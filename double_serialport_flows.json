@@ -1,0 +1,835 @@
+[
+    {
+        "id": "a5e559706e7cb5f0",
+        "type": "tab",
+        "label": "流程 2",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "a5bcf59e3c8fe790",
+        "type": "rpi-gpio out",
+        "z": "a5e559706e7cb5f0",
+        "name": "气囊缩小",
+        "pin": "5",
+        "set": true,
+        "level": "0",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 320,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "5ea3987cc6ddd1f6",
+        "type": "inject",
+        "z": "a5e559706e7cb5f0",
+        "name": "开",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "1",
+        "payloadType": "num",
+        "x": 110,
+        "y": 620,
+        "wires": [
+            [
+                "a5bcf59e3c8fe790"
+            ]
+        ]
+    },
+    {
+        "id": "9fdfcaf603c1aff9",
+        "type": "inject",
+        "z": "a5e559706e7cb5f0",
+        "name": "关",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "0",
+        "payloadType": "num",
+        "x": 110,
+        "y": 660,
+        "wires": [
+            [
+                "a5bcf59e3c8fe790"
+            ]
+        ]
+    },
+    {
+        "id": "f1d97d452ccbb413",
+        "type": "rpi-gpio out",
+        "z": "a5e559706e7cb5f0",
+        "name": "靠背向后",
+        "pin": "23",
+        "set": true,
+        "level": "0",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 640,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "060e05b9c982a194",
+        "type": "inject",
+        "z": "a5e559706e7cb5f0",
+        "name": "开",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "1",
+        "payloadType": "num",
+        "x": 490,
+        "y": 620,
+        "wires": [
+            [
+                "f1d97d452ccbb413"
+            ]
+        ]
+    },
+    {
+        "id": "2db0a9996e65d036",
+        "type": "inject",
+        "z": "a5e559706e7cb5f0",
+        "name": "关",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "0",
+        "payloadType": "num",
+        "x": 490,
+        "y": 660,
+        "wires": [
+            [
+                "f1d97d452ccbb413"
+            ]
+        ]
+    },
+    {
+        "id": "fb0d0e9336e9b5a3",
+        "type": "rpi-gpio out",
+        "z": "a5e559706e7cb5f0",
+        "name": "靠背向前",
+        "pin": "18",
+        "set": true,
+        "level": "0",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 640,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "97587015ad4a41c4",
+        "type": "inject",
+        "z": "a5e559706e7cb5f0",
+        "name": "开",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "1",
+        "payloadType": "num",
+        "x": 490,
+        "y": 740,
+        "wires": [
+            [
+                "fb0d0e9336e9b5a3"
+            ]
+        ]
+    },
+    {
+        "id": "1fedf10a3da638db",
+        "type": "inject",
+        "z": "a5e559706e7cb5f0",
+        "name": "关",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "0",
+        "payloadType": "num",
+        "x": 490,
+        "y": 780,
+        "wires": [
+            [
+                "fb0d0e9336e9b5a3"
+            ]
+        ]
+    },
+    {
+        "id": "86b3ad939189b313",
+        "type": "rpi-gpio out",
+        "z": "a5e559706e7cb5f0",
+        "name": "坐垫向前",
+        "pin": "25",
+        "set": true,
+        "level": "0",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 940,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "d88e87fa55ac6d0b",
+        "type": "rpi-gpio out",
+        "z": "a5e559706e7cb5f0",
+        "name": "坐垫向后",
+        "pin": "24",
+        "set": true,
+        "level": "0",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 960,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "37cf08cf2c441b01",
+        "type": "inject",
+        "z": "a5e559706e7cb5f0",
+        "name": "开",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "1",
+        "payloadType": "num",
+        "x": 810,
+        "y": 620,
+        "wires": [
+            [
+                "86b3ad939189b313"
+            ]
+        ]
+    },
+    {
+        "id": "d811c1bafa103234",
+        "type": "inject",
+        "z": "a5e559706e7cb5f0",
+        "name": "关",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "0",
+        "payloadType": "num",
+        "x": 810,
+        "y": 680,
+        "wires": [
+            [
+                "86b3ad939189b313"
+            ]
+        ]
+    },
+    {
+        "id": "af1b1adec84b4b53",
+        "type": "inject",
+        "z": "a5e559706e7cb5f0",
+        "name": "开",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "1",
+        "payloadType": "num",
+        "x": 810,
+        "y": 740,
+        "wires": [
+            [
+                "d88e87fa55ac6d0b"
+            ]
+        ]
+    },
+    {
+        "id": "bd9627d82e08d132",
+        "type": "inject",
+        "z": "a5e559706e7cb5f0",
+        "name": "关",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "0",
+        "payloadType": "num",
+        "x": 810,
+        "y": 780,
+        "wires": [
+            [
+                "d88e87fa55ac6d0b"
+            ]
+        ]
+    },
+    {
+        "id": "fa81b501e3ebf9c3",
+        "type": "rpi-gpio out",
+        "z": "a5e559706e7cb5f0",
+        "name": "气囊变大",
+        "pin": "22",
+        "set": true,
+        "level": "0",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 320,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "d747bf14d627cece",
+        "type": "inject",
+        "z": "a5e559706e7cb5f0",
+        "name": "开",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "1",
+        "payloadType": "num",
+        "x": 110,
+        "y": 760,
+        "wires": [
+            [
+                "fa81b501e3ebf9c3"
+            ]
+        ]
+    },
+    {
+        "id": "a2135d6f0e4e9c49",
+        "type": "inject",
+        "z": "a5e559706e7cb5f0",
+        "name": "关",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "0",
+        "payloadType": "num",
+        "x": 110,
+        "y": 800,
+        "wires": [
+            [
+                "fa81b501e3ebf9c3"
+            ]
+        ]
+    },
+    {
+        "id": "31a82c032f418abc",
+        "type": "rpi-gpio out",
+        "z": "a5e559706e7cb5f0",
+        "name": "按摩",
+        "pin": "21",
+        "set": true,
+        "level": "0",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 1310,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "9fc8ab0d293da739",
+        "type": "inject",
+        "z": "a5e559706e7cb5f0",
+        "name": "开",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "1",
+        "payloadType": "num",
+        "x": 1110,
+        "y": 660,
+        "wires": [
+            [
+                "31a82c032f418abc"
+            ]
+        ]
+    },
+    {
+        "id": "43e2879cbc9fb174",
+        "type": "inject",
+        "z": "a5e559706e7cb5f0",
+        "name": "关",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "0",
+        "payloadType": "num",
+        "x": 1110,
+        "y": 700,
+        "wires": [
+            [
+                "31a82c032f418abc"
+            ]
+        ]
+    },
+    {
+        "id": "d3bf60d007153332",
+        "type": "serial in",
+        "z": "a5e559706e7cb5f0",
+        "name": "",
+        "serial": "193f9130dc45f976",
+        "x": 445,
+        "y": 60,
+        "wires": [
+            [
+                "e574ffa6046aeaf6"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "e574ffa6046aeaf6",
+        "type": "function",
+        "z": "a5e559706e7cb5f0",
+        "name": "function 1",
+        "func": "var delimiter = Buffer.from([0xAA, 0x55, 0x03, 0x99]);\n//1.取出缓存中的矩阵数组\n//2.把读取的数据 放进缓存的数据 并检索 分隔符\n//3.如果为1  切割出前一部分 如果-1  缓存进数组 放进全局变量\n//  如果为-1 把切割剩余的部分 放进缓存\n\nvar matrixCacheArr =  global.get(\"matrixCacheArr\");\n \n \nmatrixCacheArr = Buffer.concat([matrixCacheArr, Buffer.from(msg.payload)])\n  \nvar index = matrixCacheArr.indexOf(delimiter,0);\n \nif(index==-1){\n    \n    global.set(\"matrixCacheArr\", matrixCacheArr);\n}else {\n      \n      \n    var front=matrixCacheArr.slice(0,index);\n   \n    matrixCacheArr=matrixCacheArr.slice(index+delimiter.length);\n    global.set(\"matrixCacheArr\", matrixCacheArr);\n    msg.payload =front;\n    return msg;\n}\n \n ",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 600,
+        "y": 100,
+        "wires": [
+            [
+                "f27ac10ac9f73574"
+            ]
+        ]
+    },
+    {
+        "id": "ccd478e7d021929b",
+        "type": "inject",
+        "z": "a5e559706e7cb5f0",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "0",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 180,
+        "y": 100,
+        "wires": [
+            [
+                "4b7b69f759586071"
+            ]
+        ]
+    },
+    {
+        "id": "4b7b69f759586071",
+        "type": "function",
+        "z": "a5e559706e7cb5f0",
+        "name": "function 2",
+        "func": " \n\nvar matrixCacheArr = Buffer.from([]);; \n \n\nglobal.set(\"matrixCacheArr\", matrixCacheArr);\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 360,
+        "y": 100,
+        "wires": [
+            [
+                "e574ffa6046aeaf6"
+            ]
+        ]
+    },
+    {
+        "id": "f27ac10ac9f73574",
+        "type": "buffer-parser",
+        "z": "a5e559706e7cb5f0",
+        "name": "sitDataParser",
+        "data": "payload",
+        "dataType": "msg",
+        "specification": "spec",
+        "specificationType": "ui",
+        "items": [
+            {
+                "type": "uint8",
+                "name": "sitData",
+                "offset": 0,
+                "length": 1024,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            }
+        ],
+        "swap1": "",
+        "swap2": "",
+        "swap3": "",
+        "swap1Type": "swap",
+        "swap2Type": "swap",
+        "swap3Type": "swap",
+        "msgProperty": "payload",
+        "msgPropertyType": "str",
+        "resultType": "keyvalue",
+        "resultTypeType": "return",
+        "multipleResult": false,
+        "fanOutMultipleResult": false,
+        "setTopic": true,
+        "outputs": 1,
+        "x": 840,
+        "y": 100,
+        "wires": [
+            [
+                "5d770981a1b0f19d"
+            ]
+        ]
+    },
+    {
+        "id": "5d770981a1b0f19d",
+        "type": "websocket out",
+        "z": "a5e559706e7cb5f0",
+        "name": "",
+        "server": "a61959c5fb2aafc9",
+        "client": "",
+        "x": 1110,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "43b83d05b488bcc7",
+        "type": "serial in",
+        "z": "a5e559706e7cb5f0",
+        "name": "",
+        "serial": "3c48bdf53b96508a",
+        "x": 455,
+        "y": 240,
+        "wires": [
+            [
+                "700e518d653bfae4"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "700e518d653bfae4",
+        "type": "function",
+        "z": "a5e559706e7cb5f0",
+        "name": "function 3",
+        "func": "var delimiter = Buffer.from([0xAA, 0x55, 0x03, 0x99]);\n//1.取出缓存中的矩阵数组\n//2.把读取的数据 放进缓存的数据 并检索 分隔符\n//3.如果为1  切割出前一部分 如果-1  缓存进数组 放进全局变量\n//  如果为-1 把切割剩余的部分 放进缓存\n\nvar matrixCacheArr_back = global.get(\"matrixCacheArr_back\");\n \n \nmatrixCacheArr_back = Buffer.concat([matrixCacheArr_back, Buffer.from(msg.payload)])\n  \nvar index = matrixCacheArr_back.indexOf(delimiter,0);\n \nif(index==-1){\n    \n    global.set(\"matrixCacheArr_back\", matrixCacheArr_back);\n}else {\n      \n      \n    var front = matrixCacheArr_back.slice(0,index);\n   \n    matrixCacheArr_back = matrixCacheArr_back.slice(index+delimiter.length);\n    global.set(\"matrixCacheArr_back\", matrixCacheArr_back);\n    msg.payload =front;\n    return msg;\n}\n \n ",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 600,
+        "y": 280,
+        "wires": [
+            [
+                "7db326b71730eca9"
+            ]
+        ]
+    },
+    {
+        "id": "8e31a4d06b351f40",
+        "type": "inject",
+        "z": "a5e559706e7cb5f0",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "0",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 180,
+        "y": 280,
+        "wires": [
+            [
+                "5247aed29fd33654"
+            ]
+        ]
+    },
+    {
+        "id": "5247aed29fd33654",
+        "type": "function",
+        "z": "a5e559706e7cb5f0",
+        "name": "function 4",
+        "func": " \n\nvar matrixCacheArr_back = Buffer.from([]);; \n \n\nglobal.set(\"matrixCacheArr_back\", matrixCacheArr_back);\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 360,
+        "y": 280,
+        "wires": [
+            [
+                "700e518d653bfae4"
+            ]
+        ]
+    },
+    {
+        "id": "7db326b71730eca9",
+        "type": "buffer-parser",
+        "z": "a5e559706e7cb5f0",
+        "name": "backDataParser",
+        "data": "payload",
+        "dataType": "msg",
+        "specification": "spec",
+        "specificationType": "ui",
+        "items": [
+            {
+                "type": "uint8",
+                "name": "backData",
+                "offset": 0,
+                "length": 1024,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            }
+        ],
+        "swap1": "",
+        "swap2": "",
+        "swap3": "",
+        "swap1Type": "swap",
+        "swap2Type": "swap",
+        "swap3Type": "swap",
+        "msgProperty": "payload",
+        "msgPropertyType": "str",
+        "resultType": "keyvalue",
+        "resultTypeType": "return",
+        "multipleResult": false,
+        "fanOutMultipleResult": false,
+        "setTopic": true,
+        "outputs": 1,
+        "x": 840,
+        "y": 280,
+        "wires": [
+            [
+                "ccd34a8eb8d66d8b"
+            ]
+        ]
+    },
+    {
+        "id": "ccd34a8eb8d66d8b",
+        "type": "websocket out",
+        "z": "a5e559706e7cb5f0",
+        "name": "",
+        "server": "a61959c5fb2aafc9",
+        "client": "",
+        "x": 1110,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "193f9130dc45f976",
+        "type": "serial-port",
+        "serialport": "/dev/ttyUSB1",
+        "serialbaud": "1000000",
+        "databits": "8",
+        "parity": "none",
+        "stopbits": "1",
+        "waitfor": "",
+        "dtr": "none",
+        "rts": "none",
+        "cts": "none",
+        "dsr": "none",
+        "newline": "100",
+        "bin": "bin",
+        "out": "count",
+        "addchar": "",
+        "responsetimeout": " "
+    },
+    {
+        "id": "a61959c5fb2aafc9",
+        "type": "websocket-listener",
+        "path": "/ws/data",
+        "wholemsg": "false"
+    },
+    {
+        "id": "3c48bdf53b96508a",
+        "type": "serial-port",
+        "serialport": "/dev/ttyUSB0",
+        "serialbaud": "1000000",
+        "databits": "8",
+        "parity": "none",
+        "stopbits": "1",
+        "waitfor": "",
+        "dtr": "none",
+        "rts": "none",
+        "cts": "none",
+        "dsr": "none",
+        "newline": "100",
+        "bin": "bin",
+        "out": "count",
+        "addchar": "",
+        "responsetimeout": ""
+    }
+]
