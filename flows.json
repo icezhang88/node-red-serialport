@@ -725,7 +725,10 @@
         "y": 260,
         "wires": [
             [
-                "b0cf2e1ee652e3e1"
+                "b0cf2e1ee652e3e1",
+                "c72b704e615916af",
+                "0369b8ef373c3bbe",
+                "643baf584803bf9b"
             ]
         ]
     },
@@ -836,6 +839,207 @@
         "x": 2090,
         "y": 620,
         "wires": []
+    },
+    {
+        "id": "c72b704e615916af",
+        "type": "switch",
+        "z": "a5e559706e7cb5f0",
+        "name": "switch_waist",
+        "property": "waist",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "gt",
+                "v": "0.15",
+                "vt": "str"
+            },
+            {
+                "t": "lt",
+                "v": "0.1",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 2350,
+        "y": 140,
+        "wires": [
+            [
+                "c41d33d906047c85"
+            ],
+            [
+                "15660dea127b032d"
+            ]
+        ]
+    },
+    {
+        "id": "0369b8ef373c3bbe",
+        "type": "switch",
+        "z": "a5e559706e7cb5f0",
+        "name": "switch_hunch",
+        "property": "hunch",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "gt",
+                "v": "0.9",
+                "vt": "str"
+            },
+            {
+                "t": "lt",
+                "v": "0.5",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 2340,
+        "y": 280,
+        "wires": [
+            [
+                "50a44ef799a6c6db"
+            ],
+            [
+                "42452f6c8e47a62d"
+            ]
+        ]
+    },
+    {
+        "id": "643baf584803bf9b",
+        "type": "switch",
+        "z": "a5e559706e7cb5f0",
+        "name": "switch_back",
+        "property": "back",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "gt",
+                "v": "7.5",
+                "vt": "str"
+            },
+            {
+                "t": "lt",
+                "v": "5",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 2330,
+        "y": 400,
+        "wires": [
+            [
+                "d082387f360b9405"
+            ],
+            [
+                "9d9d8616a16c1e9d"
+            ]
+        ]
+    },
+    {
+        "id": "c41d33d906047c85",
+        "type": "function",
+        "z": "a5e559706e7cb5f0",
+        "name": "function 2",
+        "func": "console.info(\"waist: \"+msg.waist);\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2540,
+        "y": 120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "15660dea127b032d",
+        "type": "function",
+        "z": "a5e559706e7cb5f0",
+        "name": "function 3",
+        "func": "console.info(\"waist: \" + msg.waist)\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2540,
+        "y": 160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "50a44ef799a6c6db",
+        "type": "function",
+        "z": "a5e559706e7cb5f0",
+        "name": "function 4",
+        "func": "console.info(\"hunch: \" + msg.hunch);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2540,
+        "y": 260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "42452f6c8e47a62d",
+        "type": "function",
+        "z": "a5e559706e7cb5f0",
+        "name": "function 5",
+        "func": "console.info(\"hunch: \" + msg.hunch);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2540,
+        "y": 300,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d082387f360b9405",
+        "type": "function",
+        "z": "a5e559706e7cb5f0",
+        "name": "function 6",
+        "func": "console.info(\"hunch: \" + msg.back);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2540,
+        "y": 380,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9d9d8616a16c1e9d",
+        "type": "function",
+        "z": "a5e559706e7cb5f0",
+        "name": "function 7",
+        "func": "console.info(\"hunch: \" + msg.back);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2540,
+        "y": 420,
+        "wires": [
+            []
+        ]
     },
     {
         "id": "6105b276c3761157",
