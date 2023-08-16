@@ -179,7 +179,7 @@
         "y": 200,
         "wires": [
             [
-                "69c72ac095e1a5d2"
+                "4a5b34c980448aa6"
             ]
         ]
     },
@@ -303,7 +303,7 @@
         "y": 320,
         "wires": [
             [
-                "e6a36f7f98b54829"
+                "4a5b34c980448aa6"
             ]
         ]
     },
@@ -311,14 +311,14 @@
         "id": "4a5b34c980448aa6",
         "type": "function",
         "z": "a5e559706e7cb5f0",
-        "name": "function 1",
+        "name": "在离坐判断",
         "func": "// 汽车座椅的使用逻辑\nif (msg.payload.sitData!=null){\n    global.set(\"sitMatrixData\", msg.payload.sitData);\n   \n   \n}\nif (msg.payload.backData != null) {\n    global.set(\"backMatrixData\", msg.payload.backData);\n}\n\n\nconst sitMatrixSum = global.get(\"sitMatrixData\").reduce((accumulator, currentValue) => {\n    return accumulator + currentValue;\n}, 0);\n \nmsg.payload = sitMatrixSum;\n\nconsole.info(\"sitSum: \"+sitMatrixSum);\n \nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1440,
+        "x": 1370,
         "y": 240,
         "wires": [
             [
@@ -559,14 +559,14 @@
         "type": "function",
         "z": "a5e559706e7cb5f0",
         "name": "realTimeMatrix",
-        "func": "//设置全局变量 保存坐垫及靠背的实时矩阵数据\nvar sitMatrixData=new Array();\n\nvar backMatrixData=new Array();\n\nglobal.set(\"sitMatrixData\", sitMatrixData);\n\nglobal.set(\"backMatrixData\", backMatrixData);\n\nglobal.set(\"onSeatCount\",0);\nglobal.set(\"notSeatCount\",0);\n\nreturn msg;",
+        "func": "//设置全局变量 保存坐垫及靠背的实时矩阵数据\nvar sitMatrixData=new Array();\nvar backMatrixData=new Array();\nglobal.set(\"sitMatrixData\", sitMatrixData);\nglobal.set(\"backMatrixData\", backMatrixData);\n//在离坐判断全局变量\nglobal.set(\"onSeatCount\",0);\nglobal.set(\"notSeatCount\",0);\n\n//座椅 坐垫 上下调节条件\n\nglobal.set(\"frontUpConditionCount\",0);\nglobal.set(\"frontDownConditionCount\", 0);\n\n//座椅 靠背 靠背调节条件\nglobal.set(\"hunchUpConditionCount\",0);\nglobal.set(\"hunchDownConditionCount\",0);\n\n//座椅 靠背调节条件\nglobal.set(\"waistUpConditionCount\",0);\nglobal.set(\"waistDownConditionCount\",0);\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1100,
-        "y": 100,
+        "x": 1560,
+        "y": 40,
         "wires": [
             [
                 "4a5b34c980448aa6"
@@ -612,19 +612,19 @@
         "rules": [
             {
                 "t": "lt",
-                "v": "3000",
+                "v": "2000",
                 "vt": "str"
             },
             {
                 "t": "gte",
-                "v": "3500",
+                "v": "2000",
                 "vt": "str"
             }
         ],
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 1610,
+        "x": 1510,
         "y": 240,
         "wires": [
             [
@@ -646,8 +646,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1630,
-        "y": 340,
+        "x": 1690,
+        "y": 440,
         "wires": [
             [
                 "2104c19f63dd7d40"
@@ -665,7 +665,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1630,
+        "x": 1890,
         "y": 40,
         "wires": [
             [
@@ -690,7 +690,7 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 1810,
+        "x": 1870,
         "y": 340,
         "wires": [
             [
@@ -710,14 +710,12 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 2010,
+        "x": 2070,
         "y": 260,
         "wires": [
             [
-                "b0cf2e1ee652e3e1",
                 "c72b704e615916af",
-                "0369b8ef373c3bbe",
-                "643baf584803bf9b"
+                "0369b8ef373c3bbe"
             ]
         ]
     },
@@ -738,7 +736,7 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 1810,
+        "x": 2050,
         "y": 40,
         "wires": [
             [
@@ -757,12 +755,10 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 2000,
+        "x": 2200,
         "y": 40,
         "wires": [
-            [
-                "f7869c6c2db5852c"
-            ]
+            []
         ]
     },
     {
@@ -776,58 +772,13 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 2000,
-        "y": 540,
+        "x": 2040,
+        "y": 1140,
         "wires": [
             [
-                "6fb2f824d87cfc53"
+                "b5b49e9064d293c0"
             ]
         ]
-    },
-    {
-        "id": "f7869c6c2db5852c",
-        "type": "rpi-gpio out",
-        "z": "a5e559706e7cb5f0",
-        "name": "靠背向后",
-        "pin": "23",
-        "set": true,
-        "level": "0",
-        "freq": "",
-        "out": "out",
-        "bcm": true,
-        "x": 2220,
-        "y": 40,
-        "wires": []
-    },
-    {
-        "id": "b0cf2e1ee652e3e1",
-        "type": "rpi-gpio out",
-        "z": "a5e559706e7cb5f0",
-        "name": "靠背向后(动作反馈测试)",
-        "pin": "23",
-        "set": true,
-        "level": "0",
-        "freq": "",
-        "out": "out",
-        "bcm": true,
-        "x": 2110,
-        "y": 140,
-        "wires": []
-    },
-    {
-        "id": "6fb2f824d87cfc53",
-        "type": "rpi-gpio out",
-        "z": "a5e559706e7cb5f0",
-        "name": "靠背向后(动作反馈测试)",
-        "pin": "23",
-        "set": true,
-        "level": "0",
-        "freq": "",
-        "out": "out",
-        "bcm": true,
-        "x": 2530,
-        "y": 580,
-        "wires": []
     },
     {
         "id": "c72b704e615916af",
@@ -884,8 +835,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 2340,
-        "y": 280,
+        "x": 2360,
+        "y": 740,
         "wires": [
             [
                 "50a44ef799a6c6db"
@@ -896,138 +847,79 @@
         ]
     },
     {
-        "id": "643baf584803bf9b",
-        "type": "switch",
-        "z": "a5e559706e7cb5f0",
-        "name": "switch_back",
-        "property": "back",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "gt",
-                "v": "7.5",
-                "vt": "str"
-            },
-            {
-                "t": "lt",
-                "v": "5",
-                "vt": "str"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 2,
-        "x": 2330,
-        "y": 400,
-        "wires": [
-            [
-                "d082387f360b9405"
-            ],
-            [
-                "9d9d8616a16c1e9d"
-            ]
-        ]
-    },
-    {
         "id": "c41d33d906047c85",
         "type": "function",
         "z": "a5e559706e7cb5f0",
-        "name": "function 2",
-        "func": "// console.info(\"waist: \"+msg.waist);\n\n\nreturn msg;",
+        "name": "条件窗口",
+        "func": "\nglobal.set(\"waistDownConditionCount\", 0);\n\nvar waistUpConditionCount = global.get(\"waistUpConditionCount\");\nwaistUpConditionCount++;\nglobal.set(\"waistUpConditionCount\", waistUpConditionCount);\n\nif (waistUpConditionCount > 20) {\n    msg.payload = 1;\n    global.set(\"waistUpConditionCount\", 0);\n}\n\n\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 2540,
-        "y": 120,
+        "x": 2560,
+        "y": 80,
         "wires": [
-            []
+            [
+                "0a7299bc4d4113fc"
+            ]
         ]
     },
     {
         "id": "15660dea127b032d",
         "type": "function",
         "z": "a5e559706e7cb5f0",
-        "name": "function 3",
-        "func": "console.info(\"waist: \" + msg.waist)\nreturn msg;",
+        "name": "条件窗口",
+        "func": "\nglobal.set(\"waistUpConditionCount\", 0);\n\nvar waistDownConditionCount = global.get(\"waistDownConditionCount\");\nwaistDownConditionCount++;\nglobal.set(\"waistUpConditionCount\", waistDownConditionCount);\n\nif (waistDownConditionCount > 20) {\n    msg.payload = 1;\n    global.set(\"waistUpConditionCount\", 0);\n}\n\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 2540,
-        "y": 160,
+        "x": 2560,
+        "y": 240,
         "wires": [
-            []
+            [
+                "6f22f7919f5019ba"
+            ]
         ]
     },
     {
         "id": "50a44ef799a6c6db",
         "type": "function",
         "z": "a5e559706e7cb5f0",
-        "name": "function 4",
-        "func": "console.info(\"hunch: \" + msg.hunch);\nreturn msg;",
+        "name": "条件窗口",
+        "func": "\nglobal.set(\"hunchDownConditionCount\", 0);\n\nvar hunchUpConditionCount = global.get(\"hunchUpConditionCount\");\nhunchUpConditionCount++;\nglobal.set(\"hunchUpConditionCount\", hunchUpConditionCount);\n\nif (hunchUpConditionCount > 20) {\n    msg.payload = 1;\n    global.set(\"hunchUpConditionCount\", 0);\n}\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 2540,
-        "y": 260,
+        "x": 2560,
+        "y": 640,
         "wires": [
-            []
+            [
+                "bbf1180478dc4590"
+            ]
         ]
     },
     {
         "id": "42452f6c8e47a62d",
         "type": "function",
         "z": "a5e559706e7cb5f0",
-        "name": "function 5",
-        "func": "console.info(\"hunch: \" + msg.hunch);\nreturn msg;",
+        "name": "条件窗口",
+        "func": "\nglobal.set(\"hunchUpConditionCount\", 0);\n\nvar hunchDownConditionCount = global.get(\"hunchDownConditionCount\");\nhunchDownConditionCount++;\nglobal.set(\"hunchUpConditionCount\", hunchDownConditionCount);\n\nif (hunchDownConditionCount > 20) {\n    msg.payload = 1;\n    global.set(\"hunchUpConditionCount\", 0);\n}\n\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 2540,
-        "y": 300,
+        "x": 2560,
+        "y": 820,
         "wires": [
-            []
-        ]
-    },
-    {
-        "id": "d082387f360b9405",
-        "type": "function",
-        "z": "a5e559706e7cb5f0",
-        "name": "function 6",
-        "func": "console.info(\"hunch: \" + msg.back);\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 2540,
-        "y": 380,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "9d9d8616a16c1e9d",
-        "type": "function",
-        "z": "a5e559706e7cb5f0",
-        "name": "function 7",
-        "func": "console.info(\"hunch: \" + msg.back);\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 2540,
-        "y": 420,
-        "wires": [
-            []
+            [
+                "31696888912451c1"
+            ]
         ]
     },
     {
@@ -1042,7 +934,66 @@
         "wires": []
     },
     {
-        "id": "69c72ac095e1a5d2",
+        "id": "a4be08eb4d5ca5df",
+        "type": "websocket out",
+        "z": "a5e559706e7cb5f0",
+        "name": "",
+        "server": "a61959c5fb2aafc9",
+        "client": "",
+        "x": 1150,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "b5b49e9064d293c0",
+        "type": "switch",
+        "z": "a5e559706e7cb5f0",
+        "name": "switch_front",
+        "property": "front",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "gt",
+                "v": "0.6",
+                "vt": "str"
+            },
+            {
+                "t": "lt",
+                "v": "0.5",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 2310,
+        "y": 1140,
+        "wires": [
+            [
+                "9fa79c2efa936f57"
+            ],
+            [
+                "4f26842cb1f31634"
+            ]
+        ]
+    },
+    {
+        "id": "5588196bdcc994cf",
+        "type": "rpi-gpio out",
+        "z": "a5e559706e7cb5f0",
+        "name": "座椅向上移动",
+        "pin": "13",
+        "set": true,
+        "level": "0",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 2740,
+        "y": 1000,
+        "wires": []
+    },
+    {
+        "id": "af9e26536605ec0f",
         "type": "function",
         "z": "a5e559706e7cb5f0",
         "name": "10*10坐线序",
@@ -1052,17 +1003,14 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1130,
-        "y": 200,
+        "x": 1320,
+        "y": 548,
         "wires": [
-            [
-                "4a5b34c980448aa6",
-                "a4be08eb4d5ca5df"
-            ]
+            []
         ]
     },
     {
-        "id": "e6a36f7f98b54829",
+        "id": "99fbe26fcbf10593",
         "type": "function",
         "z": "a5e559706e7cb5f0",
         "name": "10*10背线序",
@@ -1072,24 +1020,263 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1130,
-        "y": 300,
+        "x": 1310,
+        "y": 620,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "85e9af8748b1f04b",
+        "type": "rpi-gpio out",
+        "z": "a5e559706e7cb5f0",
+        "name": "座椅向下移动",
+        "pin": "6",
+        "set": true,
+        "level": "0",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 2760,
+        "y": 1220,
+        "wires": []
+    },
+    {
+        "id": "0a46f54ae02fce6a",
+        "type": "change",
+        "z": "a5e559706e7cb5f0",
+        "name": "向下移动置0",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "0",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2730,
+        "y": 1100,
         "wires": [
             [
-                "4a5b34c980448aa6",
-                "c5563dc4529834b5"
+                "5700cc5d4b794741"
             ]
         ]
     },
     {
-        "id": "a4be08eb4d5ca5df",
-        "type": "websocket out",
+        "id": "5700cc5d4b794741",
+        "type": "rpi-gpio out",
         "z": "a5e559706e7cb5f0",
-        "name": "",
-        "server": "a61959c5fb2aafc9",
-        "client": "",
-        "x": 1150,
-        "y": 140,
+        "name": "座椅向下移动",
+        "pin": "6",
+        "set": true,
+        "level": "0",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 3020,
+        "y": 1100,
+        "wires": []
+    },
+    {
+        "id": "361c577fa92abc78",
+        "type": "change",
+        "z": "a5e559706e7cb5f0",
+        "name": "向上移动置0",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "0",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2750,
+        "y": 1340,
+        "wires": [
+            [
+                "52420a5c2b03a494"
+            ]
+        ]
+    },
+    {
+        "id": "52420a5c2b03a494",
+        "type": "rpi-gpio out",
+        "z": "a5e559706e7cb5f0",
+        "name": "座椅向上移动",
+        "pin": "13",
+        "set": true,
+        "level": "0",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 3020,
+        "y": 1340,
+        "wires": []
+    },
+    {
+        "id": "9fa79c2efa936f57",
+        "type": "function",
+        "z": "a5e559706e7cb5f0",
+        "name": "条件窗口",
+        "func": "\nglobal.set(\"frontDownConditionCount\", 0);\n\nvar frontUpConditionCount= global.get(\"frontUpConditionCount\");\nfrontUpConditionCount++;\nglobal.set(\"frontUpConditionCount\", frontUpConditionCount);\n \nif(frontUpConditionCount>20){\n    msg.payload=1;\n    global.set(\"frontUpConditionCount\",0);\n}\n\n\n\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2540,
+        "y": 1080,
+        "wires": [
+            [
+                "5588196bdcc994cf",
+                "0a46f54ae02fce6a"
+            ]
+        ]
+    },
+    {
+        "id": "4f26842cb1f31634",
+        "type": "function",
+        "z": "a5e559706e7cb5f0",
+        "name": "条件窗口",
+        "func": "\nglobal.set(\"frontUpConditionCount\", 0);\n\nvar frontDownConditionCount = global.get(\"frontDownConditionCount\");\nfrontDownConditionCount++;\nglobal.set(\"frontUpConditionCount\", frontDownConditionCount);\n\nif (frontDownConditionCount > 20) {\n    msg.payload = 1;\n    global.set(\"frontUpConditionCount\", 0);\n}\n\n\n\n\n\nreturn msg;\n ",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2540,
+        "y": 1260,
+        "wires": [
+            [
+                "85e9af8748b1f04b",
+                "361c577fa92abc78"
+            ]
+        ]
+    },
+    {
+        "id": "47326d86f5319628",
+        "type": "rpi-gpio out",
+        "z": "a5e559706e7cb5f0",
+        "name": "靠背向后",
+        "pin": "23",
+        "set": true,
+        "level": "0",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 2920,
+        "y": 820,
+        "wires": []
+    },
+    {
+        "id": "31696888912451c1",
+        "type": "change",
+        "z": "a5e559706e7cb5f0",
+        "name": "向下移动置0",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "0",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2750,
+        "y": 820,
+        "wires": [
+            [
+                "47326d86f5319628"
+            ]
+        ]
+    },
+    {
+        "id": "bbf1180478dc4590",
+        "type": "rpi-gpio out",
+        "z": "a5e559706e7cb5f0",
+        "name": "靠背向前",
+        "pin": "18",
+        "set": true,
+        "level": "0",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 2780,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "6f22f7919f5019ba",
+        "type": "change",
+        "z": "a5e559706e7cb5f0",
+        "name": "向下移动置0",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "0",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2770,
+        "y": 240,
+        "wires": [
+            [
+                "fa68d9d846f17e7a"
+            ]
+        ]
+    },
+    {
+        "id": "fa68d9d846f17e7a",
+        "type": "rpi-gpio out",
+        "z": "a5e559706e7cb5f0",
+        "name": "气囊缩小",
+        "pin": "5",
+        "set": true,
+        "level": "0",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 2940,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "0a7299bc4d4113fc",
+        "type": "rpi-gpio out",
+        "z": "a5e559706e7cb5f0",
+        "name": "气囊变大",
+        "pin": "22",
+        "set": true,
+        "level": "0",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 2780,
+        "y": 80,
         "wires": []
     },
     {
