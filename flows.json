@@ -164,7 +164,7 @@
         "y": 200,
         "wires": [
             [
-                "904b23b717f4b682"
+                "af9e26536605ec0f"
             ]
         ]
     },
@@ -288,7 +288,7 @@
         "y": 320,
         "wires": [
             [
-                "1414778172e5b7d9"
+                "99fbe26fcbf10593"
             ]
         ]
     },
@@ -918,7 +918,7 @@
         "name": "",
         "server": "a61959c5fb2aafc9",
         "client": "",
-        "x": 1270,
+        "x": 1290,
         "y": 380,
         "wires": []
     },
@@ -929,8 +929,8 @@
         "name": "",
         "server": "a61959c5fb2aafc9",
         "client": "",
-        "x": 1270,
-        "y": 120,
+        "x": 1230,
+        "y": 100,
         "wires": []
     },
     {
@@ -971,16 +971,19 @@
         "type": "function",
         "z": "a5e559706e7cb5f0",
         "name": "10*10坐线序",
-        "func": "const arr = msg.payload.sitData;\nlet ndata = [];\nfor (let i = 0; i < 32; i++) {\n    for (let j = 0; j < 32; j++) {\n        if (i < 10 && j > 21) {\n            ndata.push(arr[i * 32 + j]);\n        }\n    }\n}\n\nfor (let i = 0; i < 2; i++) {\n    for (let j = 0; j < 10; j++) {\n        [ndata[i * 10 + j], ndata[(4 - i) * 10 + j]] = [\n            ndata[(4 - i) * 10 + j],\n            ndata[i * 10 + j],\n        ];\n    }\n}\n\nfor (let i = 0; i < 5; i++) {\n    for (let j = 0; j < 10; j++) {\n        [ndata[i * 10 + j], ndata[(i + 5) * 10 + j]] = [\n            ndata[(i + 5) * 10 + j],\n            ndata[i * 10 + j],\n        ];\n    }\n}\n\nmsg.payload.sitData=ndata;\nconsole.info(ndata.length)\nreturn msg;",
+        "func": "const arr = msg.payload.sitData;\nlet ndata = [];\nfor (let i = 0; i < 32; i++) {\n    for (let j = 0; j < 32; j++) {\n        if (i < 10 && j > 21) {\n            ndata.push(arr[i * 32 + j]);\n        }\n    }\n}\n\nfor (let i = 0; i < 2; i++) {\n    for (let j = 0; j < 10; j++) {\n        [ndata[i * 10 + j], ndata[(4 - i) * 10 + j]] = [\n            ndata[(4 - i) * 10 + j],\n            ndata[i * 10 + j],\n        ];\n    }\n}\n\nfor (let i = 0; i < 5; i++) {\n    for (let j = 0; j < 10; j++) {\n        [ndata[i * 10 + j], ndata[(i + 5) * 10 + j]] = [\n            ndata[(i + 5) * 10 + j],\n            ndata[i * 10 + j],\n        ];\n    }\n}\n\n////////////////////\n\nconst newDataArr = []\n\nfor (let i = 0; i < 5; i++) {\n\n    for (let j = 0; j < 5; j++) {\n        let num = 0\n\n        for (let k = 0; k < 2; k++) {\n            for (let z = 0; z < 2; z++) {\n                num += ndata[(i * 2 + k) * 10 + j * 2 + z]\n                // console.log(i + k, j + z)\n            }\n        }\n\n        newDataArr.push(Number((num / 4).toFixed(1)))\n    }\n\n}\n\nfor (let i = 0; i < 5; i++) {\n\n    for (let j = 0; j < 5; j++) {\n        let num = 0\n\n        for (let k = 0; k < 2; k++) {\n            for (let z = 0; z < 2; z++) {\n                // num += ndata[(i*2 + k) * 10 + j*2 + z]\n                ndata[(i * 2 + k) * 10 + j * 2 + z] = newDataArr[i * 5 + j]\n                // console.log(i + k, j + z)\n            }\n        }\n\n        // newArr.push(Number((num / 4).toFixed(1)))\n    }\n\n}\n\n\n\nmsg.payload.sitData=ndata;\nconsole.info(ndata.length)\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 850,
-        "y": 400,
+        "x": 1110,
+        "y": 200,
         "wires": [
-            []
+            [
+                "a4be08eb4d5ca5df",
+                "4a5b34c980448aa6"
+            ]
         ]
     },
     {
@@ -988,16 +991,19 @@
         "type": "function",
         "z": "a5e559706e7cb5f0",
         "name": "10*10背线序",
-        "func": "const arr = msg.payload.backData;\nlet ndata = [];\nfor (let i = 0; i < 32; i++) {\n    for (let j = 0; j < 32; j++) {\n        if (i < 10 && j > 21) {\n            ndata.push(arr[i * 32 + j]);\n        }\n    }\n}\n\nfor (let i = 0; i < 2; i++) {\n    for (let j = 0; j < 10; j++) {\n        [ndata[i * 10 + j], ndata[(4 - i) * 10 + j]] = [\n            ndata[(4 - i) * 10 + j],\n            ndata[i * 10 + j],\n        ];\n    }\n}\n\nfor (let i = 0; i < 5; i++) {\n    for (let j = 0; j < 10; j++) {\n        [ndata[i * 10 + j], ndata[(i + 5) * 10 + j]] = [\n            ndata[(i + 5) * 10 + j],\n            ndata[i * 10 + j],\n        ];\n    }\n}\n/**\n * 补充点\n */\nfor (let i = 0; i < 10; i++) {\n    for (let j = 0; j < 5; j++) {\n        [ndata[i * 10 + 9 - j], ndata[i * 10 + j]] = [\n            ndata[i * 10 + j],\n            ndata[i * 10 + 9 - j],\n        ];\n    }\n}\n\n \nmsg.payload.backData=ndata;\nconsole.info(ndata.length)\nreturn msg;",
+        "func": "const arr = msg.payload.backData;\nlet ndata = [];\nfor (let i = 0; i < 32; i++) {\n    for (let j = 0; j < 32; j++) {\n        if (i < 10 && j > 21) {\n            ndata.push(arr[i * 32 + j]);\n        }\n    }\n}\n\nfor (let i = 0; i < 2; i++) {\n    for (let j = 0; j < 10; j++) {\n        [ndata[i * 10 + j], ndata[(4 - i) * 10 + j]] = [\n            ndata[(4 - i) * 10 + j],\n            ndata[i * 10 + j],\n        ];\n    }\n}\n\nfor (let i = 0; i < 5; i++) {\n    for (let j = 0; j < 10; j++) {\n        [ndata[i * 10 + j], ndata[(i + 5) * 10 + j]] = [\n            ndata[(i + 5) * 10 + j],\n            ndata[i * 10 + j],\n        ];\n    }\n}\n/**\n * 补充点\n */\nfor (let i = 0; i < 10; i++) {\n    for (let j = 0; j < 5; j++) {\n        [ndata[i * 10 + 9 - j], ndata[i * 10 + j]] = [\n            ndata[i * 10 + j],\n            ndata[i * 10 + 9 - j],\n        ];\n    }\n}\n\n /////////////////////////////////\n\nconst newDataArr = []\n\nfor (let i = 0; i < 5; i++) {\n\n    for (let j = 0; j < 5; j++) {\n        let num = 0\n\n        for (let k = 0; k < 2; k++) {\n            for (let z = 0; z < 2; z++) {\n                num += ndata[(i * 2 + k) * 10 + j * 2 + z]\n                // console.log(i + k, j + z)\n            }\n        }\n\n        newDataArr.push(Number((num / 4).toFixed(1)))\n    }\n\n}\n\nfor (let i = 0; i < 5; i++) {\n\n    for (let j = 0; j < 5; j++) {\n        let num = 0\n\n        for (let k = 0; k < 2; k++) {\n            for (let z = 0; z < 2; z++) {\n                // num += ndata[(i*2 + k) * 10 + j*2 + z]\n                ndata[(i * 2 + k) * 10 + j * 2 + z] = newDataArr[i * 5 + j]\n                // console.log(i + k, j + z)\n            }\n        }\n\n        // newArr.push(Number((num / 4).toFixed(1)))\n    }\n\n}\n\n\n\nmsg.payload.backData=ndata;\nconsole.info(ndata.length)\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 850,
-        "y": 480,
+        "x": 1090,
+        "y": 320,
         "wires": [
-            []
+            [
+                "c5563dc4529834b5",
+                "4a5b34c980448aa6"
+            ]
         ]
     },
     {
@@ -1123,46 +1129,6 @@
         "x": 2780,
         "y": 40,
         "wires": []
-    },
-    {
-        "id": "904b23b717f4b682",
-        "type": "function",
-        "z": "a5e559706e7cb5f0",
-        "name": "function 1",
-        "func": "var matrix = msg.payload.sitData;\nvar matrix1 = new Array();\n\nfor (var i = 0; i < 32; i++) {\n    for (var j = 1; j < 31; j++) {\n        matrix1.push(matrix[j + 32 * i])\n\n    }\n}\n \nmatrix1 = matrix1.slice(30, matrix1.length - 30);//993\n \n\nconst originalArray = matrix1/* 你的原始数组数据，例如 [1, 2, 3, ...] */;\n\n// 缩小数组的尺寸\nconst newSize = 10;\n\n// 缩小数组的步长，用于取原始数组中的值以生成缩小的数组\nconst stepSize = 3;\n\n// 将一维数组转换为二维数组，每行包含 30 个元素\nconst chunkedArray = [];\nfor (let i = 0; i < originalArray.length; i += 30) {\n    chunkedArray.push(originalArray.slice(i, i + 30));\n}\n\n// 计算缩小数组的值\nconst reducedArray = [];\nfor (let i = 0; i < newSize; i++) {\n    for (let j = 0; j < newSize; j++) {\n        const startRow = i * stepSize; // 原始数组每隔 stepSize 个元素取一个，以达到缩小效果\n        const startCol = j * stepSize;\n        let sum = 0;\n\n        // 计算缩小数组元素的平均值\n        for (let k = 0; k < stepSize; k++) {\n            for (let l = 0; l < stepSize; l++) {\n                sum += chunkedArray[startRow + k][startCol + l];\n            }\n        }\n\n        const average = sum / (stepSize * stepSize);\n        reducedArray.push(Math.floor(average));\n    }\n}\n \n//msg.payload.sitData = reducedArray;\n\nvar array = reducedArray;\n\nconst length = array.length;\n\n// 计算生成二维数组的行数和列数\nconst rows = Math.sqrt(length);\nconst cols = rows;\n\nif (rows % 1 !== 0) {\n    console.error(\"输入数组长度不适合生成正方形二维数组。\");\n    return;\n}\n\n// 将一维数组转换为二维数组\nconst originalMatrix = [];\nfor (let i = 0; i < rows; i++) {\n    originalMatrix.push(array.slice(i * cols, (i + 1) * cols));\n}\n\n// 创建一个新的旋转后的矩阵\nconst rotatedMatrix = new Array(cols).fill().map(() => []);\n\n// 进行矩阵转置和行翻转\nfor (let row = 0; row < rows; row++) {\n    for (let col = 0; col < cols; col++) {\n        rotatedMatrix[col][rows - 1 - row] = originalMatrix[row][col];\n    }\n}\n\n// 将旋转后的矩阵转换为一维数组\nconst rotatedArray = rotatedMatrix.flat();\n\n\nmsg.payload.sitData = rotatedArray;\n\n \nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1100,
-        "y": 200,
-        "wires": [
-            [
-                "4a5b34c980448aa6",
-                "a4be08eb4d5ca5df"
-            ]
-        ]
-    },
-    {
-        "id": "1414778172e5b7d9",
-        "type": "function",
-        "z": "a5e559706e7cb5f0",
-        "name": "function 2",
-        "func": "var matrix = msg.payload.backData;\nvar matrix1 = new Array();\n\nfor (var i = 0; i < 32; i++) {\n    for (var j = 1; j < 31; j++) {\n        matrix1.push(matrix[j + 32 * i])\n\n    }\n}\n \nmatrix1 = matrix1.slice(30, matrix1.length - 30);//993\n \nconst originalArray = matrix1/* 你的原始数组数据，例如 [1, 2, 3, ...] */;\n\n// 缩小数组的尺寸\nconst newSize = 10;\n\n// 缩小数组的步长，用于取原始数组中的值以生成缩小的数组\nconst stepSize = 3;\n\n// 将一维数组转换为二维数组，每行包含 30 个元素\nconst chunkedArray = [];\nfor (let i = 0; i < originalArray.length; i += 30) {\n    chunkedArray.push(originalArray.slice(i, i + 30));\n}\n\n// 计算缩小数组的值\nconst reducedArray = [];\nfor (let i = 0; i < newSize; i++) {\n    for (let j = 0; j < newSize; j++) {\n        const startRow = i * stepSize; // 原始数组每隔 stepSize 个元素取一个，以达到缩小效果\n        const startCol = j * stepSize;\n        let sum = 0;\n\n        // 计算缩小数组元素的平均值\n        for (let k = 0; k < stepSize; k++) {\n            for (let l = 0; l < stepSize; l++) {\n                sum += chunkedArray[startRow + k][startCol + l];\n            }\n        }\n\n        const average = sum / (stepSize * stepSize);\n        reducedArray.push(Math.floor(average));\n    }\n}\n// console.log(reducedArray);\n//msg.payload.backData = reducedArray;\n\nvar array = reducedArray;\n\nconst length = array.length;\n\n// 计算生成二维数组的行数和列数\nconst rows = Math.sqrt(length);\nconst cols = rows;\n\nif (rows % 1 !== 0) {\n    console.error(\"输入数组长度不适合生成正方形二维数组。\");\n    return;\n}\n\n// 将一维数组转换为二维数组\nconst originalMatrix = [];\nfor (let i = 0; i < rows; i++) {\n    originalMatrix.push(array.slice(i * cols, (i + 1) * cols));\n}\n\n// 创建一个新的旋转后的矩阵\nconst rotatedMatrix = new Array(cols).fill().map(() => []);\n\n// 进行矩阵转置和行翻转\nfor (let row = 0; row < rows; row++) {\n    for (let col = 0; col < cols; col++) {\n        rotatedMatrix[col][rows - 1 - row] = originalMatrix[row][col];\n    }\n}\n\n// 将旋转后的矩阵转换为一维数组\nconst rotatedArray = rotatedMatrix.flat();\nmsg.payload.backData = rotatedArray;\n\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1100,
-        "y": 300,
-        "wires": [
-            [
-                "4a5b34c980448aa6",
-                "c5563dc4529834b5"
-            ]
-        ]
     },
     {
         "id": "0c05fa8fd24f8526",
