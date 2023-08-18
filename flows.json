@@ -60,6 +60,12 @@
         "responsetimeout": ""
     },
     {
+        "id": "b8aa3b3b7763e86e",
+        "type": "websocket-listener",
+        "path": "/ws/data1",
+        "wholemsg": "false"
+    },
+    {
         "id": "e574ffa6046aeaf6",
         "type": "function",
         "z": "a5e559706e7cb5f0",
@@ -173,7 +179,7 @@
         "type": "serial in",
         "z": "a5e559706e7cb5f0",
         "name": "Serialport0",
-        "serial": "193f9130dc45f976",
+        "serial": "3c48bdf53b96508a",
         "x": 385,
         "y": 260,
         "wires": [
@@ -916,9 +922,9 @@
         "type": "websocket out",
         "z": "a5e559706e7cb5f0",
         "name": "",
-        "server": "a61959c5fb2aafc9",
+        "server": "b8aa3b3b7763e86e",
         "client": "",
-        "x": 1290,
+        "x": 1300,
         "y": 380,
         "wires": []
     },
@@ -971,7 +977,7 @@
         "type": "function",
         "z": "a5e559706e7cb5f0",
         "name": "10*10坐线序",
-        "func": "const arr = msg.payload.sitData;\nlet ndata = [];\nfor (let i = 0; i < 32; i++) {\n    for (let j = 0; j < 32; j++) {\n        if (i < 10 && j > 21) {\n            ndata.push(arr[i * 32 + j]);\n        }\n    }\n}\n\nfor (let i = 0; i < 2; i++) {\n    for (let j = 0; j < 10; j++) {\n        [ndata[i * 10 + j], ndata[(4 - i) * 10 + j]] = [\n            ndata[(4 - i) * 10 + j],\n            ndata[i * 10 + j],\n        ];\n    }\n}\n\nfor (let i = 0; i < 5; i++) {\n    for (let j = 0; j < 10; j++) {\n        [ndata[i * 10 + j], ndata[(i + 5) * 10 + j]] = [\n            ndata[(i + 5) * 10 + j],\n            ndata[i * 10 + j],\n        ];\n    }\n}\n\n////////////////////\n\nconst newDataArr = []\n\nfor (let i = 0; i < 5; i++) {\n\n    for (let j = 0; j < 5; j++) {\n        let num = 0\n\n        for (let k = 0; k < 2; k++) {\n            for (let z = 0; z < 2; z++) {\n                num += ndata[(i * 2 + k) * 10 + j * 2 + z]\n                // console.log(i + k, j + z)\n            }\n        }\n\n        newDataArr.push(Number((num / 4).toFixed(1)))\n    }\n\n}\n\nfor (let i = 0; i < 5; i++) {\n\n    for (let j = 0; j < 5; j++) {\n        let num = 0\n\n        for (let k = 0; k < 2; k++) {\n            for (let z = 0; z < 2; z++) {\n                // num += ndata[(i*2 + k) * 10 + j*2 + z]\n                ndata[(i * 2 + k) * 10 + j * 2 + z] = newDataArr[i * 5 + j]\n                // console.log(i + k, j + z)\n            }\n        }\n\n        // newArr.push(Number((num / 4).toFixed(1)))\n    }\n\n}\n\n\n\nmsg.payload.sitData=ndata;\nconsole.info(ndata.length)\nreturn msg;",
+        "func": "const arr = msg.payload.sitData;\nlet ndata = [];\nfor (let i = 0; i < 32; i++) {\n    for (let j = 0; j < 32; j++) {\n        if (i < 10 && j > 21) {\n            ndata.push(arr[i * 32 + j]);\n        }\n    }\n}\n\nfor (let i = 0; i < 2; i++) {\n    for (let j = 0; j < 10; j++) {\n        [ndata[i * 10 + j], ndata[(4 - i) * 10 + j]] = [\n            ndata[(4 - i) * 10 + j],\n            ndata[i * 10 + j],\n        ];\n    }\n}\n\nfor (let i = 0; i < 5; i++) {\n    for (let j = 0; j < 10; j++) {\n        [ndata[i * 10 + j], ndata[(i + 5) * 10 + j]] = [\n            ndata[(i + 5) * 10 + j],\n            ndata[i * 10 + j],\n        ];\n    }\n}\n\nconst length = ndata.length;\n\n// 计算生成二维数组的行数和列数\nconst rows = Math.sqrt(length);\nconst cols = rows;\n\nif (length !== rows * cols) {\n    console.error(\"输入数组长度与给定的行数和列数不匹配。\");\n    return;\n}\n\n// 将一维数组转换为二维数组\nconst originalMatrix = [];\nfor (let i = 0; i < rows; i++) {\n    originalMatrix.push(ndata.slice(i * cols, (i + 1) * cols));\n}\n\n// 创建一个新的旋转后的矩阵\nconst rotatedMatrix = new Array(rows).fill().map(() => []);\n\n// 进行矩阵转置和行翻转\nfor (let row = 0; row < rows; row++) {\n    for (let col = 0; col < cols; col++) {\n        rotatedMatrix[cols - 1 - col][row] = originalMatrix[row][col];\n    }\n}\n\n// 将旋转后的矩阵转换为一维数组\nconst rotatedArray = rotatedMatrix.flat();\n////////////////////\nndata = rotatedArray\nconst newDataArr = []\n\nfor (let i = 0; i < 5; i++) {\n\n    for (let j = 0; j < 5; j++) {\n        let num = 0\n\n        for (let k = 0; k < 2; k++) {\n            for (let z = 0; z < 2; z++) {\n                num += ndata[(i * 2 + k) * 10 + j * 2 + z]\n                // console.log(i + k, j + z)\n            }\n        }\n\n        newDataArr.push(Number((num / 4).toFixed(1)))\n    }\n\n}\n\nfor (let i = 0; i < 5; i++) {\n\n    for (let j = 0; j < 5; j++) {\n        let num = 0\n\n        for (let k = 0; k < 2; k++) {\n            for (let z = 0; z < 2; z++) {\n                // num += ndata[(i*2 + k) * 10 + j*2 + z]\n                ndata[(i * 2 + k) * 10 + j * 2 + z] = newDataArr[i * 5 + j]\n                // console.log(i + k, j + z)\n            }\n        }\n\n        // newArr.push(Number((num / 4).toFixed(1)))\n    }\n\n}\n\n\n\nmsg.payload.sitData=ndata;\nconsole.info(ndata.length)\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -991,7 +997,7 @@
         "type": "function",
         "z": "a5e559706e7cb5f0",
         "name": "10*10背线序",
-        "func": "const arr = msg.payload.backData;\nlet ndata = [];\nfor (let i = 0; i < 32; i++) {\n    for (let j = 0; j < 32; j++) {\n        if (i < 10 && j > 21) {\n            ndata.push(arr[i * 32 + j]);\n        }\n    }\n}\n\nfor (let i = 0; i < 2; i++) {\n    for (let j = 0; j < 10; j++) {\n        [ndata[i * 10 + j], ndata[(4 - i) * 10 + j]] = [\n            ndata[(4 - i) * 10 + j],\n            ndata[i * 10 + j],\n        ];\n    }\n}\n\nfor (let i = 0; i < 5; i++) {\n    for (let j = 0; j < 10; j++) {\n        [ndata[i * 10 + j], ndata[(i + 5) * 10 + j]] = [\n            ndata[(i + 5) * 10 + j],\n            ndata[i * 10 + j],\n        ];\n    }\n}\n/**\n * 补充点\n */\nfor (let i = 0; i < 10; i++) {\n    for (let j = 0; j < 5; j++) {\n        [ndata[i * 10 + 9 - j], ndata[i * 10 + j]] = [\n            ndata[i * 10 + j],\n            ndata[i * 10 + 9 - j],\n        ];\n    }\n}\n\n /////////////////////////////////\n\nconst newDataArr = []\n\nfor (let i = 0; i < 5; i++) {\n\n    for (let j = 0; j < 5; j++) {\n        let num = 0\n\n        for (let k = 0; k < 2; k++) {\n            for (let z = 0; z < 2; z++) {\n                num += ndata[(i * 2 + k) * 10 + j * 2 + z]\n                // console.log(i + k, j + z)\n            }\n        }\n\n        newDataArr.push(Number((num / 4).toFixed(1)))\n    }\n\n}\n\nfor (let i = 0; i < 5; i++) {\n\n    for (let j = 0; j < 5; j++) {\n        let num = 0\n\n        for (let k = 0; k < 2; k++) {\n            for (let z = 0; z < 2; z++) {\n                // num += ndata[(i*2 + k) * 10 + j*2 + z]\n                ndata[(i * 2 + k) * 10 + j * 2 + z] = newDataArr[i * 5 + j]\n                // console.log(i + k, j + z)\n            }\n        }\n\n        // newArr.push(Number((num / 4).toFixed(1)))\n    }\n\n}\n\n\n\nmsg.payload.backData=ndata;\nconsole.info(ndata.length)\nreturn msg;",
+        "func": "const arr = msg.payload.backData;\nlet ndata = [];\nfor (let i = 0; i < 32; i++) {\n    for (let j = 0; j < 32; j++) {\n        if (i < 10 && j > 21) {\n            ndata.push(arr[i * 32 + j]);\n        }\n    }\n}\n\nfor (let i = 0; i < 2; i++) {\n    for (let j = 0; j < 10; j++) {\n        [ndata[i * 10 + j], ndata[(4 - i) * 10 + j]] = [\n            ndata[(4 - i) * 10 + j],\n            ndata[i * 10 + j],\n        ];\n    }\n}\n\nfor (let i = 0; i < 5; i++) {\n    for (let j = 0; j < 10; j++) {\n        [ndata[i * 10 + j], ndata[(i + 5) * 10 + j]] = [\n            ndata[(i + 5) * 10 + j],\n            ndata[i * 10 + j],\n        ];\n    }\n}\n/**\n * 补充点\n */\nfor (let i = 0; i < 10; i++) {\n    for (let j = 0; j < 5; j++) {\n        [ndata[i * 10 + 9 - j], ndata[i * 10 + j]] = [\n            ndata[i * 10 + j],\n            ndata[i * 10 + 9 - j],\n        ];\n    }\n}\n\nconst length = ndata.length;\n\n// 计算生成二维数组的行数和列数\nconst rows = Math.sqrt(length);\nconst cols = rows;\n\nif (length !== rows * cols) {\n    console.error(\"输入数组长度与给定的行数和列数不匹配。\");\n    return;\n}\n\n// 将一维数组转换为二维数组\nconst originalMatrix = [];\nfor (let i = 0; i < rows; i++) {\n    originalMatrix.push(ndata.slice(i * cols, (i + 1) * cols));\n}\n\n// 创建一个新的旋转后的矩阵\nconst rotatedMatrix = new Array(rows).fill().map(() => []);\n\n// 进行矩阵转置和行翻转\nfor (let row = 0; row < rows; row++) {\n    for (let col = 0; col < cols; col++) {\n        rotatedMatrix[cols - 1 - col][row] = originalMatrix[row][col];\n    }\n}\n\n// 将旋转后的矩阵转换为一维数组\nconst rotatedArray = rotatedMatrix.flat();\nndata = rotatedArray\n\n /////////////////////////////////\n\nconst newDataArr = []\n\nfor (let i = 0; i < 5; i++) {\n\n    for (let j = 0; j < 5; j++) {\n        let num = 0\n\n        for (let k = 0; k < 2; k++) {\n            for (let z = 0; z < 2; z++) {\n                num += ndata[(i * 2 + k) * 10 + j * 2 + z]\n                // console.log(i + k, j + z)\n            }\n        }\n\n        newDataArr.push(Number((num / 4).toFixed(1)))\n    }\n\n}\n\nfor (let i = 0; i < 5; i++) {\n\n    for (let j = 0; j < 5; j++) {\n        let num = 0\n\n        for (let k = 0; k < 2; k++) {\n            for (let z = 0; z < 2; z++) {\n                // num += ndata[(i*2 + k) * 10 + j*2 + z]\n                ndata[(i * 2 + k) * 10 + j * 2 + z] = newDataArr[i * 5 + j]\n                // console.log(i + k, j + z)\n            }\n        }\n\n        // newArr.push(Number((num / 4).toFixed(1)))\n    }\n\n}\n\n\n\nmsg.payload.backData=ndata;\nconsole.info(ndata.length)\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -1199,7 +1205,7 @@
         "type": "serial in",
         "z": "a5e559706e7cb5f0",
         "name": "Serialport1",
-        "serial": "3c48bdf53b96508a",
+        "serial": "193f9130dc45f976",
         "x": 375,
         "y": 100,
         "wires": [
