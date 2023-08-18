@@ -955,21 +955,6 @@
         ]
     },
     {
-        "id": "5588196bdcc994cf",
-        "type": "rpi-gpio out",
-        "z": "a5e559706e7cb5f0",
-        "name": "座椅向上移动",
-        "pin": "13",
-        "set": true,
-        "level": "0",
-        "freq": "",
-        "out": "out",
-        "bcm": true,
-        "x": 2700,
-        "y": 960,
-        "wires": []
-    },
-    {
         "id": "af9e26536605ec0f",
         "type": "function",
         "z": "a5e559706e7cb5f0",
@@ -1002,21 +987,6 @@
         "wires": [
             []
         ]
-    },
-    {
-        "id": "85e9af8748b1f04b",
-        "type": "rpi-gpio out",
-        "z": "a5e559706e7cb5f0",
-        "name": "座椅向下移动",
-        "pin": "6",
-        "set": true,
-        "level": "0",
-        "freq": "",
-        "out": "out",
-        "bcm": true,
-        "x": 2760,
-        "y": 1220,
-        "wires": []
     },
     {
         "id": "0a46f54ae02fce6a",
@@ -1087,8 +1057,8 @@
         "y": 1080,
         "wires": [
             [
-                "5588196bdcc994cf",
-                "4ed669bbcf063806"
+                "4ed669bbcf063806",
+                "29b871fde6d71199"
             ]
         ]
     },
@@ -1107,8 +1077,8 @@
         "y": 1260,
         "wires": [
             [
-                "85e9af8748b1f04b",
-                "7768c646c19e0f40"
+                "7768c646c19e0f40",
+                "44f34c5836776775"
             ]
         ]
     },
@@ -1331,36 +1301,6 @@
         ]
     },
     {
-        "id": "2cc7bed53e611a0f",
-        "type": "rpi-gpio out",
-        "z": "a5e559706e7cb5f0",
-        "name": "座椅向上移动",
-        "pin": "13",
-        "set": true,
-        "level": "0",
-        "freq": "",
-        "out": "out",
-        "bcm": true,
-        "x": 3360,
-        "y": 1100,
-        "wires": []
-    },
-    {
-        "id": "1faa3e6f74866644",
-        "type": "rpi-gpio out",
-        "z": "a5e559706e7cb5f0",
-        "name": "座椅向下移动",
-        "pin": "6",
-        "set": true,
-        "level": "0",
-        "freq": "",
-        "out": "out",
-        "bcm": true,
-        "x": 3340,
-        "y": 1340,
-        "wires": []
-    },
-    {
         "id": "d3bf60d007153332",
         "type": "serial in",
         "z": "a5e559706e7cb5f0",
@@ -1390,7 +1330,7 @@
         "y": 1100,
         "wires": [
             [
-                "2cc7bed53e611a0f"
+                "58845e57432190ab"
             ]
         ]
     },
@@ -1409,7 +1349,7 @@
         "y": 1340,
         "wires": [
             [
-                "1faa3e6f74866644"
+                "46902b0ac286f9fc"
             ]
         ]
     },
@@ -1419,8 +1359,8 @@
         "z": "a5e559706e7cb5f0",
         "name": "",
         "pauseType": "delay",
-        "timeout": "2",
-        "timeoutUnits": "seconds",
+        "timeout": "2000",
+        "timeoutUnits": "milliseconds",
         "rate": "1",
         "nbRateUnits": "1",
         "rateUnits": "second",
@@ -1430,7 +1370,7 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 2740,
+        "x": 2750,
         "y": 1340,
         "wires": [
             [
@@ -1530,6 +1470,66 @@
                 "d495e2c6f008c861"
             ]
         ]
+    },
+    {
+        "id": "29b871fde6d71199",
+        "type": "rpi-gpio out",
+        "z": "a5e559706e7cb5f0",
+        "name": "坐垫向前",
+        "pin": "25",
+        "set": true,
+        "level": "0",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 2780,
+        "y": 980,
+        "wires": []
+    },
+    {
+        "id": "58845e57432190ab",
+        "type": "rpi-gpio out",
+        "z": "a5e559706e7cb5f0",
+        "name": "坐垫向前",
+        "pin": "25",
+        "set": true,
+        "level": "0",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 3360,
+        "y": 1100,
+        "wires": []
+    },
+    {
+        "id": "44f34c5836776775",
+        "type": "rpi-gpio out",
+        "z": "a5e559706e7cb5f0",
+        "name": "坐垫向后",
+        "pin": "24",
+        "set": true,
+        "level": "0",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 2740,
+        "y": 1240,
+        "wires": []
+    },
+    {
+        "id": "46902b0ac286f9fc",
+        "type": "rpi-gpio out",
+        "z": "a5e559706e7cb5f0",
+        "name": "坐垫向后",
+        "pin": "24",
+        "set": true,
+        "level": "0",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 3320,
+        "y": 1340,
+        "wires": []
     },
     {
         "id": "6105b276c3761157",
