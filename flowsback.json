@@ -70,8 +70,8 @@
     {
         "id": "deba420c25236b68",
         "type": "serial-port",
-        "serialport": "/dev/ttyUSB2",
-        "serialbaud": "115200",
+        "serialport": "",
+        "serialbaud": "57600",
         "databits": "8",
         "parity": "none",
         "stopbits": "1",
@@ -899,8 +899,8 @@
         "id": "3dcdd951ba89283a",
         "type": "function",
         "z": "0c118dcb95acf0e0",
-        "name": "气囊充气",
-        "func": "var delimiter = Buffer.from([0x05, 0x64, 0x00, 0x64, 0x64, 0x64, 0x00, 0x00, 0x00, 0x10]);\nmsg.payload = delimiter;\nconsole.info(msg.payload)\nreturn msg;",
+        "name": "气囊控制",
+        "func": "var delimiter = Buffer.from([0x05, 0x64, 0x64, 0x64, 0x64, 0x64, 0x64, 0x64, 0x64,0x20]);\nmsg.payload = delimiter;\nconsole.info(msg.payload)\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -919,8 +919,8 @@
         "type": "serial out",
         "z": "0c118dcb95acf0e0",
         "name": "",
-        "serial": "deba420c25236b68",
-        "x": 1210,
+        "serial": "",
+        "x": 1190,
         "y": 480,
         "wires": []
     },
@@ -950,180 +950,6 @@
         "wires": [
             [
                 "3dcdd951ba89283a"
-            ]
-        ]
-    },
-    {
-        "id": "3fb35e29fb02086a",
-        "type": "function",
-        "z": "0c118dcb95acf0e0",
-        "name": "气囊放气",
-        "func": "var delimiter = Buffer.from([0x05, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,0x20]);\nmsg.payload = delimiter;\nconsole.info(msg.payload)\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1180,
-        "y": 620,
-        "wires": [
-            [
-                "ca7cc46fc6ad3ff6"
-            ]
-        ]
-    },
-    {
-        "id": "ca7cc46fc6ad3ff6",
-        "type": "serial out",
-        "z": "0c118dcb95acf0e0",
-        "name": "",
-        "serial": "deba420c25236b68",
-        "x": 1430,
-        "y": 620,
-        "wires": []
-    },
-    {
-        "id": "36c693def48ace4a",
-        "type": "inject",
-        "z": "0c118dcb95acf0e0",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 970,
-        "y": 620,
-        "wires": [
-            [
-                "3fb35e29fb02086a"
-            ]
-        ]
-    },
-    {
-        "id": "a48876c9eb169440",
-        "type": "function",
-        "z": "0c118dcb95acf0e0",
-        "name": "坐垫气囊",
-        "func": "var delimiter = Buffer.from([0x07, 0x64, 0x64, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x10]);\nmsg.payload = delimiter;\nconsole.info(msg.payload)\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1080,
-        "y": 100,
-        "wires": [
-            [
-                "51f59b9c64fffa71"
-            ]
-        ]
-    },
-    {
-        "id": "51f59b9c64fffa71",
-        "type": "serial out",
-        "z": "0c118dcb95acf0e0",
-        "name": "",
-        "serial": "deba420c25236b68",
-        "x": 1330,
-        "y": 100,
-        "wires": []
-    },
-    {
-        "id": "329e6e5b7647e530",
-        "type": "inject",
-        "z": "0c118dcb95acf0e0",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 870,
-        "y": 100,
-        "wires": [
-            [
-                "a48876c9eb169440"
-            ]
-        ]
-    },
-    {
-        "id": "99d5fafaee618d5d",
-        "type": "function",
-        "z": "0c118dcb95acf0e0",
-        "name": "坐垫气囊放气",
-        "func": "var delimiter = Buffer.from([0x07, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,0x05]);\nmsg.payload = delimiter;\nconsole.info(msg.payload)\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1100,
-        "y": 40,
-        "wires": [
-            [
-                "f556b73261e37f47"
-            ]
-        ]
-    },
-    {
-        "id": "f556b73261e37f47",
-        "type": "serial out",
-        "z": "0c118dcb95acf0e0",
-        "name": "",
-        "serial": "deba420c25236b68",
-        "x": 1330,
-        "y": 40,
-        "wires": []
-    },
-    {
-        "id": "b90401e84c78b4be",
-        "type": "inject",
-        "z": "0c118dcb95acf0e0",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 870,
-        "y": 40,
-        "wires": [
-            [
-                "99d5fafaee618d5d"
             ]
         ]
     },
@@ -1241,7 +1067,7 @@
         "type": "serial in",
         "z": "23caab7f537e37b0",
         "name": "Serialport0",
-        "serial": "193f9130dc45f976",
+        "serial": "3c48bdf53b96508a",
         "x": 385,
         "y": 260,
         "wires": [
@@ -2256,7 +2082,7 @@
         "type": "serial in",
         "z": "23caab7f537e37b0",
         "name": "Serialport1",
-        "serial": "3c48bdf53b96508a",
+        "serial": "193f9130dc45f976",
         "x": 375,
         "y": 100,
         "wires": [
@@ -2822,7 +2648,7 @@
         "freq": "",
         "out": "out",
         "bcm": true,
-        "x": 3400,
+        "x": 3420,
         "y": 300,
         "wires": []
     },
