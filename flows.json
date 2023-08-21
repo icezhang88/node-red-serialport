@@ -1904,7 +1904,7 @@
         "type": "function",
         "z": "23caab7f537e37b0",
         "name": "条件窗口",
-        "func": "\nglobal.set(\"waistDownConditionCount\", 0);\n\nvar waistUpConditionCount = global.get(\"waistUpConditionCount\");\nwaistUpConditionCount++;\nglobal.set(\"waistUpConditionCount\", waistUpConditionCount);\n\nif (waistUpConditionCount > 20) {\n    msg.payload = 1;\n    global.set(\"waistUpConditionCount\", 0);\n\n    var controlingFlag = global.get(\"controlingFlag\");\n    if (controlingFlag == 0) {\n        global.set(\"controlingFlag\", 1);\n        return msg;\n    }\n}\n\n\n ",
+        "func": "\nglobal.set(\"waistDownConditionCount\", 0);\n\nvar waistUpConditionCount = global.get(\"waistUpConditionCount\");\nwaistUpConditionCount++;\nglobal.set(\"waistUpConditionCount\", waistUpConditionCount);\n\nvar waistControlTime=global.get(\"waistControlTime\");\n//向前移动的范围不超过6s\n//条件窗口为30帧连续判断\nif (waistControlTime<6000){\n    //条件窗口为30帧连续判断\n    if (waistUpConditionCount > 20) {\n        msg.payload = 1;\n        global.set(\"waistUpConditionCount\", 0);\n\n        var controlingFlag = global.get(\"controlingFlag\");\n        if (controlingFlag == 0) {\n            global.set(\"controlingFlag\", 1);\n            return msg;\n        }\n    }\n}\n\n \n\n\n ",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -1924,7 +1924,7 @@
         "type": "function",
         "z": "23caab7f537e37b0",
         "name": "条件窗口",
-        "func": "\nglobal.set(\"waistUpConditionCount\", 0);\n\nvar waistDownConditionCount = global.get(\"waistDownConditionCount\");\nwaistDownConditionCount++;\nglobal.set(\"waistUpConditionCount\", waistDownConditionCount);\n\nif (waistDownConditionCount > 20) {\n    msg.payload = 1;\n    global.set(\"waistUpConditionCount\", 0);\n\n\n    var controlingFlag = global.get(\"controlingFlag\");\n    if (controlingFlag == 0) {\n        global.set(\"controlingFlag\", 1);\n        return msg;\n    }\n\n}\n\n\n ",
+        "func": "\nglobal.set(\"waistUpConditionCount\", 0);\n\nvar waistDownConditionCount = global.get(\"waistDownConditionCount\");\nwaistDownConditionCount++;\nglobal.set(\"waistUpConditionCount\", waistDownConditionCount);\n\nvar waistControlTime=global.get(\"waistControlTime\");\n//向前移动的范围不超过6s\n//条件窗口为30帧连续判断\nif(waistControlTime>-6000){\n    //条件窗口为30帧连续判断\n    if (waistDownConditionCount > 20) {\n        msg.payload = 1;\n        global.set(\"waistUpConditionCount\", 0);\n\n\n        var controlingFlag = global.get(\"controlingFlag\");\n        if (controlingFlag == 0) {\n            global.set(\"controlingFlag\", 1);\n            return msg;\n        }\n\n    }\n\n}\n\n \n\n ",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -1944,7 +1944,7 @@
         "type": "function",
         "z": "23caab7f537e37b0",
         "name": "条件窗口",
-        "func": "\nglobal.set(\"hunchDownConditionCount\", 0);\n\nvar hunchUpConditionCount = global.get(\"hunchUpConditionCount\");\nhunchUpConditionCount++;\nglobal.set(\"hunchUpConditionCount\", hunchUpConditionCount);\n\nif (hunchUpConditionCount > 30) {\n    msg.payload = 1;\n    global.set(\"hunchUpConditionCount\", 0);\n\n    var controlingFlag = global.get(\"controlingFlag\");\n    if (controlingFlag == 0) {\n        global.set(\"controlingFlag\", 1);\n        return msg;\n    }\n}\n\n ",
+        "func": "\nglobal.set(\"hunchDownConditionCount\", 0);\n\nvar hunchUpConditionCount = global.get(\"hunchUpConditionCount\");\nhunchUpConditionCount++;\nglobal.set(\"hunchUpConditionCount\", hunchUpConditionCount);\n\nvar hunchControlTime = global.get(\"hunchControlTime\");\n\n//向前移动的范围不超过6s\n//条件窗口为30帧连续判断\nif(hunchControlTime<6000){\n//条件窗口为30帧连续判断\n    if (hunchUpConditionCount > 30) {\n        msg.payload = 1;\n        global.set(\"hunchUpConditionCount\", 0);\n\n        var controlingFlag = global.get(\"controlingFlag\");\n        if (controlingFlag == 0) {\n            global.set(\"controlingFlag\", 1);\n            return msg;\n        }\n    }\n\n}\n\n \n\n ",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -1964,7 +1964,7 @@
         "type": "function",
         "z": "23caab7f537e37b0",
         "name": "条件窗口",
-        "func": "\nglobal.set(\"hunchUpConditionCount\", 0);\n\nvar hunchDownConditionCount = global.get(\"hunchDownConditionCount\");\nhunchDownConditionCount++;\nglobal.set(\"hunchUpConditionCount\", hunchDownConditionCount);\n\nif (hunchDownConditionCount > 30) {\n    msg.payload = 1;\n    global.set(\"hunchUpConditionCount\", 0);\n\n    var controlingFlag = global.get(\"controlingFlag\");\n    if (controlingFlag == 0) {\n        global.set(\"controlingFlag\", 1);\n        return msg;\n    }\n}\n\n\n ",
+        "func": "\nglobal.set(\"hunchUpConditionCount\", 0);\n\nvar hunchDownConditionCount = global.get(\"hunchDownConditionCount\");\nhunchDownConditionCount++;\nglobal.set(\"hunchUpConditionCount\", hunchDownConditionCount);\n\nvar hunchControlTime = global.get(\"hunchControlTime\");\n\n//移动的范围不超过6s\n//条件窗口为30帧连续判断\nif (hunchControlTime >- 6000) {\n    //条件窗口为30帧连续判断\n    if (hunchDownConditionCount > 30) {\n        msg.payload = 1;\n        global.set(\"hunchUpConditionCount\", 0);\n\n        var controlingFlag = global.get(\"controlingFlag\");\n        if (controlingFlag == 0) {\n            global.set(\"controlingFlag\", 1);\n            return msg;\n        }\n    }\n\n}\n\n \n\n\n ",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -2122,7 +2122,7 @@
         "type": "function",
         "z": "23caab7f537e37b0",
         "name": "条件窗口",
-        "func": "\nglobal.set(\"frontDownConditionCount\", 0);\n\nvar frontUpConditionCount= global.get(\"frontUpConditionCount\");\nfrontUpConditionCount++;\nglobal.set(\"frontUpConditionCount\", frontUpConditionCount);\n \nif(frontUpConditionCount>30){\n    msg.payload=1;\n    global.set(\"frontUpConditionCount\",0);\n\n    var controlingFlag = global.get(\"controlingFlag\");\n    if (controlingFlag == 0) {\n        global.set(\"controlingFlag\", 1);\n        return msg;\n    }\n\n}\n\n\n \n\n ",
+        "func": "\nglobal.set(\"frontDownConditionCount\", 0);\n\nvar frontUpConditionCount= global.get(\"frontUpConditionCount\");\nfrontUpConditionCount++;\nglobal.set(\"frontUpConditionCount\", frontUpConditionCount);\n \nvar frontControlTime=global.get(\"frontControlTime\");\n//向前移动的范围不超过6s\n//条件窗口为30帧连续判断\nif (frontControlTime>6000){\n    if (frontUpConditionCount > 30) {\n        msg.payload = 1;\n        global.set(\"frontUpConditionCount\", 0);\n\n        var controlingFlag = global.get(\"controlingFlag\");\n        if (controlingFlag == 0) {\n            global.set(\"controlingFlag\", 1);\n            return msg;\n        }\n\n    }\n}\n\n \n\n\n \n\n ",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -2142,7 +2142,7 @@
         "type": "function",
         "z": "23caab7f537e37b0",
         "name": "条件窗口",
-        "func": "\nglobal.set(\"frontUpConditionCount\", 0);\n\nvar frontDownConditionCount = global.get(\"frontDownConditionCount\");\nfrontDownConditionCount++;\nglobal.set(\"frontDownConditionCount\", frontDownConditionCount);\n\nif (frontDownConditionCount > 30) {\n    msg.payload = 1;\n    global.set(\"frontDownConditionCount\", 0);\n\n\n    var controlingFlag = global.get(\"controlingFlag\");\n    if (controlingFlag == 0) {\n        global.set(\"controlingFlag\", 1);\n        return msg;\n    }\n\n}\n\n\n \n ",
+        "func": "\nglobal.set(\"frontUpConditionCount\", 0);\n\nvar frontDownConditionCount = global.get(\"frontDownConditionCount\");\nfrontDownConditionCount++;\nglobal.set(\"frontDownConditionCount\", frontDownConditionCount);\n\n\nvar frontControlTime=global.get(\"frontControlTime\");\n\n//向后移动的范围不超过6s\n//条件窗口为30帧连续判断\nif(frontControlTime>-6000){\n    //条件窗口为30帧连续判断\n    if (frontDownConditionCount > 30) {\n        msg.payload = 1;\n        global.set(\"frontDownConditionCount\", 0);\n\n\n        var controlingFlag = global.get(\"controlingFlag\");\n        if (controlingFlag == 0) {\n            global.set(\"controlingFlag\", 1);\n            return msg;\n        }\n\n    }\n\n}   \n\n \n\n \n ",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -2186,45 +2186,6 @@
         "x": 2780,
         "y": 40,
         "wires": []
-    },
-    {
-        "id": "e9378f738d69cc76",
-        "type": "serial out",
-        "z": "23caab7f537e37b0",
-        "name": "",
-        "serial": "",
-        "x": 330,
-        "y": 460,
-        "wires": []
-    },
-    {
-        "id": "d24f274501c6f167",
-        "type": "inject",
-        "z": "23caab7f537e37b0",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "bin",
-        "x": 90,
-        "y": 460,
-        "wires": [
-            [
-                "e9378f738d69cc76"
-            ]
-        ]
     },
     {
         "id": "e5e786b3cf8b3efb",
