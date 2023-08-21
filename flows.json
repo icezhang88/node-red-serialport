@@ -1699,8 +1699,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1690,
-        "y": 520,
+        "x": 1670,
+        "y": 1700,
         "wires": [
             [
                 "ce883fd325826609"
@@ -1718,8 +1718,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1890,
-        "y": 40,
+        "x": 2050,
+        "y": 320,
         "wires": [
             [
                 "75823bbbffb694c2"
@@ -1744,7 +1744,7 @@
         "repair": false,
         "outputs": 1,
         "x": 1910,
-        "y": 520,
+        "y": 2160,
         "wires": [
             [
                 "d4514e8011fae40f",
@@ -1763,8 +1763,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 2190,
-        "y": 520,
+        "x": 2170,
+        "y": 1920,
         "wires": [
             [
                 "6cdcdff727390cdc",
@@ -1789,8 +1789,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 2050,
-        "y": 40,
+        "x": 2210,
+        "y": 320,
         "wires": [
             [
                 "e8b517a694a27acf"
@@ -1802,16 +1802,20 @@
         "type": "function",
         "z": "23caab7f537e37b0",
         "name": "离坐动作触发",
-        "func": "// console.info(\"离坐次数: \" + msg.payload);\n\nvar waistControlTime=global.get(\"waistControlTime\");\nvar hunchControlTime = global.get(\"hunchControlTime\");\nvar frontControlTime = global.get(\"frontControlTime\");\n\n\n\n\nreturn msg;",
+        "func": "// console.info(\"离坐次数: \" + msg.payload);\n\nvar waistControlTime=global.get(\"waistControlTime\");\nvar hunchControlTime = global.get(\"hunchControlTime\");\nvar frontControlTime = global.get(\"frontControlTime\");\n\nmsg.waistControlTime = waistControlTime;\nmsg.hunchControlTime = hunchControlTime;\nmsg.frontControlTime = frontControlTime;\n\n//waist 复位\nif(waistControlTime>0){\n    Math.abs(waistControlTime);\n}else{\n    Math.abs(waistControlTime);\n}\n//hunch 复位\nif(hunchControlTime>0){\n    Math.abs(hunchControlTime);\n}else{\n    Math.abs(hunchControlTime);\n}\n\n//frontLeg复位\nif(frontControlTime>0){\n    Math.abs(frontControlTime);\n}else{\n    Math.abs(frontControlTime);\n}\n\n\n\n\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 2200,
-        "y": 40,
+        "x": 2400,
+        "y": 320,
         "wires": [
-            []
+            [
+                "f43741ac300f6cf1",
+                "98118aeba92e4aa7",
+                "0e0a22f283d375d8"
+            ]
         ]
     },
     {
@@ -1825,8 +1829,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 2080,
-        "y": 1540,
+        "x": 2060,
+        "y": 2720,
         "wires": [
             [
                 "3cc4a9f3e8a1d363"
@@ -1855,8 +1859,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 2390,
-        "y": 320,
+        "x": 2370,
+        "y": 1800,
         "wires": [
             [
                 "ce3bca71c51f2645"
@@ -1888,8 +1892,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 2340,
-        "y": 840,
+        "x": 2320,
+        "y": 2240,
         "wires": [
             [
                 "20b1a596648ac30c"
@@ -1910,8 +1914,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 2600,
-        "y": 260,
+        "x": 2580,
+        "y": 1760,
         "wires": [
             [
                 "090f65a7f9a09019",
@@ -1930,8 +1934,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 2600,
-        "y": 420,
+        "x": 2580,
+        "y": 1920,
         "wires": [
             [
                 "2828e551c910a493",
@@ -1950,8 +1954,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 2560,
-        "y": 680,
+        "x": 2540,
+        "y": 2080,
         "wires": [
             [
                 "858618ba7d8aedd3",
@@ -1970,8 +1974,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 2540,
-        "y": 980,
+        "x": 2520,
+        "y": 2380,
         "wires": [
             [
                 "39a2727a83b5d2ac",
@@ -2012,8 +2016,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 2350,
-        "y": 1540,
+        "x": 2330,
+        "y": 2720,
         "wires": [
             [
                 "e4b94da4e0f4f15c"
@@ -2082,8 +2086,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 3010,
-        "y": 1500,
+        "x": 2990,
+        "y": 2680,
         "wires": [
             [
                 "b5687cc679971f09"
@@ -2109,8 +2113,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 3010,
-        "y": 1740,
+        "x": 2990,
+        "y": 2920,
         "wires": [
             [
                 "44f1a095a0c75c37"
@@ -2128,8 +2132,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 2580,
-        "y": 1480,
+        "x": 2560,
+        "y": 2660,
         "wires": [
             [
                 "e5e786b3cf8b3efb",
@@ -2148,8 +2152,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 2580,
-        "y": 1660,
+        "x": 2560,
+        "y": 2840,
         "wires": [
             [
                 "fedd5531eb422989",
@@ -2168,8 +2172,8 @@
         "freq": "",
         "out": "out",
         "bcm": true,
-        "x": 2740,
-        "y": 680,
+        "x": 2720,
+        "y": 2080,
         "wires": []
     },
     {
@@ -2183,8 +2187,8 @@
         "freq": "",
         "out": "out",
         "bcm": true,
-        "x": 2820,
-        "y": 180,
+        "x": 2800,
+        "y": 1720,
         "wires": []
     },
     {
@@ -2204,8 +2208,8 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 2810,
-        "y": 1500,
+        "x": 2790,
+        "y": 2680,
         "wires": [
             [
                 "157984723e551b09"
@@ -2238,8 +2242,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 3200,
-        "y": 1500,
+        "x": 3180,
+        "y": 2680,
         "wires": [
             [
                 "fb2fc6cfed5f994c"
@@ -2257,8 +2261,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 3200,
-        "y": 1740,
+        "x": 3180,
+        "y": 2920,
         "wires": [
             [
                 "afd948ecd15aab75"
@@ -2282,8 +2286,8 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 2810,
-        "y": 1740,
+        "x": 2790,
+        "y": 2920,
         "wires": [
             [
                 "251f0bf67cebc318"
@@ -2298,7 +2302,7 @@
         "props": [
             {
                 "p": "delay",
-                "v": "2",
+                "v": "2000",
                 "vt": "num"
             },
             {
@@ -2316,8 +2320,8 @@
         "topic": "",
         "payload": "2",
         "payloadType": "str",
-        "x": 1510,
-        "y": 1280,
+        "x": 1490,
+        "y": 2460,
         "wires": [
             [
                 "e868bc474513c3e8",
@@ -2337,8 +2341,8 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1760,
-        "y": 1360,
+        "x": 1740,
+        "y": 2540,
         "wires": []
     },
     {
@@ -2354,8 +2358,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1620,
-        "y": 1200,
+        "x": 1600,
+        "y": 2380,
         "wires": []
     },
     {
@@ -2364,7 +2368,7 @@
         "z": "23caab7f537e37b0",
         "name": "",
         "pauseType": "delayv",
-        "timeout": "",
+        "timeout": "0",
         "timeoutUnits": "seconds",
         "rate": "1",
         "nbRateUnits": "1",
@@ -2375,8 +2379,8 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 1690,
-        "y": 1280,
+        "x": 1670,
+        "y": 2460,
         "wires": [
             [
                 "c027eb4e267787b4"
@@ -2394,8 +2398,8 @@
         "freq": "",
         "out": "out",
         "bcm": true,
-        "x": 2820,
-        "y": 1380,
+        "x": 2800,
+        "y": 2560,
         "wires": []
     },
     {
@@ -2409,8 +2413,8 @@
         "freq": "",
         "out": "out",
         "bcm": true,
-        "x": 3400,
-        "y": 1500,
+        "x": 3380,
+        "y": 2680,
         "wires": []
     },
     {
@@ -2424,8 +2428,8 @@
         "freq": "",
         "out": "out",
         "bcm": true,
-        "x": 2780,
-        "y": 1640,
+        "x": 2760,
+        "y": 2820,
         "wires": []
     },
     {
@@ -2439,8 +2443,8 @@
         "freq": "",
         "out": "out",
         "bcm": true,
-        "x": 3400,
-        "y": 1740,
+        "x": 3380,
+        "y": 2920,
         "wires": []
     },
     {
@@ -2462,8 +2466,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 2970,
-        "y": 780,
+        "x": 2950,
+        "y": 2180,
         "wires": [
             [
                 "b7a3b5187db6b629"
@@ -2487,8 +2491,8 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 2750,
-        "y": 780,
+        "x": 2730,
+        "y": 2180,
         "wires": [
             [
                 "c85210cabdb19fe6"
@@ -2506,8 +2510,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 3160,
-        "y": 780,
+        "x": 3140,
+        "y": 2180,
         "wires": [
             [
                 "553e2f2f42909e56"
@@ -2525,8 +2529,8 @@
         "freq": "",
         "out": "out",
         "bcm": true,
-        "x": 2780,
-        "y": 920,
+        "x": 2760,
+        "y": 2320,
         "wires": []
     },
     {
@@ -2548,8 +2552,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 2990,
-        "y": 1020,
+        "x": 2970,
+        "y": 2420,
         "wires": [
             [
                 "94e01c1661a674ed"
@@ -2573,8 +2577,8 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 2770,
-        "y": 1020,
+        "x": 2750,
+        "y": 2420,
         "wires": [
             [
                 "4e9a1bd26b17adfd"
@@ -2592,8 +2596,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 3180,
-        "y": 1020,
+        "x": 3160,
+        "y": 2420,
         "wires": [
             [
                 "99e7a3fa99425533"
@@ -2619,8 +2623,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 3030,
-        "y": 320,
+        "x": 3010,
+        "y": 1820,
         "wires": [
             [
                 "08e010a1349cae19"
@@ -2644,8 +2648,8 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 2830,
-        "y": 320,
+        "x": 2810,
+        "y": 1820,
         "wires": [
             [
                 "7287c6e126624890"
@@ -2663,8 +2667,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 3240,
-        "y": 320,
+        "x": 3220,
+        "y": 1820,
         "wires": [
             [
                 "3ebec4c2b50b83fa"
@@ -2682,8 +2686,8 @@
         "freq": "",
         "out": "out",
         "bcm": true,
-        "x": 2800,
-        "y": 380,
+        "x": 2780,
+        "y": 1880,
         "wires": []
     },
     {
@@ -2697,8 +2701,8 @@
         "freq": "",
         "out": "out",
         "bcm": true,
-        "x": 3440,
-        "y": 320,
+        "x": 3420,
+        "y": 1820,
         "wires": []
     },
     {
@@ -2720,8 +2724,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 3030,
-        "y": 480,
+        "x": 3010,
+        "y": 1980,
         "wires": [
             [
                 "8d635620d7d15bd0"
@@ -2745,8 +2749,8 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 2810,
-        "y": 480,
+        "x": 2790,
+        "y": 1980,
         "wires": [
             [
                 "32733f363ffa94ae"
@@ -2764,8 +2768,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 3240,
-        "y": 480,
+        "x": 3220,
+        "y": 1980,
         "wires": [
             [
                 "ef0ffeba387d8f99"
@@ -2783,8 +2787,8 @@
         "freq": "",
         "out": "out",
         "bcm": true,
-        "x": 3440,
-        "y": 480,
+        "x": 3420,
+        "y": 1980,
         "wires": []
     },
     {
@@ -2798,8 +2802,8 @@
         "freq": "",
         "out": "out",
         "bcm": true,
-        "x": 3360,
-        "y": 778,
+        "x": 3340,
+        "y": 2178,
         "wires": []
     },
     {
@@ -2813,8 +2817,8 @@
         "freq": "",
         "out": "out",
         "bcm": true,
-        "x": 3380,
-        "y": 1020,
+        "x": 3360,
+        "y": 2420,
         "wires": []
     },
     {
@@ -2826,6 +2830,717 @@
         "client": "",
         "x": 1300,
         "y": 380,
+        "wires": []
+    },
+    {
+        "id": "f43741ac300f6cf1",
+        "type": "switch",
+        "z": "23caab7f537e37b0",
+        "name": "switch_waist",
+        "property": "waistControlTime",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "gt",
+                "v": "0",
+                "vt": "str"
+            },
+            {
+                "t": "lt",
+                "v": "0",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 2650,
+        "y": 80,
+        "wires": [
+            [
+                "debe5af3bc8c240e"
+            ],
+            [
+                "df230cdbaa0a28eb"
+            ]
+        ]
+    },
+    {
+        "id": "98118aeba92e4aa7",
+        "type": "switch",
+        "z": "23caab7f537e37b0",
+        "name": "switch_hunch",
+        "property": "hunchControlTime",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "gt",
+                "v": "0",
+                "vt": "str"
+            },
+            {
+                "t": "lt",
+                "v": "0",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 2680,
+        "y": 480,
+        "wires": [
+            [
+                "3b2a65f0b8abc030"
+            ],
+            [
+                "3c266d87e575e87a"
+            ]
+        ]
+    },
+    {
+        "id": "0e0a22f283d375d8",
+        "type": "switch",
+        "z": "23caab7f537e37b0",
+        "name": "switch_front",
+        "property": "frontControlTime",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "gt",
+                "v": "0",
+                "vt": "str"
+            },
+            {
+                "t": "lt",
+                "v": "0",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 2670,
+        "y": 860,
+        "wires": [
+            [
+                "305aa8af9241a37f"
+            ],
+            [
+                "485d0add05a82b92"
+            ]
+        ]
+    },
+    {
+        "id": "debe5af3bc8c240e",
+        "type": "function",
+        "z": "23caab7f537e37b0",
+        "name": "向后重置",
+        "func": "\nmsg.delay = Math.abs(global.get(\"waistControlTime\"));\nmsg.payload=1;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2820,
+        "y": 60,
+        "wires": [
+            [
+                "9a07f4a9d0aff9e6",
+                "b199235a941667df"
+            ]
+        ]
+    },
+    {
+        "id": "df230cdbaa0a28eb",
+        "type": "function",
+        "z": "23caab7f537e37b0",
+        "name": "向前重置",
+        "func": "\nmsg.delay = Math.abs(global.get(\"waistControlTime\"));\nmsg.payload = 1;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2820,
+        "y": 180,
+        "wires": [
+            [
+                "4d8e51a8e88e0f7e",
+                "5161867afa135f62"
+            ]
+        ]
+    },
+    {
+        "id": "3b2a65f0b8abc030",
+        "type": "function",
+        "z": "23caab7f537e37b0",
+        "name": "向后重置",
+        "func": "msg.delay = Math.abs(global.get(\"hunchControlTime\"));\nmsg.payload = 1;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2880,
+        "y": 440,
+        "wires": [
+            [
+                "bf9ec3c0d1e77755",
+                "0991e4e7c7915dfc"
+            ]
+        ]
+    },
+    {
+        "id": "3c266d87e575e87a",
+        "type": "function",
+        "z": "23caab7f537e37b0",
+        "name": "向前重置",
+        "func": "msg.delay = Math.abs(global.get(\"hunchControlTime\"));\nmsg.payload = 1;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2880,
+        "y": 520,
+        "wires": [
+            [
+                "a565fc9bc858c29f",
+                "84620387fc1191d9"
+            ]
+        ]
+    },
+    {
+        "id": "305aa8af9241a37f",
+        "type": "function",
+        "z": "23caab7f537e37b0",
+        "name": "向后重置",
+        "func": "msg.delay = Math.abs(global.get(\"waistControlTime\"));\nmsg.payload = 1;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2860,
+        "y": 840,
+        "wires": [
+            [
+                "60a3cb13fca43cb8",
+                "ce35f6506e293e48"
+            ]
+        ]
+    },
+    {
+        "id": "485d0add05a82b92",
+        "type": "function",
+        "z": "23caab7f537e37b0",
+        "name": "向前重置",
+        "func": "\nmsg.delay = Math.abs(global.get(\"waistControlTime\"));\nmsg.payload = 1;\n\n \n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2840,
+        "y": 900,
+        "wires": [
+            [
+                "4edaadb95fd7fe78",
+                "611357cc71e3a489"
+            ]
+        ]
+    },
+    {
+        "id": "9a07f4a9d0aff9e6",
+        "type": "rpi-gpio out",
+        "z": "23caab7f537e37b0",
+        "name": "气囊缩小",
+        "pin": "5",
+        "set": true,
+        "level": "0",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 3080,
+        "y": 20,
+        "wires": []
+    },
+    {
+        "id": "b199235a941667df",
+        "type": "delay",
+        "z": "23caab7f537e37b0",
+        "name": "",
+        "pauseType": "delayv",
+        "timeout": "0",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 3070,
+        "y": 80,
+        "wires": [
+            [
+                "8375b119c62a9de3"
+            ]
+        ]
+    },
+    {
+        "id": "5161867afa135f62",
+        "type": "delay",
+        "z": "23caab7f537e37b0",
+        "name": "",
+        "pauseType": "delayv",
+        "timeout": "0",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 3070,
+        "y": 240,
+        "wires": [
+            [
+                "79c0eb87fe89f4b5"
+            ]
+        ]
+    },
+    {
+        "id": "8375b119c62a9de3",
+        "type": "change",
+        "z": "23caab7f537e37b0",
+        "name": "向下移动置0",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "0",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 3290,
+        "y": 80,
+        "wires": [
+            [
+                "3cb420b6c55fd2a9"
+            ]
+        ]
+    },
+    {
+        "id": "79c0eb87fe89f4b5",
+        "type": "change",
+        "z": "23caab7f537e37b0",
+        "name": "向下移动置0",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "0",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 3290,
+        "y": 240,
+        "wires": [
+            [
+                "4f5fa063672e073c"
+            ]
+        ]
+    },
+    {
+        "id": "3cb420b6c55fd2a9",
+        "type": "rpi-gpio out",
+        "z": "23caab7f537e37b0",
+        "name": "气囊缩小",
+        "pin": "5",
+        "set": true,
+        "level": "0",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 3620,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "4f5fa063672e073c",
+        "type": "rpi-gpio out",
+        "z": "23caab7f537e37b0",
+        "name": "气囊变大",
+        "pin": "22",
+        "set": true,
+        "level": "0",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 3620,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "4d8e51a8e88e0f7e",
+        "type": "rpi-gpio out",
+        "z": "23caab7f537e37b0",
+        "name": "气囊变大",
+        "pin": "22",
+        "set": true,
+        "level": "0",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 3080,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "bf9ec3c0d1e77755",
+        "type": "delay",
+        "z": "23caab7f537e37b0",
+        "name": "",
+        "pauseType": "delayv",
+        "timeout": "0",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 3070,
+        "y": 460,
+        "wires": [
+            [
+                "fc6fb50dedc47a70"
+            ]
+        ]
+    },
+    {
+        "id": "fc6fb50dedc47a70",
+        "type": "change",
+        "z": "23caab7f537e37b0",
+        "name": "向下移动置0",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "0",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 3290,
+        "y": 460,
+        "wires": [
+            [
+                "e4ca7a3db1ec5ab7"
+            ]
+        ]
+    },
+    {
+        "id": "a565fc9bc858c29f",
+        "type": "delay",
+        "z": "23caab7f537e37b0",
+        "name": "",
+        "pauseType": "delayv",
+        "timeout": "0",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 3070,
+        "y": 600,
+        "wires": [
+            [
+                "f389994c6d54ef3e"
+            ]
+        ]
+    },
+    {
+        "id": "f389994c6d54ef3e",
+        "type": "change",
+        "z": "23caab7f537e37b0",
+        "name": "向下移动置0",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "0",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 3290,
+        "y": 600,
+        "wires": [
+            [
+                "02078b70d2c822eb"
+            ]
+        ]
+    },
+    {
+        "id": "60a3cb13fca43cb8",
+        "type": "delay",
+        "z": "23caab7f537e37b0",
+        "name": "",
+        "pauseType": "delayv",
+        "timeout": "0",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 3050,
+        "y": 840,
+        "wires": [
+            [
+                "1c3b03e332c55812"
+            ]
+        ]
+    },
+    {
+        "id": "1c3b03e332c55812",
+        "type": "change",
+        "z": "23caab7f537e37b0",
+        "name": "向下移动置0",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "0",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 3270,
+        "y": 840,
+        "wires": [
+            [
+                "89c0600ea9495192"
+            ]
+        ]
+    },
+    {
+        "id": "4edaadb95fd7fe78",
+        "type": "delay",
+        "z": "23caab7f537e37b0",
+        "name": "",
+        "pauseType": "delayv",
+        "timeout": "0",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 3050,
+        "y": 960,
+        "wires": [
+            [
+                "d81e1e33b5f3d2a3"
+            ]
+        ]
+    },
+    {
+        "id": "d81e1e33b5f3d2a3",
+        "type": "change",
+        "z": "23caab7f537e37b0",
+        "name": "向下移动置0",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "0",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 3270,
+        "y": 960,
+        "wires": [
+            [
+                "ea11f72185f81955"
+            ]
+        ]
+    },
+    {
+        "id": "84620387fc1191d9",
+        "type": "rpi-gpio out",
+        "z": "23caab7f537e37b0",
+        "name": "靠背向前",
+        "pin": "18",
+        "set": true,
+        "level": "0",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 3080,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "02078b70d2c822eb",
+        "type": "rpi-gpio out",
+        "z": "23caab7f537e37b0",
+        "name": "靠背向前",
+        "pin": "18",
+        "set": true,
+        "level": "0",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 3600,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "0991e4e7c7915dfc",
+        "type": "rpi-gpio out",
+        "z": "23caab7f537e37b0",
+        "name": "靠背向后",
+        "pin": "23",
+        "set": true,
+        "level": "0",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 3080,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "e4ca7a3db1ec5ab7",
+        "type": "rpi-gpio out",
+        "z": "23caab7f537e37b0",
+        "name": "靠背向后",
+        "pin": "23",
+        "set": true,
+        "level": "0",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 3601.765625,
+        "y": 455.75,
+        "wires": []
+    },
+    {
+        "id": "ce35f6506e293e48",
+        "type": "rpi-gpio out",
+        "z": "23caab7f537e37b0",
+        "name": "坐垫向后",
+        "pin": "24",
+        "set": true,
+        "level": "0",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 3060,
+        "y": 780,
+        "wires": []
+    },
+    {
+        "id": "89c0600ea9495192",
+        "type": "rpi-gpio out",
+        "z": "23caab7f537e37b0",
+        "name": "坐垫向后",
+        "pin": "24",
+        "set": true,
+        "level": "0",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 3574.765625,
+        "y": 834.75,
+        "wires": []
+    },
+    {
+        "id": "611357cc71e3a489",
+        "type": "rpi-gpio out",
+        "z": "23caab7f537e37b0",
+        "name": "坐垫向前",
+        "pin": "25",
+        "set": true,
+        "level": "0",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 3060,
+        "y": 900,
+        "wires": []
+    },
+    {
+        "id": "ea11f72185f81955",
+        "type": "rpi-gpio out",
+        "z": "23caab7f537e37b0",
+        "name": "坐垫向前",
+        "pin": "25",
+        "set": true,
+        "level": "0",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 3594.765625,
+        "y": 963.75,
         "wires": []
     },
     {
