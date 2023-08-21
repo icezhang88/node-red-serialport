@@ -1612,7 +1612,7 @@
         "type": "function",
         "z": "23caab7f537e37b0",
         "name": "realTimeMatrix",
-        "func": "global.set(\"controlingFlag\",0);\n\n//设置全局变量 保存坐垫及靠背的实时矩阵数据\nvar sitMatrixData=new Array();\nvar backMatrixData=new Array();\nglobal.set(\"sitMatrixData\", sitMatrixData);\nglobal.set(\"backMatrixData\", backMatrixData);\n//在离坐判断全局变量\nglobal.set(\"onSeatCount\",0);\nglobal.set(\"notSeatCount\",0);\n\n//座椅 坐垫 上下调节条件\nglobal.set(\"frontControlTime\");\nglobal.set(\"frontUpConditionCount\",0);\nglobal.set(\"frontDownConditionCount\", 0);\n\n//座椅 靠背 靠背调节条件\nglobal.set(\"hunchControlTime\",0);\nglobal.set(\"hunchUpConditionCount\",0);\nglobal.set(\"hunchDownConditionCount\",0);\n\n//座椅 靠背调节条件\nglobal.set(\"waistUpConditionCount\",0);\nglobal.set(\"waistDownConditionCount\",0);\n\nreturn msg;",
+        "func": "global.set(\"controlingFlag\",0);\n\n//设置全局变量 保存坐垫及靠背的实时矩阵数据\nvar sitMatrixData=new Array();\nvar backMatrixData=new Array();\nglobal.set(\"sitMatrixData\", sitMatrixData);\nglobal.set(\"backMatrixData\", backMatrixData);\n//在离坐判断全局变量\nglobal.set(\"onSeatCount\",0);\nglobal.set(\"notSeatCount\",0);\n\n//座椅 坐垫 上下调节条件\nglobal.set(\"frontControlTime\");\nglobal.set(\"frontUpConditionCount\",0);\nglobal.set(\"frontDownConditionCount\", 0);\n\n//座椅 靠背 靠背调节条件\nglobal.set(\"hunchControlTime\",0);\nglobal.set(\"hunchUpConditionCount\",0);\nglobal.set(\"hunchDownConditionCount\",0);\n\n//座椅 靠背调节条件\nglobal.set(\"waistControlTime\",0);\nglobal.set(\"waistUpConditionCount\",0);\nglobal.set(\"waistDownConditionCount\",0);\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -1763,8 +1763,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 2170,
-        "y": 500,
+        "x": 2190,
+        "y": 520,
         "wires": [
             [
                 "6cdcdff727390cdc",
@@ -1802,7 +1802,7 @@
         "type": "function",
         "z": "23caab7f537e37b0",
         "name": "离坐动作触发",
-        "func": "// console.info(\"离坐次数: \" + msg.payload);\nmsg.payload = 0;\n\nreturn msg;",
+        "func": "// console.info(\"离坐次数: \" + msg.payload);\n\nvar waistControlTime=global.get(\"waistControlTime\");\nvar hunchControlTime = global.get(\"hunchControlTime\");\nvar frontControlTime = global.get(\"frontControlTime\");\n\n\n\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -1855,8 +1855,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 2350,
-        "y": 140,
+        "x": 2390,
+        "y": 320,
         "wires": [
             [
                 "ce3bca71c51f2645"
@@ -1910,8 +1910,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 2560,
-        "y": 80,
+        "x": 2600,
+        "y": 260,
         "wires": [
             [
                 "090f65a7f9a09019",
@@ -1930,8 +1930,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 2560,
-        "y": 240,
+        "x": 2600,
+        "y": 420,
         "wires": [
             [
                 "2828e551c910a493",
@@ -2183,8 +2183,8 @@
         "freq": "",
         "out": "out",
         "bcm": true,
-        "x": 2780,
-        "y": 40,
+        "x": 2820,
+        "y": 180,
         "wires": []
     },
     {
@@ -2619,8 +2619,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 2990,
-        "y": 140,
+        "x": 3030,
+        "y": 320,
         "wires": [
             [
                 "08e010a1349cae19"
@@ -2644,8 +2644,8 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 2790,
-        "y": 140,
+        "x": 2830,
+        "y": 320,
         "wires": [
             [
                 "7287c6e126624890"
@@ -2663,8 +2663,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 3200,
-        "y": 140,
+        "x": 3240,
+        "y": 320,
         "wires": [
             [
                 "3ebec4c2b50b83fa"
@@ -2682,8 +2682,8 @@
         "freq": "",
         "out": "out",
         "bcm": true,
-        "x": 2760,
-        "y": 200,
+        "x": 2800,
+        "y": 380,
         "wires": []
     },
     {
@@ -2697,8 +2697,8 @@
         "freq": "",
         "out": "out",
         "bcm": true,
-        "x": 3400,
-        "y": 140,
+        "x": 3440,
+        "y": 320,
         "wires": []
     },
     {
@@ -2720,8 +2720,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 2990,
-        "y": 300,
+        "x": 3030,
+        "y": 480,
         "wires": [
             [
                 "8d635620d7d15bd0"
@@ -2745,8 +2745,8 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 2770,
-        "y": 300,
+        "x": 2810,
+        "y": 480,
         "wires": [
             [
                 "32733f363ffa94ae"
@@ -2764,8 +2764,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 3200,
-        "y": 300,
+        "x": 3240,
+        "y": 480,
         "wires": [
             [
                 "ef0ffeba387d8f99"
@@ -2783,8 +2783,8 @@
         "freq": "",
         "out": "out",
         "bcm": true,
-        "x": 3400,
-        "y": 300,
+        "x": 3440,
+        "y": 480,
         "wires": []
     },
     {
