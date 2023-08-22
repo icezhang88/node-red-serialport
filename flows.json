@@ -1128,6 +1128,64 @@
         ]
     },
     {
+        "id": "e3551c7e5f4e8e15",
+        "type": "function",
+        "z": "0c118dcb95acf0e0",
+        "name": "气囊充气",
+        "func": "var delimiter = Buffer.from([0x05, 0x64, 0x64, 0x64, 0x64, 0x64, 0x00, 0x00, 0x00, 0x10]);\nmsg.payload = delimiter;\nconsole.info(msg.payload)\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1100,
+        "y": 720,
+        "wires": [
+            [
+                "a7111bfaa6a21179"
+            ]
+        ]
+    },
+    {
+        "id": "a7111bfaa6a21179",
+        "type": "serial out",
+        "z": "0c118dcb95acf0e0",
+        "name": "",
+        "serial": "deba420c25236b68",
+        "x": 1350,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "e6e3867cf1316b5b",
+        "type": "inject",
+        "z": "0c118dcb95acf0e0",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 890,
+        "y": 720,
+        "wires": [
+            [
+                "e3551c7e5f4e8e15"
+            ]
+        ]
+    },
+    {
         "id": "96bfd23f6af11a6e",
         "type": "function",
         "z": "23caab7f537e37b0",
@@ -1365,7 +1423,7 @@
         "type": "function",
         "z": "23caab7f537e37b0",
         "name": "在离坐判断",
-        "func": "// 汽车座椅的使用逻辑\nif (msg.payload.sitData!=null){\n    global.set(\"sitMatrixData\", msg.payload.sitData);\n   \n   \n}\nif (msg.payload.backData != null) {\n    global.set(\"backMatrixData\", msg.payload.backData);\n}\n\n\nconst sitMatrixSum = global.get(\"sitMatrixData\").reduce((accumulator, currentValue) => {\n    return accumulator + currentValue;\n}, 0);\n \nmsg.sitMatrixSum = sitMatrixSum;\n\nconsole.info(\"sitSum: \"+sitMatrixSum.toFixed(0));\n \nreturn msg;",
+        "func": "// 汽车座椅的使用逻辑\nif (msg.payload.sitData!=null){\n    global.set(\"sitMatrixData\", msg.payload.sitData);\n   \n   \n}\nif (msg.payload.backData != null) {\n    global.set(\"backMatrixData\", msg.payload.backData);\n}\n\n\nconst sitMatrixSum = global.get(\"sitMatrixData\").reduce((accumulator, currentValue) => {\n    return accumulator + currentValue;\n}, 0);\n \nmsg.sitMatrixSum = sitMatrixSum;\n\n\n \nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -1757,7 +1815,7 @@
         "type": "function",
         "z": "23caab7f537e37b0",
         "name": "BackActionTrigger",
-        "func": "// console.info(\"在座次数\" + msg.payload);\n// 复位标识为0  可进入复位  \nglobal.set(\"resetCompleteFlag\", 0);\n\nvar ndata =global.get(\"backMatrixData\");\n \n \nvar num1 = 0, num2 = 0, num3 = 0;\n \nfor (var i = 0; i < 10; i++) {\n    ndata[i * 10 + 0] = ndata[i * 10 + 1];\n    ndata[i * 10 + 9] = ndata[i * 10 + 8];\n}\nfor (var i = 0; i < 29; i++) {\n    num1 += ndata[i];\n}\nfor (var i = 29; i < 69; i++) {\n    num2 += ndata[i];\n}\nfor (var i = 69; i < 99; i++) {\n    num3 += ndata[i];\n}\n//靠背上部求和平均\nnum1 = num1 / 30;\n//靠背中部求和平均\nnum2 = num2 / 40;\n//靠背下部求和平均\nnum3 = num3 / 30;\nvar sumBack = num1 + num2 + num3;\nvar waist = num1 / sumBack;\nvar hunch = (num2 + num3) / sumBack;\nvar back = num3 / num2;\n\nconst backMatrixSum=ndata.reduce((accumulater,currentValue)=>{\n    return accumulater+currentValue;\n},0);\n\n// console.info(\n//     \"backsum: \" + backMatrixSum+\n//  \"  sumBack:\" + sumBack.toFixed(2) \n// + \" waist: \" + waist.toFixed(2) + \n// \" hunch: \" + hunch.toFixed(2));\n \nmsg.sumBack = sumBack.toFixed(2);\nmsg.waist = waist.toFixed(2);\nmsg.hunch = hunch.toFixed(2);\n\nmsg.payload=1;\n\nreturn msg;",
+        "func": "// console.info(\"在座次数\" + msg.payload);\n// 复位标识为0  可进入复位  \nglobal.set(\"resetCompleteFlag\", 0);\n\nvar ndata =global.get(\"backMatrixData\");\n \n \nvar num1 = 0, num2 = 0, num3 = 0;\n \nfor (var i = 0; i < 10; i++) {\n    ndata[i * 10 + 0] = ndata[i * 10 + 1];\n    ndata[i * 10 + 9] = ndata[i * 10 + 8];\n}\nfor (var i = 0; i < 29; i++) {\n    num1 += ndata[i];\n}\nfor (var i = 29; i < 69; i++) {\n    num2 += ndata[i];\n}\nfor (var i = 69; i < 99; i++) {\n    num3 += ndata[i];\n}\n//靠背上部求和平均\nnum1 = num1 / 30;\n//靠背中部求和平均\nnum2 = num2 / 40;\n//靠背下部求和平均\nnum3 = (num3-40) / 30;\nvar sumBack = num1 + num2 + num3;\nvar waist = num1 / sumBack;\n//var hunch = (num2+ num3) / sumBack;\nvar hunch=num2/sumBack;\nvar back = num3 / num2;\nhunch=back;\nconst backMatrixSum=ndata.reduce((accumulater,currentValue)=>{\n    return accumulater+currentValue;\n},0);\n\nconsole.info(\n    \"backsum: \" + backMatrixSum.toFixed(2)+\n \"  sumBack:\" + sumBack.toFixed(2) \n+ \" waist: \" + waist.toFixed(2) + \n\" hunch: \" + hunch.toFixed(2)\n+\" back: \"+back.toFixed(2)\n);\n \nmsg.sumBack = sumBack.toFixed(2);\nmsg.waist = waist.toFixed(2);\nmsg.hunch = hunch.toFixed(2);\n\nmsg.payload=1;\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -1823,7 +1881,7 @@
         "type": "function",
         "z": "23caab7f537e37b0",
         "name": "SitActionTrigger",
-        "func": "// 复位标识为0  可进入复位  \nglobal.set(\"resetCompleteFlag\", 0);\nconst ndata1 = global.get(\"sitMatrixData\");\n\n// console.info(ndata1);\n\n\nconst sitMatrixDataSum = ndata1.reduce((accumulator, currentValue) => {\n    return accumulator + currentValue;\n}, 0);\n// console.info(\"sitSum: \" + sitMatrixDataSum);\n\n\n// (accumulator, currentValue) => {\n//     return accumulator + currentValue;\n// }, 0\n\n \n\nvar num11 = 0, num21 = 0, num31 = 0, num41 = 0, num51 = 0, num61 = 0;\n\nfor (var i = 0; i < 3; i++) {\n    for (var j = 0; j < 5; j++) {\n        num11 += ndata1[10 * i + j];\n    }\n}\n\nfor (var i = 0; i < 3; i++) {\n    for (var j = 5; j < 10; j++) {\n        num21 += ndata1[10 * i + j];\n    }\n}\n\nfor (var i = 3; i < 7; i++) {\n    for (var j = 0; j < 5; j++) {\n        num31 += ndata1[10 * i + j];\n    }\n}\n\nfor (var i = 3; i < 7; i++) {\n    for (var j = 5; j < 10; j++) {\n        num41 += ndata1[10 * i + j];\n    }\n}\n\nfor (var i = 7; i < 10; i++) {\n    for (var j = 0; j < 5; j++) {\n        num51 += ndata1[10 * i + j];\n    }\n}\nfor (var i = 7; i < 10; i++) {\n    for (var j = 5; j < 10; j++) {\n        num61 += ndata1[10 * i + j];\n    }\n}\nnum11 = num11 / 15;\nnum21 = num21 / 15;\nnum31 = num31 / 20;\nnum41 = num41 / 20;\nnum51 = num51 / 15;\nnum61 = num61 / 15;\nvar sumSit = num11 + num21 + num31 + num41 + num51 + num61;\nvar frontleg = (num11 + num21) / sumSit;\nvar backleg = 1 - frontleg;\nvar front = (num11 + num21 + num31 + num41) / sumSit;\n//前腿支撑\nfrontleg = (num11 + num21) / sumSit;\n//前腿支撑\nbackleg = 1 - frontleg;\n//靠前\nfront = (num11 + num21 + num31 + num41) / sumSit;\n\n\nconsole.info(\"sum: \" + sitMatrixDataSum );\nconsole.info(\n     \n    \"frontLeg: \"+frontleg.toFixed(2)+\n    \" backLeg: \" + backleg.toFixed(2)+\n    \" front: \" + front.toFixed(2) \n)\nmsg.frontleg=frontleg;\nmsg.backleg=1-frontleg;\nmsg.front=front;\n\nmsg.payload = 1;\n\nreturn msg;",
+        "func": "// 复位标识为0  可进入复位  \nglobal.set(\"resetCompleteFlag\", 0);\nconst ndata1 = global.get(\"sitMatrixData\");\n\n// console.info(ndata1);\n\n\nconst sitMatrixDataSum = ndata1.reduce((accumulator, currentValue) => {\n    return accumulator + currentValue;\n}, 0);\n// console.info(\"sitSum: \" + sitMatrixDataSum);\n\n\n// (accumulator, currentValue) => {\n//     return accumulator + currentValue;\n// }, 0\n\n \n\nvar num11 = 0, num21 = 0, num31 = 0, num41 = 0, num51 = 0, num61 = 0;\n\nfor (var i = 0; i < 3; i++) {\n    for (var j = 0; j < 5; j++) {\n        num11 += ndata1[10 * i + j];\n    }\n}\n\nfor (var i = 0; i < 3; i++) {\n    for (var j = 5; j < 10; j++) {\n        num21 += ndata1[10 * i + j];\n    }\n}\n\nfor (var i = 3; i < 7; i++) {\n    for (var j = 0; j < 5; j++) {\n        num31 += ndata1[10 * i + j];\n    }\n}\n\nfor (var i = 3; i < 7; i++) {\n    for (var j = 5; j < 10; j++) {\n        num41 += ndata1[10 * i + j];\n    }\n}\n\nfor (var i = 7; i < 10; i++) {\n    for (var j = 0; j < 5; j++) {\n        num51 += ndata1[10 * i + j];\n    }\n}\nfor (var i = 7; i < 10; i++) {\n    for (var j = 5; j < 10; j++) {\n        num61 += ndata1[10 * i + j];\n    }\n}\nnum11 = num11 / 15;\nnum21 = num21 / 15;\nnum31 = num31 / 20;\nnum41 = num41 / 20;\nnum51 = num51 / 15;\nnum61 = num61 / 15;\nvar sumSit = num11 + num21 + num31 + num41 + num51 + num61;\nvar frontleg = (num11 + num21) / sumSit;\nvar backleg = 1 - frontleg;\nvar front = (num11 + num21 + num31 + num41) / sumSit;\n//前腿支撑\nfrontleg = (num11 + num21) / sumSit;\n//前腿支撑\nbackleg = 1 - frontleg;\n//靠前\nfront = (num11 + num21 + num31 + num41) / sumSit;\n\n\n// console.info(\"sum: \" + sitMatrixDataSum );\n// console.info(\n     \n//     \"frontLeg: \"+frontleg.toFixed(2)+\n//     \" backLeg: \" + backleg.toFixed(2)+\n//     \" front: \" + front.toFixed(2) \n// )\nmsg.frontleg=frontleg;\nmsg.backleg=1-frontleg;\nmsg.front=front;\n\nmsg.payload = 1;\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -1847,12 +1905,12 @@
         "rules": [
             {
                 "t": "gt",
-                "v": "0.15",
+                "v": "0.3",
                 "vt": "str"
             },
             {
                 "t": "lt",
-                "v": "0.1",
+                "v": "0.03",
                 "vt": "str"
             }
         ],
@@ -1875,17 +1933,17 @@
         "type": "switch",
         "z": "23caab7f537e37b0",
         "name": "switch_hunch",
-        "property": "hunch",
+        "property": "waist",
         "propertyType": "msg",
         "rules": [
             {
                 "t": "gt",
-                "v": "0.9",
+                "v": "1.9",
                 "vt": "str"
             },
             {
                 "t": "lt",
-                "v": "0.5",
+                "v": "1.4",
                 "vt": "str"
             }
         ],
@@ -1908,7 +1966,7 @@
         "type": "function",
         "z": "23caab7f537e37b0",
         "name": "条件窗口",
-        "func": "\nglobal.set(\"waistDownConditionCount\", 0);\n\nvar waistUpConditionCount = global.get(\"waistUpConditionCount\");\nwaistUpConditionCount++;\nglobal.set(\"waistUpConditionCount\", waistUpConditionCount);\n\nvar waistControlTime=global.get(\"waistControlTime\");\n//向前移动的范围不超过6s\n//条件窗口为30帧连续判断\nif (waistControlTime<6000){\n    //条件窗口为30帧连续判断\n    if (waistUpConditionCount > 20) {\n        msg.payload = 1;\n        global.set(\"waistUpConditionCount\", 0);\n\n        var controlingFlag = global.get(\"controlingFlag\");\n        if (controlingFlag == 0) {\n            global.set(\"controlingFlag\", 1);\n            return msg;\n        }\n    }\n}\n\n \n\n\n ",
+        "func": "\nglobal.set(\"waistDownConditionCount\", 0);\n\nvar waistUpConditionCount = global.get(\"waistUpConditionCount\");\nwaistUpConditionCount++;\nglobal.set(\"waistUpConditionCount\", waistUpConditionCount);\n\nvar waistControlTime=global.get(\"waistControlTime\");\n//向前移动的范围不超过6s\n//条件窗口为30帧连续判断\nconsole.info(\"waistControlTime: \" + waistControlTime +\" waistUpConditionCount\"+waistUpConditionCount);\nif (waistControlTime<6000){\n    //条件窗口为30帧连续判断\n    if (waistUpConditionCount > 50) {\n        msg.payload = 1;\n        global.set(\"waistUpConditionCount\", 0);\n\n        var controlingFlag = global.get(\"controlingFlag\");\n        if (controlingFlag == 0) {\n            global.set(\"controlingFlag\", 1);\n            return msg;\n        }\n    }\n}\n\n \n\n\n ",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -1918,8 +1976,7 @@
         "y": 1760,
         "wires": [
             [
-                "090f65a7f9a09019",
-                "61641cc105b747d2"
+                "bb288b162f15c2bb"
             ]
         ]
     },
@@ -1928,7 +1985,7 @@
         "type": "function",
         "z": "23caab7f537e37b0",
         "name": "条件窗口",
-        "func": "\nglobal.set(\"waistUpConditionCount\", 0);\n\nvar waistDownConditionCount = global.get(\"waistDownConditionCount\");\nwaistDownConditionCount++;\nglobal.set(\"waistUpConditionCount\", waistDownConditionCount);\n\nvar waistControlTime=global.get(\"waistControlTime\");\n//向前移动的范围不超过6s\n//条件窗口为30帧连续判断\nif(waistControlTime>-6000){\n    //条件窗口为30帧连续判断\n    if (waistDownConditionCount > 20) {\n        msg.payload = 1;\n        global.set(\"waistUpConditionCount\", 0);\n\n\n        var controlingFlag = global.get(\"controlingFlag\");\n        if (controlingFlag == 0) {\n            global.set(\"controlingFlag\", 1);\n            return msg;\n        }\n\n    }\n\n}\n\n \n\n ",
+        "func": "\nglobal.set(\"waistUpConditionCount\", 0);\n\nvar waistDownConditionCount = global.get(\"waistDownConditionCount\");\nwaistDownConditionCount++;\nglobal.set(\"waistDownConditionCount\", waistDownConditionCount);\n\nvar waistControlTime=global.get(\"waistControlTime\");\n//向前移动的范围不超过6s\n//条件窗口为30帧连续判断\nif(waistControlTime>-6000){\n    //条件窗口为30帧连续判断\n    if (waistDownConditionCount > 50) {\n        msg.payload = 1;\n        global.set(\"waistDownConditionCount\", 0);\n\n\n        var controlingFlag = global.get(\"controlingFlag\");\n        if (controlingFlag == 0) {\n            global.set(\"controlingFlag\", 1);\n            return msg;\n        }\n\n    }\n\n}\n\n \n\n ",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -1938,8 +1995,7 @@
         "y": 1920,
         "wires": [
             [
-                "2828e551c910a493",
-                "4f38c408e02340fb"
+                "05f780ead063d30e"
             ]
         ]
     },
@@ -1954,7 +2010,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 2540,
+        "x": 2480,
         "y": 2080,
         "wires": [
             [
@@ -1968,7 +2024,7 @@
         "type": "function",
         "z": "23caab7f537e37b0",
         "name": "条件窗口",
-        "func": "\nglobal.set(\"hunchUpConditionCount\", 0);\n\nvar hunchDownConditionCount = global.get(\"hunchDownConditionCount\");\nhunchDownConditionCount++;\nglobal.set(\"hunchUpConditionCount\", hunchDownConditionCount);\n\nvar hunchControlTime = global.get(\"hunchControlTime\");\n\n//移动的范围不超过6s\n//条件窗口为30帧连续判断\nif (hunchControlTime >- 6000) {\n    //条件窗口为30帧连续判断\n    if (hunchDownConditionCount > 30) {\n        msg.payload = 1;\n        global.set(\"hunchUpConditionCount\", 0);\n\n        var controlingFlag = global.get(\"controlingFlag\");\n        if (controlingFlag == 0) {\n            global.set(\"controlingFlag\", 1);\n            return msg;\n        }\n    }\n\n}\n\n \n\n\n ",
+        "func": "\nglobal.set(\"hunchUpConditionCount\", 0);\n\nvar hunchDownConditionCount = global.get(\"hunchDownConditionCount\");\nhunchDownConditionCount++;\nglobal.set(\"hunchDownConditionCount\", hunchDownConditionCount);\n\nvar hunchControlTime = global.get(\"hunchControlTime\");\n\nconsole.info(\"hunchControlTime: \"  +hunchControlTime);\n\n//移动的范围不超过6s\n//条件窗口为30帧连续判断\nconsole.info();\nif (hunchControlTime >- 6000) {\n    //条件窗口为30帧连续判断\n    if (hunchDownConditionCount > 30) {\n        msg.payload = 1;\n        global.set(\"hunchDownConditionCount\", 0);\n\n        var controlingFlag = global.get(\"controlingFlag\");\n        if (controlingFlag == 0) {\n            global.set(\"controlingFlag\", 1);\n            return msg;\n        }\n    }\n\n}\n\n \n\n\n ",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -2032,7 +2088,7 @@
         "type": "function",
         "z": "23caab7f537e37b0",
         "name": "10*10坐线序",
-        "func": "const arr = msg.payload.sitData;\nlet ndata = [];\nfor (let i = 0; i < 32; i++) {\n    for (let j = 0; j < 32; j++) {\n        if (i < 10 && j > 21) {\n            ndata.push(arr[i * 32 + j]);\n        }\n    }\n}\n\nfor (let i = 0; i < 2; i++) {\n    for (let j = 0; j < 10; j++) {\n        [ndata[i * 10 + j], ndata[(4 - i) * 10 + j]] = [\n            ndata[(4 - i) * 10 + j],\n            ndata[i * 10 + j],\n        ];\n    }\n}\n\nfor (let i = 0; i < 5; i++) {\n    for (let j = 0; j < 10; j++) {\n        [ndata[i * 10 + j], ndata[(i + 5) * 10 + j]] = [\n            ndata[(i + 5) * 10 + j],\n            ndata[i * 10 + j],\n        ];\n    }\n}\nconst height = 10\nconst width = 10\n\nlet matrix = [];\nfor (let i = 0; i < height; i++) {\n    matrix[i] = [];\n    for (let j = 0; j < width; j++) {\n        matrix[i].push(ndata[i * width + j]);\n    }\n}\n//逆时针旋转 180 度\n//行 = h - 1 - 行(i);  h表示总行数\n//列 = n - 1 - 列(j);  n表示总列数\nvar temp = [];\nvar len = matrix.length;\nfor (var i = 0; i < len; i++) {\n    for (var j = 0; j < len; j++) {\n        var k = len - 1 - i;\n        if (!temp[k]) {\n            temp[k] = [];\n        }\n        temp[k][len - 1 - j] = matrix[i][j];\n    }\n}\nlet resArr = [];\nfor (let i = 0; i < temp.length; i++) {\n    resArr = resArr.concat(temp[i]);\n}\n\nndata = resArr\n\nconst newDataArr = []\n\nfor (let i = 0; i < 5; i++) {\n\n    for (let j = 0; j < 5; j++) {\n        let num = 0\n\n        for (let k = 0; k < 2; k++) {\n            for (let z = 0; z < 2; z++) {\n                num += ndata[(i * 2 + k) * 10 + j * 2 + z]\n                // console.log(i + k, j + z)\n            }\n        }\n\n        newDataArr.push(Number((num / 4).toFixed(1)))\n    }\n\n}\n\nfor (let i = 0; i < 5; i++) {\n\n    for (let j = 0; j < 5; j++) {\n        let num = 0\n\n        for (let k = 0; k < 2; k++) {\n            for (let z = 0; z < 2; z++) {\n                // num += ndata[(i*2 + k) * 10 + j*2 + z]\n                ndata[(i * 2 + k) * 10 + j * 2 + z] = newDataArr[i * 5 + j]\n                // console.log(i + k, j + z)\n            }\n        }\n\n        // newArr.push(Number((num / 4).toFixed(1)))\n    }\n\n}\n\n\n\nmsg.payload.sitData=ndata;\nconsole.info(ndata.length)\nreturn msg;",
+        "func": "const arr = msg.payload.sitData;\nlet ndata = [];\nfor (let i = 0; i < 32; i++) {\n    for (let j = 0; j < 32; j++) {\n        if (i < 10 && j > 21) {\n            ndata.push(arr[i * 32 + j]);\n        }\n    }\n}\n\nfor (let i = 0; i < 2; i++) {\n    for (let j = 0; j < 10; j++) {\n        [ndata[i * 10 + j], ndata[(4 - i) * 10 + j]] = [\n            ndata[(4 - i) * 10 + j],\n            ndata[i * 10 + j],\n        ];\n    }\n}\n\nfor (let i = 0; i < 5; i++) {\n    for (let j = 0; j < 10; j++) {\n        [ndata[i * 10 + j], ndata[(i + 5) * 10 + j]] = [\n            ndata[(i + 5) * 10 + j],\n            ndata[i * 10 + j],\n        ];\n    }\n}\nconst height = 10\nconst width = 10\n\nlet matrix = [];\nfor (let i = 0; i < height; i++) {\n    matrix[i] = [];\n    for (let j = 0; j < width; j++) {\n        matrix[i].push(ndata[i * width + j]);\n    }\n}\n//逆时针旋转 180 度\n//行 = h - 1 - 行(i);  h表示总行数\n//列 = n - 1 - 列(j);  n表示总列数\nvar temp = [];\nvar len = matrix.length;\nfor (var i = 0; i < len; i++) {\n    for (var j = 0; j < len; j++) {\n        var k = len - 1 - i;\n        if (!temp[k]) {\n            temp[k] = [];\n        }\n        temp[k][len - 1 - j] = matrix[i][j];\n    }\n}\nlet resArr = [];\nfor (let i = 0; i < temp.length; i++) {\n    resArr = resArr.concat(temp[i]);\n}\n\nndata = resArr\n\nconst newDataArr = []\n\nfor (let i = 0; i < 5; i++) {\n\n    for (let j = 0; j < 5; j++) {\n        let num = 0\n\n        for (let k = 0; k < 2; k++) {\n            for (let z = 0; z < 2; z++) {\n                num += ndata[(i * 2 + k) * 10 + j * 2 + z]\n                // console.log(i + k, j + z)\n            }\n        }\n\n        newDataArr.push(Number((num / 4).toFixed(1)))\n    }\n\n}\n\nfor (let i = 0; i < 5; i++) {\n\n    for (let j = 0; j < 5; j++) {\n        let num = 0\n\n        for (let k = 0; k < 2; k++) {\n            for (let z = 0; z < 2; z++) {\n                // num += ndata[(i*2 + k) * 10 + j*2 + z]\n                ndata[(i * 2 + k) * 10 + j * 2 + z] = newDataArr[i * 5 + j]\n                // console.log(i + k, j + z)\n            }\n        }\n\n        // newArr.push(Number((num / 4).toFixed(1)))\n    }\n\n}\n\n\n\nmsg.payload.sitData=ndata;\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -2052,7 +2108,7 @@
         "type": "function",
         "z": "23caab7f537e37b0",
         "name": "10*10背线序",
-        "func": "const arr = msg.payload.backData;\nlet ndata = [];\nfor (let i = 0; i < 32; i++) {\n    for (let j = 0; j < 32; j++) {\n        if (i < 10 && j > 21) {\n            ndata.push(arr[i * 32 + j]);\n        }\n    }\n}\n\nfor (let i = 0; i < 2; i++) {\n    for (let j = 0; j < 10; j++) {\n        [ndata[i * 10 + j], ndata[(4 - i) * 10 + j]] = [\n            ndata[(4 - i) * 10 + j],\n            ndata[i * 10 + j],\n        ];\n    }\n}\n\nfor (let i = 0; i < 5; i++) {\n    for (let j = 0; j < 10; j++) {\n        [ndata[i * 10 + j], ndata[(i + 5) * 10 + j]] = [\n            ndata[(i + 5) * 10 + j],\n            ndata[i * 10 + j],\n        ];\n    }\n}\n/**\n * 补充点\n */\nfor (let i = 0; i < 10; i++) {\n    for (let j = 0; j < 5; j++) {\n        [ndata[i * 10 + 9 - j], ndata[i * 10 + j]] = [\n            ndata[i * 10 + j],\n            ndata[i * 10 + 9 - j],\n        ];\n    }\n}\n\nconst length = ndata.length;\n\nconst m = 10 , n = 10\nconst wsPointData = [...ndata];\nfor (let i = 0; i < m; i++) {\n    for (let j = 0;  j< n / 2; j++) {\n        [wsPointData[i  + j*m], wsPointData[i + (n - 1 - j)*m]] = [\n            wsPointData[i + (n - 1 - j)*m],\n            wsPointData[i + j * m],\n        ];\n    }\n}\nndata = wsPointData;\n\n /////////////////////////////////\n\nconst newDataArr = []\n\nfor (let i = 0; i < 5; i++) {\n\n    for (let j = 0; j < 5; j++) {\n        let num = 0\n\n        for (let k = 0; k < 2; k++) {\n            for (let z = 0; z < 2; z++) {\n                num += ndata[(i * 2 + k) * 10 + j * 2 + z]\n                // console.log(i + k, j + z)\n            }\n        }\n\n        newDataArr.push(Number((num / 4).toFixed(1)))\n    }\n\n}\n\nfor (let i = 0; i < 5; i++) {\n\n    for (let j = 0; j < 5; j++) {\n        let num = 0\n\n        for (let k = 0; k < 2; k++) {\n            for (let z = 0; z < 2; z++) {\n                // num += ndata[(i*2 + k) * 10 + j*2 + z]\n                ndata[(i * 2 + k) * 10 + j * 2 + z] = newDataArr[i * 5 + j]\n                // console.log(i + k, j + z)\n            }\n        }\n\n        // newArr.push(Number((num / 4).toFixed(1)))\n    }\n\n}\n\n\n\nmsg.payload.backData=ndata;\nconsole.info(ndata.length)\nreturn msg;",
+        "func": "const arr = msg.payload.backData;\nlet ndata = [];\nfor (let i = 0; i < 32; i++) {\n    for (let j = 0; j < 32; j++) {\n        if (i < 10 && j > 21) {\n            ndata.push(arr[i * 32 + j]);\n        }\n    }\n}\n\nfor (let i = 0; i < 2; i++) {\n    for (let j = 0; j < 10; j++) {\n        [ndata[i * 10 + j], ndata[(4 - i) * 10 + j]] = [\n            ndata[(4 - i) * 10 + j],\n            ndata[i * 10 + j],\n        ];\n    }\n}\n\nfor (let i = 0; i < 5; i++) {\n    for (let j = 0; j < 10; j++) {\n        [ndata[i * 10 + j], ndata[(i + 5) * 10 + j]] = [\n            ndata[(i + 5) * 10 + j],\n            ndata[i * 10 + j],\n        ];\n    }\n}\n/**\n * 补充点\n */\nfor (let i = 0; i < 10; i++) {\n    for (let j = 0; j < 5; j++) {\n        [ndata[i * 10 + 9 - j], ndata[i * 10 + j]] = [\n            ndata[i * 10 + j],\n            ndata[i * 10 + 9 - j],\n        ];\n    }\n}\n\nconst length = ndata.length;\n\nconst m = 10 , n = 10\nconst wsPointData = [...ndata];\nfor (let i = 0; i < m; i++) {\n    for (let j = 0;  j< n / 2; j++) {\n        [wsPointData[i  + j*m], wsPointData[i + (n - 1 - j)*m]] = [\n            wsPointData[i + (n - 1 - j)*m],\n            wsPointData[i + j * m],\n        ];\n    }\n}\nndata = wsPointData;\n\n /////////////////////////////////\n\nconst newDataArr = []\n\nfor (let i = 0; i < 5; i++) {\n\n    for (let j = 0; j < 5; j++) {\n        let num = 0\n\n        for (let k = 0; k < 2; k++) {\n            for (let z = 0; z < 2; z++) {\n                num += ndata[(i * 2 + k) * 10 + j * 2 + z]\n                // console.log(i + k, j + z)\n            }\n        }\n\n        newDataArr.push(Number((num / 4).toFixed(1)))\n    }\n\n}\n\nfor (let i = 0; i < 5; i++) {\n\n    for (let j = 0; j < 5; j++) {\n        let num = 0\n\n        for (let k = 0; k < 2; k++) {\n            for (let z = 0; z < 2; z++) {\n                // num += ndata[(i*2 + k) * 10 + j*2 + z]\n                ndata[(i * 2 + k) * 10 + j * 2 + z] = newDataArr[i * 5 + j]\n                // console.log(i + k, j + z)\n            }\n        }\n\n        // newArr.push(Number((num / 4).toFixed(1)))\n    }\n\n}\n\n\n\nmsg.payload.backData=ndata;\n \nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -2174,21 +2230,6 @@
         "bcm": true,
         "x": 2720,
         "y": 2080,
-        "wires": []
-    },
-    {
-        "id": "090f65a7f9a09019",
-        "type": "rpi-gpio out",
-        "z": "23caab7f537e37b0",
-        "name": "气囊变大",
-        "pin": "22",
-        "set": true,
-        "level": "0",
-        "freq": "",
-        "out": "out",
-        "bcm": true,
-        "x": 2800,
-        "y": 1720,
         "wires": []
     },
     {
@@ -2552,7 +2593,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 2970,
+        "x": 2950,
         "y": 2420,
         "wires": [
             [
@@ -2603,193 +2644,6 @@
                 "99e7a3fa99425533"
             ]
         ]
-    },
-    {
-        "id": "7287c6e126624890",
-        "type": "change",
-        "z": "23caab7f537e37b0",
-        "name": "向下移动置0",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "0",
-                "tot": "str"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 3010,
-        "y": 1820,
-        "wires": [
-            [
-                "08e010a1349cae19"
-            ]
-        ]
-    },
-    {
-        "id": "61641cc105b747d2",
-        "type": "delay",
-        "z": "23caab7f537e37b0",
-        "name": "",
-        "pauseType": "delay",
-        "timeout": "2000",
-        "timeoutUnits": "milliseconds",
-        "rate": "1",
-        "nbRateUnits": "1",
-        "rateUnits": "second",
-        "randomFirst": "1",
-        "randomLast": "5",
-        "randomUnits": "seconds",
-        "drop": false,
-        "allowrate": false,
-        "outputs": 1,
-        "x": 2810,
-        "y": 1820,
-        "wires": [
-            [
-                "7287c6e126624890"
-            ]
-        ]
-    },
-    {
-        "id": "08e010a1349cae19",
-        "type": "function",
-        "z": "23caab7f537e37b0",
-        "name": "重置控制标识",
-        "func": "global.set(\"controlingFlag\",0);\nvar waistControlTime = global.get(\"waistControlTime\");\nglobal.set(\"waistControlTime\", waistControlTime+2000);\nglobal.set(\"waistUpConditionCount\",0);\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 3220,
-        "y": 1820,
-        "wires": [
-            [
-                "3ebec4c2b50b83fa"
-            ]
-        ]
-    },
-    {
-        "id": "2828e551c910a493",
-        "type": "rpi-gpio out",
-        "z": "23caab7f537e37b0",
-        "name": "气囊缩小",
-        "pin": "5",
-        "set": true,
-        "level": "0",
-        "freq": "",
-        "out": "out",
-        "bcm": true,
-        "x": 2780,
-        "y": 1880,
-        "wires": []
-    },
-    {
-        "id": "3ebec4c2b50b83fa",
-        "type": "rpi-gpio out",
-        "z": "23caab7f537e37b0",
-        "name": "气囊变大",
-        "pin": "22",
-        "set": true,
-        "level": "0",
-        "freq": "",
-        "out": "out",
-        "bcm": true,
-        "x": 3420,
-        "y": 1820,
-        "wires": []
-    },
-    {
-        "id": "32733f363ffa94ae",
-        "type": "change",
-        "z": "23caab7f537e37b0",
-        "name": "向下移动置0",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "0",
-                "tot": "str"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 3010,
-        "y": 1980,
-        "wires": [
-            [
-                "8d635620d7d15bd0"
-            ]
-        ]
-    },
-    {
-        "id": "4f38c408e02340fb",
-        "type": "delay",
-        "z": "23caab7f537e37b0",
-        "name": "",
-        "pauseType": "delay",
-        "timeout": "2000",
-        "timeoutUnits": "milliseconds",
-        "rate": "1",
-        "nbRateUnits": "1",
-        "rateUnits": "second",
-        "randomFirst": "1",
-        "randomLast": "5",
-        "randomUnits": "seconds",
-        "drop": false,
-        "allowrate": false,
-        "outputs": 1,
-        "x": 2790,
-        "y": 1980,
-        "wires": [
-            [
-                "32733f363ffa94ae"
-            ]
-        ]
-    },
-    {
-        "id": "8d635620d7d15bd0",
-        "type": "function",
-        "z": "23caab7f537e37b0",
-        "name": "重置控制标识",
-        "func": "global.set(\"controlingFlag\",0);\nvar waistControlTime = global.get(\"waistControlTime\");\nglobal.set(\"waistControlTime\", waistControlTime-2000);\nglobal.set(\"waistDownConditionCount\",0);\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 3220,
-        "y": 1980,
-        "wires": [
-            [
-                "ef0ffeba387d8f99"
-            ]
-        ]
-    },
-    {
-        "id": "ef0ffeba387d8f99",
-        "type": "rpi-gpio out",
-        "z": "23caab7f537e37b0",
-        "name": "气囊缩小",
-        "pin": "5",
-        "set": true,
-        "level": "0",
-        "freq": "",
-        "out": "out",
-        "bcm": true,
-        "x": 3420,
-        "y": 1980,
-        "wires": []
     },
     {
         "id": "553e2f2f42909e56",
@@ -2860,9 +2714,7 @@
             [
                 "debe5af3bc8c240e"
             ],
-            [
-                "df230cdbaa0a28eb"
-            ]
+            []
         ]
     },
     {
@@ -2936,7 +2788,7 @@
         "type": "function",
         "z": "23caab7f537e37b0",
         "name": "向后重置",
-        "func": "\nmsg.delay = Math.abs(global.get(\"waistControlTime\"));\nmsg.payload=1;\n\nglobal.set(\"waistControlTime\", 0);\nreturn msg;",
+        "func": "\nmsg.delay = Math.abs(global.get(\"waistControlTime\"));\nmsg.payload=1;\nconsole.info(\"waist 重置\" + msg.delay);\nglobal.set(\"waistControlTime\", 0);\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -2946,28 +2798,7 @@
         "y": 60,
         "wires": [
             [
-                "9a07f4a9d0aff9e6",
-                "b199235a941667df"
-            ]
-        ]
-    },
-    {
-        "id": "df230cdbaa0a28eb",
-        "type": "function",
-        "z": "23caab7f537e37b0",
-        "name": "向前重置",
-        "func": "\nmsg.delay = Math.abs(global.get(\"waistControlTime\"));\nmsg.payload = 1;\n\n\nglobal.set(\"waistControlTime\", 0);\n\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 2820,
-        "y": 180,
-        "wires": [
-            [
-                "4d8e51a8e88e0f7e",
-                "5161867afa135f62"
+                "1235f0aa882f2909"
             ]
         ]
     },
@@ -2976,7 +2807,7 @@
         "type": "function",
         "z": "23caab7f537e37b0",
         "name": "向后重置",
-        "func": "msg.delay = Math.abs(global.get(\"hunchControlTime\"));\nmsg.payload = 1;\n\nglobal.set(\"hunchControlTime\", 0);\n\nreturn msg;",
+        "func": "msg.delay = Math.abs(global.get(\"hunchControlTime\"));\nmsg.payload = 1;\n\nglobal.set(\"hunchControlTime\", 0);\nconsole.info(\"hunch 重置\"+msg.delay);\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -2996,7 +2827,7 @@
         "type": "function",
         "z": "23caab7f537e37b0",
         "name": "向前重置",
-        "func": "msg.delay = Math.abs(global.get(\"hunchControlTime\"));\nmsg.payload = 1;\n\nglobal.set(\"hunchControlTime\", 0);\n\nreturn msg;",
+        "func": "msg.delay = Math.abs(global.get(\"hunchControlTime\"));\nmsg.payload = 1;\n\nglobal.set(\"hunchControlTime\", 0);\n\nconsole.info(\"hunch 重置\" + msg.delay);\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -3016,7 +2847,7 @@
         "type": "function",
         "z": "23caab7f537e37b0",
         "name": "向后重置",
-        "func": "msg.delay = Math.abs(global.get(\"waistControlTime\"));\nmsg.payload = 1;\nglobal.set(\"frontControlTime\", 0);\nreturn msg;",
+        "func": "msg.delay = Math.abs(global.get(\"frontControlTime\"));\nmsg.payload = 1;\n\n\nconsole.info(\"front 重置\" + msg.delay);\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -3036,13 +2867,13 @@
         "type": "function",
         "z": "23caab7f537e37b0",
         "name": "向前重置",
-        "func": "\nmsg.delay = Math.abs(global.get(\"waistControlTime\"));\nmsg.payload = 1;\n\n \nglobal.set(\"frontControlTime\", 0);\nreturn msg;",
+        "func": "\nmsg.delay = Math.abs(global.get(\"frontControlTime\"));\nmsg.payload = 1;\n\n \n\n\nconsole.info(\"front 重置\" + msg.delay);\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 2840,
+        "x": 2860,
         "y": 900,
         "wires": [
             [
@@ -3050,170 +2881,6 @@
                 "611357cc71e3a489"
             ]
         ]
-    },
-    {
-        "id": "9a07f4a9d0aff9e6",
-        "type": "rpi-gpio out",
-        "z": "23caab7f537e37b0",
-        "name": "气囊缩小",
-        "pin": "5",
-        "set": true,
-        "level": "0",
-        "freq": "",
-        "out": "out",
-        "bcm": true,
-        "x": 3080,
-        "y": 20,
-        "wires": []
-    },
-    {
-        "id": "b199235a941667df",
-        "type": "delay",
-        "z": "23caab7f537e37b0",
-        "name": "",
-        "pauseType": "delayv",
-        "timeout": "0",
-        "timeoutUnits": "seconds",
-        "rate": "1",
-        "nbRateUnits": "1",
-        "rateUnits": "second",
-        "randomFirst": "1",
-        "randomLast": "5",
-        "randomUnits": "seconds",
-        "drop": false,
-        "allowrate": false,
-        "outputs": 1,
-        "x": 3070,
-        "y": 80,
-        "wires": [
-            [
-                "8375b119c62a9de3"
-            ]
-        ]
-    },
-    {
-        "id": "5161867afa135f62",
-        "type": "delay",
-        "z": "23caab7f537e37b0",
-        "name": "",
-        "pauseType": "delayv",
-        "timeout": "0",
-        "timeoutUnits": "seconds",
-        "rate": "1",
-        "nbRateUnits": "1",
-        "rateUnits": "second",
-        "randomFirst": "1",
-        "randomLast": "5",
-        "randomUnits": "seconds",
-        "drop": false,
-        "allowrate": false,
-        "outputs": 1,
-        "x": 3070,
-        "y": 240,
-        "wires": [
-            [
-                "79c0eb87fe89f4b5"
-            ]
-        ]
-    },
-    {
-        "id": "8375b119c62a9de3",
-        "type": "change",
-        "z": "23caab7f537e37b0",
-        "name": "向下移动置0",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "0",
-                "tot": "str"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 3290,
-        "y": 80,
-        "wires": [
-            [
-                "3cb420b6c55fd2a9"
-            ]
-        ]
-    },
-    {
-        "id": "79c0eb87fe89f4b5",
-        "type": "change",
-        "z": "23caab7f537e37b0",
-        "name": "向下移动置0",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "0",
-                "tot": "str"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 3290,
-        "y": 240,
-        "wires": [
-            [
-                "4f5fa063672e073c"
-            ]
-        ]
-    },
-    {
-        "id": "3cb420b6c55fd2a9",
-        "type": "rpi-gpio out",
-        "z": "23caab7f537e37b0",
-        "name": "气囊缩小",
-        "pin": "5",
-        "set": true,
-        "level": "0",
-        "freq": "",
-        "out": "out",
-        "bcm": true,
-        "x": 3620,
-        "y": 80,
-        "wires": []
-    },
-    {
-        "id": "4f5fa063672e073c",
-        "type": "rpi-gpio out",
-        "z": "23caab7f537e37b0",
-        "name": "气囊变大",
-        "pin": "22",
-        "set": true,
-        "level": "0",
-        "freq": "",
-        "out": "out",
-        "bcm": true,
-        "x": 3620,
-        "y": 240,
-        "wires": []
-    },
-    {
-        "id": "4d8e51a8e88e0f7e",
-        "type": "rpi-gpio out",
-        "z": "23caab7f537e37b0",
-        "name": "气囊变大",
-        "pin": "22",
-        "set": true,
-        "level": "0",
-        "freq": "",
-        "out": "out",
-        "bcm": true,
-        "x": 3080,
-        "y": 160,
-        "wires": []
     },
     {
         "id": "bf9ec3c0d1e77755",
@@ -3541,6 +3208,93 @@
         "bcm": true,
         "x": 3594.765625,
         "y": 963.75,
+        "wires": []
+    },
+    {
+        "id": "bb288b162f15c2bb",
+        "type": "function",
+        "z": "23caab7f537e37b0",
+        "name": "气囊充气",
+        "func": "var delimiter = Buffer.from([0x05, 0x64, 0x00, 0x64, 0x64, 0x64, 0x00, 0x00, 0x00, 0x30]);\nmsg.payload = delimiter;\nconsole.info(msg.payload)\n\nglobal.set(\"controlingFlag\", 0);\nvar waistControlTime = global.get(\"waistControlTime\");\nglobal.set(\"waistControlTime\", waistControlTime + 2000);\nglobal.set(\"waistUpConditionCount\", 0);\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2820,
+        "y": 1760,
+        "wires": [
+            [
+                "dc3f09f84e4bb4c1"
+            ]
+        ]
+    },
+    {
+        "id": "dc3f09f84e4bb4c1",
+        "type": "serial out",
+        "z": "23caab7f537e37b0",
+        "name": "",
+        "serial": "deba420c25236b68",
+        "x": 3070,
+        "y": 1760,
+        "wires": []
+    },
+    {
+        "id": "05f780ead063d30e",
+        "type": "function",
+        "z": "23caab7f537e37b0",
+        "name": "气囊放气",
+        "func": "var delimiter = Buffer.from([0x05, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,0x20]);\nmsg.payload = delimiter;\nconsole.info(msg.payload)\nconsole.info(\"放气\");\n\nglobal.set(\"controlingFlag\", 0);\nvar waistControlTime = global.get(\"waistControlTime\");\nglobal.set(\"waistControlTime\", waistControlTime - 2000);\nglobal.set(\"waistUpConditionCount\", 0);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2800,
+        "y": 1920,
+        "wires": [
+            [
+                "36f7529fb473dc0b"
+            ]
+        ]
+    },
+    {
+        "id": "36f7529fb473dc0b",
+        "type": "serial out",
+        "z": "23caab7f537e37b0",
+        "name": "",
+        "serial": "deba420c25236b68",
+        "x": 3050,
+        "y": 1920,
+        "wires": []
+    },
+    {
+        "id": "1235f0aa882f2909",
+        "type": "function",
+        "z": "23caab7f537e37b0",
+        "name": "气囊放气",
+        "func": "var delimiter = Buffer.from([0x05, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,0x20]);\nmsg.payload = delimiter;\nconsole.info(msg.payload)\nconsole.info(\"放气\");\n\nglobal.set(\"controlingFlag\", 0);\nvar waistControlTime = global.get(\"waistControlTime\");\nglobal.set(\"waistControlTime\", waistControlTime - 2000);\nglobal.set(\"waistUpConditionCount\", 0);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 3040,
+        "y": 60,
+        "wires": [
+            [
+                "22a4ebccfc1c4a26"
+            ]
+        ]
+    },
+    {
+        "id": "22a4ebccfc1c4a26",
+        "type": "serial out",
+        "z": "23caab7f537e37b0",
+        "name": "",
+        "serial": "deba420c25236b68",
+        "x": 3290,
+        "y": 60,
         "wires": []
     },
     {
