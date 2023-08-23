@@ -1217,31 +1217,11 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 100,
-        "y": 200,
+        "x": 80,
+        "y": 240,
         "wires": [
             [
-                "45e594dc8e9b7160",
                 "916338bdc4906865"
-            ]
-        ]
-    },
-    {
-        "id": "45e594dc8e9b7160",
-        "type": "function",
-        "z": "23caab7f537e37b0",
-        "name": "Sit Global Variable",
-        "func": " \n\nvar matrixCacheArr = Buffer.from([]);; \n \n\nglobal.set(\"matrixCacheArr\", matrixCacheArr);\n\n\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 410,
-        "y": 200,
-        "wires": [
-            [
-                "96bfd23f6af11a6e"
             ]
         ]
     },
@@ -1293,7 +1273,7 @@
         "z": "23caab7f537e37b0",
         "name": "Serialport0",
         "serial": "193f9130dc45f976",
-        "x": 385,
+        "x": 505,
         "y": 260,
         "wires": [
             [
@@ -1318,54 +1298,6 @@
         "wires": [
             [
                 "9173d7a7828a888f"
-            ]
-        ]
-    },
-    {
-        "id": "5312818c1e5a465a",
-        "type": "inject",
-        "z": "23caab7f537e37b0",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": true,
-        "onceDelay": "0",
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 100,
-        "y": 320,
-        "wires": [
-            [
-                "46f21c17ee04d5f3"
-            ]
-        ]
-    },
-    {
-        "id": "46f21c17ee04d5f3",
-        "type": "function",
-        "z": "23caab7f537e37b0",
-        "name": "Back Global Variable",
-        "func": " \n\nvar matrixCacheArr_back = Buffer.from([]);; \n \n\nglobal.set(\"matrixCacheArr_back\", matrixCacheArr_back);\n\n\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 420,
-        "y": 320,
-        "wires": [
-            [
-                "7b925195e5ed571a"
             ]
         ]
     },
@@ -1522,8 +1454,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1790,
-        "y": 1700,
+        "x": 1750,
+        "y": 1800,
         "wires": [
             [
                 "ce883fd325826609"
@@ -1535,7 +1467,7 @@
         "type": "function",
         "z": "23caab7f537e37b0",
         "name": "离坐次数逻辑处理",
-        "func": "var resetCompleteFlag = global.get(\"resetCompleteFlag\");\nif(resetCompleteFlag==0){\n    var onSeatCount = global.get(\"onSeatCount\");\n    var notSeatCount = global.get(\"notSeatCount\");\n\n    onSeatCount = 0;\n    global.set(\"onSeatCount\", onSeatCount);\n\n    notSeatCount++;\n    global.set(\"notSeatCount\", notSeatCount);\n    //防止数据溢出\n    if (notSeatCount > 5000) { global.set(\"notSeatCount\", 5000); };\n\n    msg.payload = notSeatCount;\n\n\n    return msg;\n\n}\n\n \n\n\n ",
+        "func": "\n\nvar resetCompleteFlag = global.get(\"resetCompleteFlag\");\nif(resetCompleteFlag==0){\n    var onSeatCount = global.get(\"onSeatCount\");\n    var notSeatCount = global.get(\"notSeatCount\");\n\n    onSeatCount = 0;\n    global.set(\"onSeatCount\", onSeatCount);\n\n    notSeatCount++;\n    global.set(\"notSeatCount\", notSeatCount);\n    //防止数据溢出\n    if (notSeatCount > 5000) { global.set(\"notSeatCount\", 5000); };\n\n    msg.payload = notSeatCount;\n\n\n    return msg;\n\n}\n\n \n\n\n ",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -1566,12 +1498,11 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 1910,
-        "y": 2160,
+        "x": 1810,
+        "y": 2200,
         "wires": [
             [
-                "d4514e8011fae40f",
-                "5f717a82896161e6"
+                "94d0d8f3c315f574"
             ]
         ]
     },
@@ -1586,8 +1517,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 2170,
-        "y": 1920,
+        "x": 2730,
+        "y": 2240,
         "wires": [
             [
                 "ba815064a5e3e0a2"
@@ -1651,8 +1582,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 2060,
-        "y": 2720,
+        "x": 2800,
+        "y": 2620,
         "wires": [
             [
                 "3cc4a9f3e8a1d363"
@@ -1681,8 +1612,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 2370,
-        "y": 1800,
+        "x": 2870,
+        "y": 3200,
         "wires": [
             [
                 "ce3bca71c51f2645"
@@ -1714,7 +1645,7 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 2320,
+        "x": 3000,
         "y": 2240,
         "wires": [
             [
@@ -1736,8 +1667,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 2580,
-        "y": 1760,
+        "x": 3080,
+        "y": 3160,
         "wires": [
             [
                 "bb288b162f15c2bb"
@@ -1755,8 +1686,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 2580,
-        "y": 1920,
+        "x": 3080,
+        "y": 3320,
         "wires": [
             [
                 "05f780ead063d30e"
@@ -1774,7 +1705,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 2520,
+        "x": 3300,
         "y": 2080,
         "wires": [
             [
@@ -1795,7 +1726,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 2520,
+        "x": 3300,
         "y": 2380,
         "wires": [
             [
@@ -1838,8 +1769,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 2330,
-        "y": 2720,
+        "x": 3010,
+        "y": 2620,
         "wires": [
             [
                 "e4b94da4e0f4f15c"
@@ -1854,7 +1785,7 @@
         "type": "function",
         "z": "23caab7f537e37b0",
         "name": "10*10坐线序",
-        "func": "const arr = msg.payload.sitData;\nlet ndata = [];\nfor (let i = 0; i < 32; i++) {\n    for (let j = 0; j < 32; j++) {\n        if (i < 10 && j > 21) {\n            ndata.push(arr[i * 32 + j]);\n        }\n    }\n}\n\nfor (let i = 0; i < 2; i++) {\n    for (let j = 0; j < 10; j++) {\n        [ndata[i * 10 + j], ndata[(4 - i) * 10 + j]] = [\n            ndata[(4 - i) * 10 + j],\n            ndata[i * 10 + j],\n        ];\n    }\n}\n\nfor (let i = 0; i < 5; i++) {\n    for (let j = 0; j < 10; j++) {\n        [ndata[i * 10 + j], ndata[(i + 5) * 10 + j]] = [\n            ndata[(i + 5) * 10 + j],\n            ndata[i * 10 + j],\n        ];\n    }\n}\nconst height = 10\nconst width = 10\n\nlet matrix = [];\nfor (let i = 0; i < height; i++) {\n    matrix[i] = [];\n    for (let j = 0; j < width; j++) {\n        matrix[i].push(ndata[i * width + j]);\n    }\n}\n//逆时针旋转 180 度\n//行 = h - 1 - 行(i);  h表示总行数\n//列 = n - 1 - 列(j);  n表示总列数\nvar temp = [];\nvar len = matrix.length;\nfor (var i = 0; i < len; i++) {\n    for (var j = 0; j < len; j++) {\n        var k = len - 1 - i;\n        if (!temp[k]) {\n            temp[k] = [];\n        }\n        temp[k][len - 1 - j] = matrix[i][j];\n    }\n}\nlet resArr = [];\nfor (let i = 0; i < temp.length; i++) {\n    resArr = resArr.concat(temp[i]);\n}\n\nndata = resArr\n\nconst newDataArr = []\n\nfor (let i = 0; i < 5; i++) {\n\n    for (let j = 0; j < 5; j++) {\n        let num = 0\n\n        for (let k = 0; k < 2; k++) {\n            for (let z = 0; z < 2; z++) {\n                num += ndata[(i * 2 + k) * 10 + j * 2 + z]\n                // console.log(i + k, j + z)\n            }\n        }\n\n        newDataArr.push(Number((num / 4).toFixed(1)))\n    }\n\n}\n\nfor (let i = 0; i < 5; i++) {\n\n    for (let j = 0; j < 5; j++) {\n        let num = 0\n\n        for (let k = 0; k < 2; k++) {\n            for (let z = 0; z < 2; z++) {\n                // num += ndata[(i*2 + k) * 10 + j*2 + z]\n                ndata[(i * 2 + k) * 10 + j * 2 + z] = newDataArr[i * 5 + j]\n                // console.log(i + k, j + z)\n            }\n        }\n\n        // newArr.push(Number((num / 4).toFixed(1)))\n    }\n\n}\n\n\n\nmsg.payload.sitData=ndata;\n\nreturn msg;",
+        "func": "\n\nconst arr = msg.payload.sitData;\nlet ndata = [];\nfor (let i = 0; i < 32; i++) {\n    for (let j = 0; j < 32; j++) {\n        if (i < 10 && j > 21) {\n            ndata.push(arr[i * 32 + j]);\n        }\n    }\n}\n\nfor (let i = 0; i < 2; i++) {\n    for (let j = 0; j < 10; j++) {\n        [ndata[i * 10 + j], ndata[(4 - i) * 10 + j]] = [\n            ndata[(4 - i) * 10 + j],\n            ndata[i * 10 + j],\n        ];\n    }\n}\n\nfor (let i = 0; i < 5; i++) {\n    for (let j = 0; j < 10; j++) {\n        [ndata[i * 10 + j], ndata[(i + 5) * 10 + j]] = [\n            ndata[(i + 5) * 10 + j],\n            ndata[i * 10 + j],\n        ];\n    }\n}\nconst height = 10\nconst width = 10\n\nlet matrix = [];\nfor (let i = 0; i < height; i++) {\n    matrix[i] = [];\n    for (let j = 0; j < width; j++) {\n        matrix[i].push(ndata[i * width + j]);\n    }\n}\n//逆时针旋转 180 度\n//行 = h - 1 - 行(i);  h表示总行数\n//列 = n - 1 - 列(j);  n表示总列数\nvar temp = [];\nvar len = matrix.length;\nfor (var i = 0; i < len; i++) {\n    for (var j = 0; j < len; j++) {\n        var k = len - 1 - i;\n        if (!temp[k]) {\n            temp[k] = [];\n        }\n        temp[k][len - 1 - j] = matrix[i][j];\n    }\n}\nlet resArr = [];\nfor (let i = 0; i < temp.length; i++) {\n    resArr = resArr.concat(temp[i]);\n}\n\nndata = resArr\n\nconst newDataArr = []\n\nfor (let i = 0; i < 5; i++) {\n\n    for (let j = 0; j < 5; j++) {\n        let num = 0\n\n        for (let k = 0; k < 2; k++) {\n            for (let z = 0; z < 2; z++) {\n                num += ndata[(i * 2 + k) * 10 + j * 2 + z]\n                // console.log(i + k, j + z)\n            }\n        }\n\n        newDataArr.push(Number((num / 4).toFixed(1)))\n    }\n\n}\n\nfor (let i = 0; i < 5; i++) {\n\n    for (let j = 0; j < 5; j++) {\n        let num = 0\n\n        for (let k = 0; k < 2; k++) {\n            for (let z = 0; z < 2; z++) {\n                // num += ndata[(i*2 + k) * 10 + j*2 + z]\n                ndata[(i * 2 + k) * 10 + j * 2 + z] = newDataArr[i * 5 + j]\n                // console.log(i + k, j + z)\n            }\n        }\n\n        // newArr.push(Number((num / 4).toFixed(1)))\n    }\n\n}\n\n\n\nmsg.payload.sitData=ndata;\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -1908,8 +1839,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 2990,
-        "y": 2680,
+        "x": 3690,
+        "y": 2600,
         "wires": [
             [
                 "b5687cc679971f09"
@@ -1935,8 +1866,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 2990,
-        "y": 2920,
+        "x": 3670,
+        "y": 2820,
         "wires": [
             [
                 "44f1a095a0c75c37"
@@ -1954,12 +1885,12 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 2560,
-        "y": 2660,
+        "x": 3240,
+        "y": 2560,
         "wires": [
             [
                 "e5e786b3cf8b3efb",
-                "1216c89095dc76eb"
+                "9d5a4cca8ef9dccd"
             ]
         ]
     },
@@ -1974,12 +1905,12 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 2560,
-        "y": 2840,
+        "x": 3240,
+        "y": 2740,
         "wires": [
             [
                 "fedd5531eb422989",
-                "1918ffab23eb619e"
+                "cfda399748851474"
             ]
         ]
     },
@@ -1994,8 +1925,8 @@
         "freq": "",
         "out": "out",
         "bcm": true,
-        "x": 2720,
-        "y": 2080,
+        "x": 3520,
+        "y": 2100,
         "wires": []
     },
     {
@@ -2015,8 +1946,8 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 2790,
-        "y": 2680,
+        "x": 3490,
+        "y": 2600,
         "wires": [
             [
                 "157984723e551b09"
@@ -2029,8 +1960,8 @@
         "z": "23caab7f537e37b0",
         "name": "Serialport1",
         "serial": "3c48bdf53b96508a",
-        "x": 375,
-        "y": 100,
+        "x": 495,
+        "y": 160,
         "wires": [
             [
                 "96bfd23f6af11a6e"
@@ -2049,11 +1980,11 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 3180,
-        "y": 2680,
+        "x": 3880,
+        "y": 2600,
         "wires": [
             [
-                "fb2fc6cfed5f994c"
+                "3b837eb249de7da7"
             ]
         ]
     },
@@ -2068,11 +1999,11 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 3180,
-        "y": 2920,
+        "x": 3860,
+        "y": 2820,
         "wires": [
             [
-                "afd948ecd15aab75"
+                "7547a378edacfbf8"
             ]
         ]
     },
@@ -2093,166 +2024,13 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 2790,
-        "y": 2920,
+        "x": 3470,
+        "y": 2820,
         "wires": [
             [
                 "251f0bf67cebc318"
             ]
         ]
-    },
-    {
-        "id": "896ff48ab5617593",
-        "type": "inject",
-        "z": "23caab7f537e37b0",
-        "name": "",
-        "props": [
-            {
-                "p": "delay",
-                "v": "2000",
-                "vt": "num"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            },
-            {
-                "p": "payload"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "2",
-        "payloadType": "str",
-        "x": 1490,
-        "y": 2460,
-        "wires": [
-            [
-                "e868bc474513c3e8",
-                "bc72af4d86457dbd"
-            ]
-        ]
-    },
-    {
-        "id": "c027eb4e267787b4",
-        "type": "debug",
-        "z": "23caab7f537e37b0",
-        "name": "debug 1",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1740,
-        "y": 2540,
-        "wires": []
-    },
-    {
-        "id": "e868bc474513c3e8",
-        "type": "debug",
-        "z": "23caab7f537e37b0",
-        "name": "debug 2",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1600,
-        "y": 2380,
-        "wires": []
-    },
-    {
-        "id": "bc72af4d86457dbd",
-        "type": "delay",
-        "z": "23caab7f537e37b0",
-        "name": "",
-        "pauseType": "delayv",
-        "timeout": "0",
-        "timeoutUnits": "seconds",
-        "rate": "1",
-        "nbRateUnits": "1",
-        "rateUnits": "second",
-        "randomFirst": "1",
-        "randomLast": "5",
-        "randomUnits": "seconds",
-        "drop": false,
-        "allowrate": false,
-        "outputs": 1,
-        "x": 1670,
-        "y": 2460,
-        "wires": [
-            [
-                "c027eb4e267787b4"
-            ]
-        ]
-    },
-    {
-        "id": "1216c89095dc76eb",
-        "type": "rpi-gpio out",
-        "z": "23caab7f537e37b0",
-        "name": "坐垫向前",
-        "pin": "25",
-        "set": true,
-        "level": "0",
-        "freq": "",
-        "out": "out",
-        "bcm": true,
-        "x": 2800,
-        "y": 2560,
-        "wires": []
-    },
-    {
-        "id": "fb2fc6cfed5f994c",
-        "type": "rpi-gpio out",
-        "z": "23caab7f537e37b0",
-        "name": "坐垫向前",
-        "pin": "25",
-        "set": true,
-        "level": "0",
-        "freq": "",
-        "out": "out",
-        "bcm": true,
-        "x": 3380,
-        "y": 2680,
-        "wires": []
-    },
-    {
-        "id": "1918ffab23eb619e",
-        "type": "rpi-gpio out",
-        "z": "23caab7f537e37b0",
-        "name": "坐垫向后",
-        "pin": "24",
-        "set": true,
-        "level": "0",
-        "freq": "",
-        "out": "out",
-        "bcm": true,
-        "x": 2760,
-        "y": 2820,
-        "wires": []
-    },
-    {
-        "id": "afd948ecd15aab75",
-        "type": "rpi-gpio out",
-        "z": "23caab7f537e37b0",
-        "name": "坐垫向后",
-        "pin": "24",
-        "set": true,
-        "level": "0",
-        "freq": "",
-        "out": "out",
-        "bcm": true,
-        "x": 3380,
-        "y": 2920,
-        "wires": []
     },
     {
         "id": "c85210cabdb19fe6",
@@ -2273,7 +2051,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 2950,
+        "x": 3730,
         "y": 2180,
         "wires": [
             [
@@ -2298,7 +2076,7 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 2730,
+        "x": 3510,
         "y": 2180,
         "wires": [
             [
@@ -2317,7 +2095,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 3140,
+        "x": 3920,
         "y": 2180,
         "wires": [
             [
@@ -2336,7 +2114,7 @@
         "freq": "",
         "out": "out",
         "bcm": true,
-        "x": 2760,
+        "x": 3540,
         "y": 2320,
         "wires": []
     },
@@ -2359,7 +2137,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 2950,
+        "x": 3730,
         "y": 2420,
         "wires": [
             [
@@ -2384,8 +2162,8 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 2750,
-        "y": 2420,
+        "x": 3550,
+        "y": 2400,
         "wires": [
             [
                 "4e9a1bd26b17adfd"
@@ -2403,7 +2181,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 3160,
+        "x": 3940,
         "y": 2420,
         "wires": [
             [
@@ -2422,7 +2200,7 @@
         "freq": "",
         "out": "out",
         "bcm": true,
-        "x": 3340,
+        "x": 4120,
         "y": 2180,
         "wires": []
     },
@@ -2437,7 +2215,7 @@
         "freq": "",
         "out": "out",
         "bcm": true,
-        "x": 3360,
+        "x": 4140,
         "y": 2420,
         "wires": []
     },
@@ -2505,8 +2283,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 2680,
-        "y": 480,
+        "x": 2700,
+        "y": 320,
         "wires": [
             [
                 "3b2a65f0b8abc030"
@@ -2538,8 +2316,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 2670,
-        "y": 900,
+        "x": 2630,
+        "y": 720,
         "wires": [
             [
                 "305aa8af9241a37f"
@@ -2579,8 +2357,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 2880,
-        "y": 440,
+        "x": 2900,
+        "y": 280,
         "wires": [
             [
                 "bf9ec3c0d1e77755",
@@ -2599,8 +2377,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 2880,
-        "y": 520,
+        "x": 2900,
+        "y": 360,
         "wires": [
             [
                 "a565fc9bc858c29f",
@@ -2619,8 +2397,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 2840,
-        "y": 800,
+        "x": 2820,
+        "y": 620,
         "wires": [
             [
                 "60a3cb13fca43cb8",
@@ -2639,8 +2417,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 2860,
-        "y": 980,
+        "x": 2820,
+        "y": 800,
         "wires": [
             [
                 "4edaadb95fd7fe78",
@@ -2665,8 +2443,8 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 3070,
-        "y": 460,
+        "x": 3090,
+        "y": 300,
         "wires": [
             [
                 "fc6fb50dedc47a70"
@@ -2692,8 +2470,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 3290,
-        "y": 460,
+        "x": 3310,
+        "y": 300,
         "wires": [
             [
                 "e4ca7a3db1ec5ab7"
@@ -2717,8 +2495,8 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 3070,
-        "y": 600,
+        "x": 3090,
+        "y": 440,
         "wires": [
             [
                 "f389994c6d54ef3e"
@@ -2744,8 +2522,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 3290,
-        "y": 600,
+        "x": 3310,
+        "y": 440,
         "wires": [
             [
                 "02078b70d2c822eb"
@@ -2769,8 +2547,8 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 3030,
-        "y": 800,
+        "x": 2990,
+        "y": 620,
         "wires": [
             [
                 "1c3b03e332c55812"
@@ -2796,8 +2574,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 3250,
-        "y": 800,
+        "x": 3210,
+        "y": 620,
         "wires": [
             [
                 "89c0600ea9495192"
@@ -2821,8 +2599,8 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 3050,
-        "y": 1040,
+        "x": 3010,
+        "y": 860,
         "wires": [
             [
                 "d81e1e33b5f3d2a3"
@@ -2848,8 +2626,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 3270,
-        "y": 1040,
+        "x": 3230,
+        "y": 860,
         "wires": [
             [
                 "ea11f72185f81955"
@@ -2867,8 +2645,8 @@
         "freq": "",
         "out": "out",
         "bcm": true,
-        "x": 3080,
-        "y": 520,
+        "x": 3100,
+        "y": 360,
         "wires": []
     },
     {
@@ -2882,8 +2660,8 @@
         "freq": "",
         "out": "out",
         "bcm": true,
-        "x": 3600,
-        "y": 600,
+        "x": 3620,
+        "y": 440,
         "wires": []
     },
     {
@@ -2897,8 +2675,8 @@
         "freq": "",
         "out": "out",
         "bcm": true,
-        "x": 3080,
-        "y": 380,
+        "x": 3100,
+        "y": 220,
         "wires": []
     },
     {
@@ -2912,8 +2690,8 @@
         "freq": "",
         "out": "out",
         "bcm": true,
-        "x": 3601.765625,
-        "y": 455.75,
+        "x": 3621.765625,
+        "y": 295.75,
         "wires": []
     },
     {
@@ -2927,8 +2705,8 @@
         "freq": "",
         "out": "out",
         "bcm": true,
-        "x": 3040,
-        "y": 740,
+        "x": 3000,
+        "y": 560,
         "wires": []
     },
     {
@@ -2942,8 +2720,8 @@
         "freq": "",
         "out": "out",
         "bcm": true,
-        "x": 3554.765625,
-        "y": 794.75,
+        "x": 3514.765625,
+        "y": 614.75,
         "wires": []
     },
     {
@@ -2957,8 +2735,8 @@
         "freq": "",
         "out": "out",
         "bcm": true,
-        "x": 3060,
-        "y": 980,
+        "x": 3020,
+        "y": 800,
         "wires": []
     },
     {
@@ -2972,8 +2750,8 @@
         "freq": "",
         "out": "out",
         "bcm": true,
-        "x": 3594.765625,
-        "y": 1043.75,
+        "x": 3554.765625,
+        "y": 863.75,
         "wires": []
     },
     {
@@ -2987,8 +2765,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 2820,
-        "y": 1760,
+        "x": 3320,
+        "y": 3160,
         "wires": [
             [
                 "dc3f09f84e4bb4c1"
@@ -3001,8 +2779,8 @@
         "z": "23caab7f537e37b0",
         "name": "",
         "serial": "deba420c25236b68",
-        "x": 3070,
-        "y": 1760,
+        "x": 3570,
+        "y": 3160,
         "wires": []
     },
     {
@@ -3016,8 +2794,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 2800,
-        "y": 1920,
+        "x": 3300,
+        "y": 3320,
         "wires": [
             [
                 "36f7529fb473dc0b"
@@ -3030,8 +2808,8 @@
         "z": "23caab7f537e37b0",
         "name": "",
         "serial": "deba420c25236b68",
-        "x": 3050,
-        "y": 1920,
+        "x": 3550,
+        "y": 3320,
         "wires": []
     },
     {
@@ -3074,7 +2852,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 2720,
+        "x": 3500,
         "y": 2020,
         "wires": [
             [
@@ -3088,7 +2866,7 @@
         "z": "23caab7f537e37b0",
         "name": "",
         "serial": "deba420c25236b68",
-        "x": 2970,
+        "x": 3750,
         "y": 2020,
         "wires": []
     },
@@ -3103,7 +2881,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 2740,
+        "x": 3520,
         "y": 2260,
         "wires": [
             [
@@ -3117,7 +2895,7 @@
         "z": "23caab7f537e37b0",
         "name": "",
         "serial": "deba420c25236b68",
-        "x": 2990,
+        "x": 3770,
         "y": 2260,
         "wires": []
     },
@@ -3125,6 +2903,7 @@
         "id": "428dee1c77796a3c",
         "type": "inject",
         "z": "23caab7f537e37b0",
+        "d": true,
         "name": "座椅初始化归位START",
         "props": [
             {
@@ -3369,7 +3148,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1030,
+        "x": 1010,
         "y": 900,
         "wires": [
             [
@@ -3396,7 +3175,7 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 1220,
+        "x": 1200,
         "y": 1020,
         "wires": [
             [
@@ -3423,7 +3202,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1430,
+        "x": 1410,
         "y": 1020,
         "wires": [
             [
@@ -3475,7 +3254,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1210,
+        "x": 1190,
         "y": 900,
         "wires": [
             [
@@ -3510,7 +3289,7 @@
         "freq": "",
         "out": "out",
         "bcm": true,
-        "x": 1240,
+        "x": 1220,
         "y": 800,
         "wires": []
     },
@@ -3525,7 +3304,7 @@
         "freq": "",
         "out": "out",
         "bcm": true,
-        "x": 1420,
+        "x": 1400,
         "y": 900,
         "wires": []
     },
@@ -3540,8 +3319,8 @@
         "freq": "",
         "out": "out",
         "bcm": true,
-        "x": 1480,
-        "y": 1120,
+        "x": 1380,
+        "y": 1140,
         "wires": []
     },
     {
@@ -3576,20 +3355,20 @@
         "id": "916338bdc4906865",
         "type": "function",
         "z": "23caab7f537e37b0",
-        "name": "function 1",
-        "func": "global.set(\"readFlag\",0);\nreturn msg;",
+        "name": "初始化座椅完成标识",
+        "func": "//是否允许进行串口读去矩阵的标识  0-禁止读取  1-允许读取\nglobal.set(\"readFlag\",0);\n\n\nvar matrixCacheArr = Buffer.from([]);;\nglobal.set(\"matrixCacheArr\", matrixCacheArr);\n\nvar matrixCacheArr_back = Buffer.from([]);;\nglobal.set(\"matrixCacheArr_back\", matrixCacheArr_back);\n//调节次序  \nglobal.set(\"controlNumber\",0);\n\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 140,
-        "y": 400,
+        "x": 280,
+        "y": 240,
         "wires": [
             [
-                "45e594dc8e9b7160",
-                "46f21c17ee04d5f3",
-                "2f4f4f0c26b0ed3a"
+                "96bfd23f6af11a6e",
+                "7b925195e5ed571a",
+                "2d72d39f917f04a6"
             ]
         ]
     },
@@ -3597,7 +3376,7 @@
         "id": "ced4cecda08a967e",
         "type": "function",
         "z": "23caab7f537e37b0",
-        "name": "function 2",
+        "name": "允许读写标识",
         "func": "global.set(\"readFlag\",1);\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
@@ -3608,6 +3387,825 @@
         "y": 960,
         "wires": [
             []
+        ]
+    },
+    {
+        "id": "04de8949266ba1c0",
+        "type": "rpi-gpio out",
+        "z": "23caab7f537e37b0",
+        "name": "靠背向前",
+        "pin": "18",
+        "set": true,
+        "level": "0",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 2600,
+        "y": 1380,
+        "wires": []
+    },
+    {
+        "id": "2d104068bc6740be",
+        "type": "change",
+        "z": "23caab7f537e37b0",
+        "name": "向下移动置0",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "0",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2830,
+        "y": 1460,
+        "wires": [
+            [
+                "281f222c312604cc"
+            ]
+        ]
+    },
+    {
+        "id": "7576e601dd2d9b9f",
+        "type": "delay",
+        "z": "23caab7f537e37b0",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "2000",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 2610,
+        "y": 1460,
+        "wires": [
+            [
+                "2d104068bc6740be"
+            ]
+        ]
+    },
+    {
+        "id": "281f222c312604cc",
+        "type": "function",
+        "z": "23caab7f537e37b0",
+        "name": "重置控制标识",
+        "func": " \nvar hunchControlTime = global.get(\"hunchControlTime\");\nglobal.set(\"hunchControlTime\", hunchControlTime+2000);\n \nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 3020,
+        "y": 1460,
+        "wires": [
+            [
+                "54843142a3a2a7ae"
+            ]
+        ]
+    },
+    {
+        "id": "54843142a3a2a7ae",
+        "type": "rpi-gpio out",
+        "z": "23caab7f537e37b0",
+        "name": "靠背向前",
+        "pin": "18",
+        "set": true,
+        "level": "0",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 3220,
+        "y": 1460,
+        "wires": []
+    },
+    {
+        "id": "355bc6dbcd102b2f",
+        "type": "function",
+        "z": "23caab7f537e37b0",
+        "name": "气囊充气",
+        "func": "var delimiter = Buffer.from([0x05, 0x64, 0x00, 0x64, 0x64, 0x64, 0x00, 0x00, 0x00, 0x20]);\nmsg.payload = delimiter;\nconsole.info(msg.payload)\n\nglobal.set(\"controlingFlag\", 0);\nvar waistControlTime = global.get(\"waistControlTime\");\nglobal.set(\"waistControlTime\", waistControlTime + 2000);\nglobal.set(\"waistUpConditionCount\", 0);\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2600,
+        "y": 1300,
+        "wires": [
+            [
+                "2e2456fd28a43fdb"
+            ]
+        ]
+    },
+    {
+        "id": "2e2456fd28a43fdb",
+        "type": "serial out",
+        "z": "23caab7f537e37b0",
+        "name": "",
+        "serial": "deba420c25236b68",
+        "x": 2850,
+        "y": 1300,
+        "wires": []
+    },
+    {
+        "id": "0dfb92980e6df6e4",
+        "type": "change",
+        "z": "23caab7f537e37b0",
+        "name": "向前移动置0",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "0",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2830,
+        "y": 1720,
+        "wires": [
+            [
+                "0e8eb81696d7ab7f"
+            ]
+        ]
+    },
+    {
+        "id": "2be67b42180b6e36",
+        "type": "delay",
+        "z": "23caab7f537e37b0",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "2000",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 2610,
+        "y": 1720,
+        "wires": [
+            [
+                "0dfb92980e6df6e4"
+            ]
+        ]
+    },
+    {
+        "id": "0e8eb81696d7ab7f",
+        "type": "function",
+        "z": "23caab7f537e37b0",
+        "name": "重置控制标识",
+        "func": "\nvar frontControlTime=global.get(\"frontControlTime\");\nglobal.set(\"frontControlTime\",frontControlTime+2000);\nconsole.info(\"起始调整frontControlTime: \" + frontControlTime + 2000)\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 3020,
+        "y": 1720,
+        "wires": [
+            [
+                "db0724d2bc5e86cc",
+                "162f9ede4e21056b",
+                "ed2ee5d47caf2c79"
+            ]
+        ]
+    },
+    {
+        "id": "1c634b3f87d264af",
+        "type": "rpi-gpio out",
+        "z": "23caab7f537e37b0",
+        "name": "坐垫向前",
+        "pin": "25",
+        "set": true,
+        "level": "0",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 2600,
+        "y": 1640,
+        "wires": []
+    },
+    {
+        "id": "db0724d2bc5e86cc",
+        "type": "rpi-gpio out",
+        "z": "23caab7f537e37b0",
+        "name": "坐垫向前",
+        "pin": "25",
+        "set": true,
+        "level": "0",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 3220,
+        "y": 1720,
+        "wires": []
+    },
+    {
+        "id": "2ac4654c32fa235b",
+        "type": "function",
+        "z": "23caab7f537e37b0",
+        "name": "function 3",
+        "func": "\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2360,
+        "y": 1380,
+        "wires": [
+            [
+                "355bc6dbcd102b2f",
+                "04de8949266ba1c0",
+                "7576e601dd2d9b9f"
+            ]
+        ]
+    },
+    {
+        "id": "6f2924dddd1fc24d",
+        "type": "function",
+        "z": "23caab7f537e37b0",
+        "name": "靠背坐垫调整",
+        "func": " \nvar controlingFlag = global.get(\"controlingFlag\");\nconsole.info(\"controlingFlag: \" + controlingFlag);\nif (controlingFlag==0){\n    global.set(\"controlingFlag\", 1);\n    console.info(\"靠背坐垫开始调整\");\n    msg.payload=1;\n    return msg;\n}\n ",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2380,
+        "y": 1680,
+        "wires": [
+            [
+                "1c634b3f87d264af",
+                "2be67b42180b6e36"
+            ]
+        ]
+    },
+    {
+        "id": "012efafc21be045b",
+        "type": "function",
+        "z": "23caab7f537e37b0",
+        "name": "并发调整",
+        "func": "console.info(\"并发调整\");\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2460,
+        "y": 2240,
+        "wires": [
+            [
+                "d4514e8011fae40f",
+                "5f717a82896161e6"
+            ]
+        ]
+    },
+    {
+        "id": "94d0d8f3c315f574",
+        "type": "function",
+        "z": "23caab7f537e37b0",
+        "name": "座椅部位调整次序",
+        "func": "var controlNumber =global.get(\"controlNumber\");\n\n\n\nmsg.controlNumber = controlNumber;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2010,
+        "y": 2200,
+        "wires": [
+            [
+                "9c8b5ecd4c3165ed"
+            ]
+        ]
+    },
+    {
+        "id": "9c8b5ecd4c3165ed",
+        "type": "switch",
+        "z": "23caab7f537e37b0",
+        "name": "",
+        "property": "controlNumber",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "2",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "3",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 4,
+        "x": 2170,
+        "y": 2200,
+        "wires": [
+            [
+                "6f2924dddd1fc24d"
+            ],
+            [
+                "ad98cb3ba794f334"
+            ],
+            [
+                "6138d1c8ed4eb445"
+            ],
+            [
+                "012efafc21be045b"
+            ]
+        ]
+    },
+    {
+        "id": "10b561917ba9adea",
+        "type": "rpi-gpio out",
+        "z": "23caab7f537e37b0",
+        "name": "靠背向前",
+        "pin": "18",
+        "set": true,
+        "level": "0",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 3380,
+        "y": 1600,
+        "wires": []
+    },
+    {
+        "id": "162f9ede4e21056b",
+        "type": "delay",
+        "z": "23caab7f537e37b0",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "2000",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 3290,
+        "y": 1660,
+        "wires": [
+            [
+                "f68ad5323d7223ee"
+            ]
+        ]
+    },
+    {
+        "id": "f68ad5323d7223ee",
+        "type": "function",
+        "z": "23caab7f537e37b0",
+        "name": "重置控制标识",
+        "func": "\nvar hunchControlTime = global.get(\"hunchControlTime\");\nglobal.set(\"hunchControlTime\", hunchControlTime+2000);\nglobal.set(\"hunchUpConditionCount\",0);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 3660,
+        "y": 1660,
+        "wires": [
+            [
+                "35f136471196d736",
+                "cdd90321234ee2cc"
+            ]
+        ]
+    },
+    {
+        "id": "35f136471196d736",
+        "type": "rpi-gpio out",
+        "z": "23caab7f537e37b0",
+        "name": "靠背向前",
+        "pin": "18",
+        "set": true,
+        "level": "0",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 3860,
+        "y": 1660,
+        "wires": []
+    },
+    {
+        "id": "d1b5e54c877259b7",
+        "type": "function",
+        "z": "23caab7f537e37b0",
+        "name": "更改调整次序",
+        "func": "global.set(\"controlNumber\",1);\nglobal.set(\"controlingFlag\", 0);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 3960,
+        "y": 1540,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ad98cb3ba794f334",
+        "type": "function",
+        "z": "23caab7f537e37b0",
+        "name": "坐垫角度调整",
+        "func": "var controlingFlag = global.get(\"controlingFlag\");\nif (controlingFlag==0){\n    global.set(\"controlingFlag\",1);\n    console.info(\"坐垫角度调整\");\n    msg.payload = 1;\n     \n    return msg;\n}\n ",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2420,
+        "y": 1820,
+        "wires": [
+            [
+                "e5a7d6af13ca37f1",
+                "89136e3f72a7fe80"
+            ]
+        ]
+    },
+    {
+        "id": "6138d1c8ed4eb445",
+        "type": "function",
+        "z": "23caab7f537e37b0",
+        "name": "腰托调整",
+        "func": "var controlingFlag = global.get(\"controlingFlag\");\nif (controlingFlag==0){\n    global.set(\"controlingFlag\",1);\n    console.info(\"腰托调整\");\n    msg.payload = 1;\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2420,
+        "y": 1980,
+        "wires": [
+            [
+                "4ce0aa02818ed88c"
+            ]
+        ]
+    },
+    {
+        "id": "e5a7d6af13ca37f1",
+        "type": "rpi-gpio out",
+        "z": "23caab7f537e37b0",
+        "name": "座椅前上移动",
+        "pin": "19",
+        "set": true,
+        "level": "0",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 2640,
+        "y": 1780,
+        "wires": []
+    },
+    {
+        "id": "89136e3f72a7fe80",
+        "type": "delay",
+        "z": "23caab7f537e37b0",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "2000",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 2650,
+        "y": 1840,
+        "wires": [
+            [
+                "3691f3183a70c6ee"
+            ]
+        ]
+    },
+    {
+        "id": "3691f3183a70c6ee",
+        "type": "change",
+        "z": "23caab7f537e37b0",
+        "name": "向前移动置0",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "0",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2830,
+        "y": 1840,
+        "wires": [
+            [
+                "b9688c1801d06cba",
+                "7adba73a11142ecf"
+            ]
+        ]
+    },
+    {
+        "id": "b9688c1801d06cba",
+        "type": "rpi-gpio out",
+        "z": "23caab7f537e37b0",
+        "name": "座椅前上移动",
+        "pin": "19",
+        "set": true,
+        "level": "0",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 3040,
+        "y": 1840,
+        "wires": []
+    },
+    {
+        "id": "882fbf69f72d956e",
+        "type": "function",
+        "z": "23caab7f537e37b0",
+        "name": "更改次序",
+        "func": "var frontControlTime = global.get(\"frontControlTime\");\nglobal.set(\"frontControlTime\", frontControlTime + 2000);\n\nglobal.set(\"controlNumber\",2);\nglobal.set(\"controlingFlag\",0);\nconsole.info(\"坐垫角度调整\");\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 3140,
+        "y": 1780,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4ce0aa02818ed88c",
+        "type": "function",
+        "z": "23caab7f537e37b0",
+        "name": "气囊充气",
+        "func": "var delimiter = Buffer.from([0x05, 0x64, 0x00, 0x64, 0x64, 0x64, 0x00, 0x00, 0x00, 0x20]);\nmsg.payload = delimiter;\nconsole.info(msg.payload)\n\n\nvar waistControlTime = global.get(\"waistControlTime\");\nglobal.set(\"waistControlTime\", waistControlTime + 2000);\nglobal.set(\"waistUpConditionCount\", 0);\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2640,
+        "y": 1980,
+        "wires": [
+            [
+                "2290e06033e62f45",
+                "fd4303a6897ac0b8"
+            ]
+        ]
+    },
+    {
+        "id": "2290e06033e62f45",
+        "type": "serial out",
+        "z": "23caab7f537e37b0",
+        "name": "",
+        "serial": "deba420c25236b68",
+        "x": 2910,
+        "y": 1980,
+        "wires": []
+    },
+    {
+        "id": "28ac5f337d0b366f",
+        "type": "function",
+        "z": "23caab7f537e37b0",
+        "name": "更改次序",
+        "func": "global.set(\"controlNumber\",3);\nglobal.set(\"controlingFlag\",0);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 3040,
+        "y": 1920,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2d72d39f917f04a6",
+        "type": "function",
+        "z": "23caab7f537e37b0",
+        "name": "允许读写标识",
+        "func": "global.set(\"readFlag\",1);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 400,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ed2ee5d47caf2c79",
+        "type": "change",
+        "z": "23caab7f537e37b0",
+        "name": "向下移动置1",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "1",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 3170,
+        "y": 1600,
+        "wires": [
+            [
+                "10b561917ba9adea"
+            ]
+        ]
+    },
+    {
+        "id": "9d5a4cca8ef9dccd",
+        "type": "rpi-gpio out",
+        "z": "23caab7f537e37b0",
+        "name": "座椅前上移动",
+        "pin": "19",
+        "set": true,
+        "level": "0",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 3420,
+        "y": 2500,
+        "wires": []
+    },
+    {
+        "id": "3b837eb249de7da7",
+        "type": "rpi-gpio out",
+        "z": "23caab7f537e37b0",
+        "name": "座椅前上移动",
+        "pin": "19",
+        "set": true,
+        "level": "0",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 4080,
+        "y": 2600,
+        "wires": []
+    },
+    {
+        "id": "cfda399748851474",
+        "type": "rpi-gpio out",
+        "z": "23caab7f537e37b0",
+        "name": "座椅向下移动",
+        "pin": "26",
+        "set": true,
+        "level": "0",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 3480,
+        "y": 2700,
+        "wires": []
+    },
+    {
+        "id": "7547a378edacfbf8",
+        "type": "rpi-gpio out",
+        "z": "23caab7f537e37b0",
+        "name": "座椅向下移动",
+        "pin": "26",
+        "set": true,
+        "level": "0",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 4080,
+        "y": 2820,
+        "wires": []
+    },
+    {
+        "id": "cdd90321234ee2cc",
+        "type": "delay",
+        "z": "23caab7f537e37b0",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "1",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 3800,
+        "y": 1600,
+        "wires": [
+            [
+                "d1b5e54c877259b7"
+            ]
+        ]
+    },
+    {
+        "id": "7adba73a11142ecf",
+        "type": "delay",
+        "z": "23caab7f537e37b0",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "1",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 2960,
+        "y": 1780,
+        "wires": [
+            [
+                "882fbf69f72d956e"
+            ]
+        ]
+    },
+    {
+        "id": "fd4303a6897ac0b8",
+        "type": "delay",
+        "z": "23caab7f537e37b0",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "1",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 2840,
+        "y": 1920,
+        "wires": [
+            [
+                "28ac5f337d0b366f"
+            ]
         ]
     }
 ]
