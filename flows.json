@@ -1815,7 +1815,7 @@
         "type": "function",
         "z": "23caab7f537e37b0",
         "name": "BackActionTrigger",
-        "func": "// console.info(\"在座次数\" + msg.payload);\n// 复位标识为0  可进入复位  \nglobal.set(\"resetCompleteFlag\", 0);\n\nvar ndata =global.get(\"backMatrixData\");\n \n \nvar num1 = 0, num2 = 0, num3 = 0;\nvar numHead=0,numBody=0,numFoot=0;\n \nfor (var i = 0; i < 10; i++) {\n    ndata[i * 10 + 0] = ndata[i * 10 + 1];\n    ndata[i * 10 + 9] = ndata[i * 10 + 8];\n}\nfor (var i = 0; i < 29; i++) {\n    num1 += ndata[i];\n}\nfor (var i = 29; i < 69; i++) {\n    num2 += ndata[i];\n}\nfor (var i = 69; i < 99; i++) {\n    num3 += ndata[i];\n}\n\n\n\nfor (var i = 49; i < 99; i++) {\n    numFoot+=ndata[i];\n}\n//靠背上部求和平均\nnum1 = num1 / 30;\n//靠背中部求和平均\nnum2 = num2 / 40;\n//靠背下部求和平均\nnum3 = (num3-40) / 30;\nvar sumBack = num1 + num2 + num3;\nvar waist = num1 / sumBack;\n//var hunch = (num2+ num3) / sumBack;\n//var hunch=numFoot/num1;\nvar back=num3/num2;\n\nvar hunch=numFoot/num1;\nconst backMatrixSum=ndata.reduce((accumulater,currentValue)=>{\n    return accumulater+currentValue;\n},0);\n\nconsole.info(\n    \"backsum: \" + backMatrixSum.toFixed(2)+\n \"  sumBack:\" + sumBack.toFixed(2) \n+ \" waist: \" + waist.toFixed(2) + \n\" hunch: \" + hunch.toFixed(2)\n\n);\n \n//msg.sumBack = Math.floor(sumBack)     ;\nmsg.waist = Math.floor(waist)  ;\nmsg.hunch = Math.floor(hunch);\n \n\nreturn msg;",
+        "func": "// console.info(\"在座次数\" + msg.payload);\n// 复位标识为0  可进入复位  \nglobal.set(\"resetCompleteFlag\", 0);\n\nvar ndata =global.get(\"backMatrixData\");\n \n \nvar num1 = 0, num2 = 0, num3 = 0;\nvar numHead=0,numBody=0,numFoot=0;\n \nfor (var i = 0; i < 10; i++) {\n    ndata[i * 10 + 0] = ndata[i * 10 + 1];\n    ndata[i * 10 + 9] = ndata[i * 10 + 8];\n}\nfor (var i = 0; i < 29; i++) {\n    num1 += ndata[i];\n}\nfor (var i = 29; i < 69; i++) {\n    num2 += ndata[i];\n}\nfor (var i = 69; i < 99; i++) {\n    num3 += ndata[i];\n}\n\n\n\nfor (var i = 49; i < 99; i++) {\n    numFoot+=ndata[i];\n}\n//靠背上部求和平均\nnum1 = num1 / 30;\n//靠背中部求和平均\nnum2 = num2 / 40;\n//靠背下部求和平均\nnum3 = (num3-40) / 30;\nvar sumBack = num1 + num2 + num3;\nvar waist = num1 / sumBack;\n//var hunch = (num2+ num3) / sumBack;\n//var hunch=numFoot/num1;\nvar back=num3/num2;\n\nvar hunch=numFoot/num1;\n\nconst backMatrixSum=ndata.reduce((accumulater,currentValue)=>{\n    return accumulater+currentValue;\n},0);\n\nconsole.info(\n    \"backsum: \" + backMatrixSum.toFixed(2)+\n \"  sumBack:\" + sumBack.toFixed(2) \n+ \" waist: \" + waist.toFixed(2) + \n\" hunch: \" + hunch.toFixed(2)\n\n);\n console.info(\"trigger waist: \"+waist);\n//msg.sumBack = Math.floor(sumBack)     ;\nmsg.waist = waist.toFixed(2)  ;\nmsg.hunch = Math.floor(hunch);\n\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -1826,7 +1826,8 @@
         "wires": [
             [
                 "ba815064a5e3e0a2",
-                "6cdcdff727390cdc"
+                "6cdcdff727390cdc",
+                "c88a0c345d9cebb6"
             ]
         ]
     },
@@ -2696,12 +2697,12 @@
         "rules": [
             {
                 "t": "gt",
-                "v": "0",
+                "v": "0.3",
                 "vt": "str"
             },
             {
                 "t": "lt",
-                "v": "0",
+                "v": "0.1",
                 "vt": "str"
             }
         ],
@@ -3296,6 +3297,23 @@
         "x": 3290,
         "y": 60,
         "wires": []
+    },
+    {
+        "id": "c88a0c345d9cebb6",
+        "type": "function",
+        "z": "23caab7f537e37b0",
+        "name": "function 1",
+        "func": "console.info(\"function1 waist: \"+msg.waist)\n \nconsole.info(\"function1 hunch: \" + msg.hunch);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2420,
+        "y": 1960,
+        "wires": [
+            []
+        ]
     },
     {
         "id": "9ba39c9be2e4f64d",
