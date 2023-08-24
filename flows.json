@@ -1370,7 +1370,7 @@
         "type": "function",
         "z": "0c118dcb95acf0e0",
         "name": "气囊充气",
-        "func": "var delimiter = Buffer.from([0x05, 0x64, 0x64, 0x64, 0x64, 0x64, 0x00, 0x00, 0x00, 0x40]);\nmsg.payload = delimiter;\nconsole.info(msg.payload)\nconsole.info(111)\nreturn msg;",
+        "func": "var delimiter = Buffer.from([0x05, 0x64, 0x64, 0x64, 0x64, 0x64, 0x00, 0x00, 0x00, 0x30]);\nmsg.payload = delimiter;\nconsole.info(msg.payload)\nconsole.info(111)\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -1391,7 +1391,7 @@
         "z": "0c118dcb95acf0e0",
         "name": "",
         "pauseType": "delay",
-        "timeout": "1500",
+        "timeout": "1000",
         "timeoutUnits": "milliseconds",
         "rate": "1",
         "nbRateUnits": "1",
@@ -1414,6 +1414,7 @@
         "id": "c8b0119e9718581b",
         "type": "inject",
         "z": "0c118dcb95acf0e0",
+        "d": true,
         "name": "",
         "props": [
             {
@@ -1424,14 +1425,14 @@
                 "vt": "str"
             }
         ],
-        "repeat": "",
+        "repeat": "6",
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 1630,
+        "x": 1640,
         "y": 880,
         "wires": [
             [
@@ -1501,7 +1502,7 @@
         "z": "0c118dcb95acf0e0",
         "name": "",
         "pauseType": "delay",
-        "timeout": "1500",
+        "timeout": "1000",
         "timeoutUnits": "milliseconds",
         "rate": "1",
         "nbRateUnits": "1",
@@ -1590,7 +1591,7 @@
         "type": "function",
         "z": "0c118dcb95acf0e0",
         "name": "靠背气囊充气",
-        "func": "var delimiter = Buffer.from([0x05, 0x64, 0x64, 0x64, 0x64, 0x64, 0x00, 0x00, 0x00, 0x40]);\nmsg.payload = delimiter;\nconsole.info(msg.payload)\nconsole.info(111)\nreturn msg;",
+        "func": "var delimiter = Buffer.from([0x05, 0x64, 0x00, 0x64, 0x64, 0x64, 0x00, 0x00, 0x00, 0x30]);\nmsg.payload = delimiter;\nconsole.info(msg.payload)\nconsole.info(111)\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -1611,7 +1612,7 @@
         "z": "0c118dcb95acf0e0",
         "name": "",
         "pauseType": "delay",
-        "timeout": "1500",
+        "timeout": "1000",
         "timeoutUnits": "milliseconds",
         "rate": "1",
         "nbRateUnits": "1",
@@ -1721,7 +1722,7 @@
         "z": "0c118dcb95acf0e0",
         "name": "",
         "pauseType": "delay",
-        "timeout": "1500",
+        "timeout": "1000",
         "timeoutUnits": "milliseconds",
         "rate": "1",
         "nbRateUnits": "1",
@@ -1831,7 +1832,7 @@
         "z": "0c118dcb95acf0e0",
         "name": "",
         "pauseType": "delay",
-        "timeout": "1500",
+        "timeout": "1000",
         "timeoutUnits": "milliseconds",
         "rate": "1",
         "nbRateUnits": "1",
@@ -2267,7 +2268,7 @@
         "type": "function",
         "z": "23caab7f537e37b0",
         "name": "离坐动作触发",
-        "func": "// console.info(\"离坐次数: \" + msg.payload);\n\nvar waistControlTime=global.get(\"waistControlTime\");\nvar hunchControlTime = global.get(\"hunchControlTime\");\nvar frontControlTime = global.get(\"frontControlTime\");\n\nmsg.waistControlTime = waistControlTime;\nmsg.hunchControlTime = hunchControlTime;\nmsg.frontControlTime = frontControlTime;\n\nglobal.set(\"resetCompleteFlag\",1);\n\n\n\n\n\nreturn msg;",
+        "func": "// console.info(\"离坐次数: \" + msg.payload);\n\nvar waistControlTime=global.get(\"waistControlTime\");\nvar hunchControlTime = global.get(\"hunchControlTime\");\nvar frontControlTime = global.get(\"frontControlTime\");\n\nmsg.waistControlTime = waistControlTime;\nmsg.hunchControlTime = hunchControlTime;\nmsg.frontControlTime = frontControlTime;\n\nglobal.set(\"resetCompleteFlag\",1);\n\n\nglobal.set(\"controlNumber\", 0);\n\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -2279,7 +2280,8 @@
             [
                 "f43741ac300f6cf1",
                 "98118aeba92e4aa7",
-                "0e0a22f283d375d8"
+                "0e0a22f283d375d8",
+                "8389342d3ac68bc1"
             ]
         ]
     },
@@ -2288,7 +2290,7 @@
         "type": "function",
         "z": "23caab7f537e37b0",
         "name": "SitActionTrigger",
-        "func": "// 复位标识为0  可进入复位  \nglobal.set(\"resetCompleteFlag\", 0);\nconst ndata1 = global.get(\"sitMatrixData\");\n\n// console.info(ndata1);\n\n\nconst sitMatrixDataSum = ndata1.reduce((accumulator, currentValue) => {\n    return accumulator + currentValue;\n}, 0);\n// console.info(\"sitSum: \" + sitMatrixDataSum);\n\n\n// (accumulator, currentValue) => {\n//     return accumulator + currentValue;\n// }, 0\n\n \n\nvar num11 = 0, num21 = 0, num31 = 0, num41 = 0, num51 = 0, num61 = 0;\n\nfor (var i = 0; i < 3; i++) {\n    for (var j = 0; j < 5; j++) {\n        num11 += ndata1[10 * i + j];\n    }\n}\n\nfor (var i = 0; i < 3; i++) {\n    for (var j = 5; j < 10; j++) {\n        num21 += ndata1[10 * i + j];\n    }\n}\n\nfor (var i = 3; i < 7; i++) {\n    for (var j = 0; j < 5; j++) {\n        num31 += ndata1[10 * i + j];\n    }\n}\n\nfor (var i = 3; i < 7; i++) {\n    for (var j = 5; j < 10; j++) {\n        num41 += ndata1[10 * i + j];\n    }\n}\n\nfor (var i = 7; i < 10; i++) {\n    for (var j = 0; j < 5; j++) {\n        num51 += ndata1[10 * i + j];\n    }\n}\nfor (var i = 7; i < 10; i++) {\n    for (var j = 5; j < 10; j++) {\n        num61 += ndata1[10 * i + j];\n    }\n}\nnum11 = num11 / 15;\nnum21 = num21 / 15;\nnum31 = num31 / 20;\nnum41 = num41 / 20;\nnum51 = num51 / 15;\nnum61 = num61 / 15;\nvar sumSit = num11 + num21 + num31 + num41 + num51 + num61;\nvar frontleg = (num11 + num21) / sumSit;\nvar backleg = 1 - frontleg;\nvar front = (num11 + num21 + num31 + num41) / sumSit;\n//前腿支撑\nfrontleg = (num11 + num21) / sumSit;\n//前腿支撑\nbackleg = 1 - frontleg;\n//靠前\nfront = (num11 + num21 + num31 + num41) / sumSit;\n\n\nconsole.info(\"sum: \" + sitMatrixDataSum );\nconsole.info(\n     \n    \"frontLeg: \"+frontleg.toFixed(2)+\n    \" backLeg: \" + backleg.toFixed(2)+\n    \" front: \" + front.toFixed(2) \n)\nmsg.frontleg=frontleg;\nmsg.backleg=1-frontleg;\nmsg.front=front;\n\nmsg.payload = 1;\n\nreturn msg;",
+        "func": "// 复位标识为0  可进入复位  \nglobal.set(\"resetCompleteFlag\", 0);\nconst ndata1 = global.get(\"sitMatrixData\");\n\n// console.info(ndata1);\n\n\nconst sitMatrixDataSum = ndata1.reduce((accumulator, currentValue) => {\n    return accumulator + currentValue;\n}, 0);\n// console.info(\"sitSum: \" + sitMatrixDataSum);\n\n\n// (accumulator, currentValue) => {\n//     return accumulator + currentValue;\n// }, 0\n\n \n\nvar num11 = 0, num21 = 0, num31 = 0, num41 = 0, num51 = 0, num61 = 0;\n\nfor (var i = 0; i < 3; i++) {\n    for (var j = 0; j < 5; j++) {\n        num11 += ndata1[10 * i + j];\n    }\n}\n\nfor (var i = 0; i < 3; i++) {\n    for (var j = 5; j < 10; j++) {\n        num21 += ndata1[10 * i + j];\n    }\n}\n\nfor (var i = 3; i < 7; i++) {\n    for (var j = 0; j < 5; j++) {\n        num31 += ndata1[10 * i + j];\n    }\n}\n\nfor (var i = 3; i < 7; i++) {\n    for (var j = 5; j < 10; j++) {\n        num41 += ndata1[10 * i + j];\n    }\n}\n\nfor (var i = 7; i < 10; i++) {\n    for (var j = 0; j < 5; j++) {\n        num51 += ndata1[10 * i + j];\n    }\n}\nfor (var i = 7; i < 10; i++) {\n    for (var j = 5; j < 10; j++) {\n        num61 += ndata1[10 * i + j];\n    }\n}\nnum11 = num11 / 15;\nnum21 = num21 / 15;\nnum31 = num31 / 20;\nnum41 = num41 / 20;\nnum51 = num51 / 15;\nnum61 = num61 / 15;\nvar sumSit = num11 + num21 + num31 + num41 + num51 + num61;\nvar frontleg = (num11 + num21) / sumSit;\nvar backleg = 1 - frontleg;\nvar front = (num11 + num21 + num31 + num41) / sumSit;\n//前腿支撑\nfrontleg = (num11 + num21) / sumSit;\n//前腿支撑\nbackleg = 1 - frontleg;\n//靠前\nfront = (num11 + num21 + num31 + num41) / sumSit;\n\n\n// console.info(\"sum: \" + sitMatrixDataSum );\n// console.info(\n     \n//     \"frontLeg: \"+frontleg.toFixed(2)+\n//     \" backLeg: \" + backleg.toFixed(2)+\n//     \" front: \" + front.toFixed(2) \n// )\nmsg.frontleg=frontleg;\nmsg.backleg=1-frontleg;\nmsg.front=front;\n\nmsg.payload = 1;\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -2411,7 +2413,7 @@
         "type": "function",
         "z": "23caab7f537e37b0",
         "name": "条件窗口",
-        "func": "\nglobal.set(\"hunchDownConditionCount\", 0);\n\nvar hunchUpConditionCount = global.get(\"hunchUpConditionCount\");\nhunchUpConditionCount++;\nglobal.set(\"hunchUpConditionCount\", hunchUpConditionCount);\n\nvar hunchControlTime = global.get(\"hunchControlTime\");\n\nconsole.info(\"hunchControlTime:\"+hunchControlTime);\nconsole.info(\"hunchUpConditionCount: \" + hunchUpConditionCount)\n//向前移动的范围不超过6s\n//条件窗口为30帧连续判断\nif(hunchControlTime<6000){\n//条件窗口为30帧连续判断\n    if (hunchUpConditionCount > 30) {\n        msg.payload = 1;\n        global.set(\"hunchUpConditionCount\", 0);\n\n        var controlingFlag = global.get(\"controlingFlag\");\n        if (controlingFlag == 0) {\n            global.set(\"controlingFlag\", 1);\n            return msg;\n        }\n    }\n\n}\n\n \n\n ",
+        "func": "\nglobal.set(\"hunchDownConditionCount\", 0);\n\nvar hunchUpConditionCount = global.get(\"hunchUpConditionCount\");\nhunchUpConditionCount++;\nglobal.set(\"hunchUpConditionCount\", hunchUpConditionCount);\n\nvar hunchControlTime = global.get(\"hunchControlTime\");\n\nconsole.info(\"hunchControlTime:\"+hunchControlTime);\nconsole.info(\"hunchUpConditionCount: \" + hunchUpConditionCount)\n//向前移动的范围不超过6s\n//条件窗口为30帧连续判断\nif(hunchControlTime<4000){\n//条件窗口为30帧连续判断\n    if (hunchUpConditionCount > 30) {\n        msg.payload = 1;\n        global.set(\"hunchUpConditionCount\", 0);\n\n        var controlingFlag = global.get(\"controlingFlag\");\n        if (controlingFlag == 0) {\n            global.set(\"controlingFlag\", 1);\n            return msg;\n        }\n    }\n\n}\n\n \n\n ",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -2432,7 +2434,7 @@
         "type": "function",
         "z": "23caab7f537e37b0",
         "name": "条件窗口",
-        "func": "\nglobal.set(\"hunchUpConditionCount\", 0);\n\nvar hunchDownConditionCount = global.get(\"hunchDownConditionCount\");\nhunchDownConditionCount++;\nglobal.set(\"hunchDownConditionCount\", hunchDownConditionCount);\n\nvar hunchControlTime = global.get(\"hunchControlTime\");\n\nconsole.info(\"hunchControlTime: \"  +hunchControlTime);\nconsole.info(\"hunchDownConditionCount: \" + hunchDownConditionCount)\n//移动的范围不超过6s\n//条件窗口为30帧连续判断\nconsole.info();\nif (hunchControlTime >- 6000) {\n    //条件窗口为30帧连续判断\n    if (hunchDownConditionCount > 30) {\n        msg.payload = 1;\n        global.set(\"hunchDownConditionCount\", 0);\n\n        var controlingFlag = global.get(\"controlingFlag\");\n        if (controlingFlag == 0) {\n            global.set(\"controlingFlag\", 1);\n            return msg;\n        }\n    }\n\n}\n\n \n\n\n ",
+        "func": "\nglobal.set(\"hunchUpConditionCount\", 0);\n\nvar hunchDownConditionCount = global.get(\"hunchDownConditionCount\");\nhunchDownConditionCount++;\nglobal.set(\"hunchDownConditionCount\", hunchDownConditionCount);\n\nvar hunchControlTime = global.get(\"hunchControlTime\");\n\nconsole.info(\"hunchControlTime: \"  +hunchControlTime);\nconsole.info(\"hunchDownConditionCount: \" + hunchDownConditionCount)\n//移动的范围不超过6s\n//条件窗口为30帧连续判断\nconsole.info();\nif (hunchControlTime >- 4000) {\n    //条件窗口为30帧连续判断\n    if (hunchDownConditionCount > 30) {\n        msg.payload = 1;\n        global.set(\"hunchDownConditionCount\", 0);\n\n        var controlingFlag = global.get(\"controlingFlag\");\n        if (controlingFlag == 0) {\n            global.set(\"controlingFlag\", 1);\n            return msg;\n        }\n    }\n\n}\n\n \n\n\n ",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -2997,7 +2999,7 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 2700,
+        "x": 2720,
         "y": 320,
         "wires": [
             [
@@ -3046,7 +3048,7 @@
         "type": "function",
         "z": "23caab7f537e37b0",
         "name": "向后重置",
-        "func": "\nmsg.delay = Math.abs(global.get(\"waistControlTime\"));\nmsg.payload=1;\nconsole.info(\"waist 重置\" + msg.delay);\nglobal.set(\"waistControlTime\", 0);\nreturn msg;",
+        "func": "\nmsg.delay = Math.abs(global.get(\"waistControlTime\"));\nmsg.payload=1;\nconsole.info(\"waist 重置\" + global.get(\"waistControlTime\"));\nglobal.set(\"waistControlTime\", 0);\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -3065,7 +3067,7 @@
         "type": "function",
         "z": "23caab7f537e37b0",
         "name": "向后重置",
-        "func": "msg.delay = Math.abs(global.get(\"hunchControlTime\"));\nmsg.payload = 1;\n\nglobal.set(\"hunchControlTime\", 0);\nconsole.info(\"hunch 重置\"+msg.delay);\nreturn msg;",
+        "func": "msg.delay = Math.abs(global.get(\"hunchControlTime\"));\nmsg.payload = 1;\n\nglobal.set(\"hunchControlTime\", 0);\nconsole.info(\"hunch 重置\" + global.get(\"hunchControlTime\"));\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -3085,7 +3087,7 @@
         "type": "function",
         "z": "23caab7f537e37b0",
         "name": "向前重置",
-        "func": "msg.delay = Math.abs(global.get(\"hunchControlTime\"));\nmsg.payload = 1;\n\nglobal.set(\"hunchControlTime\", 0);\n\nconsole.info(\"hunch 重置\" + msg.delay);\n\nreturn msg;",
+        "func": "msg.delay = Math.abs(global.get(\"hunchControlTime\"));\nmsg.payload = 1;\n\nglobal.set(\"hunchControlTime\", 0);\n\nconsole.info(\"hunch 重置\" + global.get(\"hunchControlTime\"));\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -3105,7 +3107,7 @@
         "type": "function",
         "z": "23caab7f537e37b0",
         "name": "向后重置",
-        "func": "msg.delay = Math.abs(global.get(\"frontControlTime\"));\nmsg.payload = 1;\n\n\nconsole.info(\"front 重置\" + msg.delay);\n\nreturn msg;",
+        "func": "msg.delay = Math.abs(global.get(\"frontControlTime\"));\nmsg.payload = 1;\n\n\nconsole.info(\"front 重置\" + global.get(\"frontControlTime\"));\n\nglobal.set(\"frontControlTime\",0)\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -3116,7 +3118,8 @@
         "wires": [
             [
                 "60a3cb13fca43cb8",
-                "ce35f6506e293e48"
+                "fc91c123f1ac8604",
+                "2725fd1821a3bb17"
             ]
         ]
     },
@@ -3125,7 +3128,7 @@
         "type": "function",
         "z": "23caab7f537e37b0",
         "name": "向前重置",
-        "func": "\nmsg.delay = Math.abs(global.get(\"frontControlTime\"));\nmsg.payload = 1;\n\n \n\n\nconsole.info(\"front 重置\" + msg.delay);\n\nreturn msg;",
+        "func": "\nmsg.delay = Math.abs(global.get(\"frontControlTime\"));\nmsg.payload = 1;\n\n \n\n\nconsole.info(\"front 重置\" + global.get(\"frontControlTime\"));\nglobal.set(\"frontControlTime\", 0)\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -3136,7 +3139,7 @@
         "wires": [
             [
                 "4edaadb95fd7fe78",
-                "611357cc71e3a489"
+                "a8faa4f78bde53b9"
             ]
         ]
     },
@@ -3292,7 +3295,7 @@
         "y": 620,
         "wires": [
             [
-                "89c0600ea9495192"
+                "9409fa8d4e120a80"
             ]
         ]
     },
@@ -3344,7 +3347,7 @@
         "y": 860,
         "wires": [
             [
-                "ea11f72185f81955"
+                "37bc2193c32dd852"
             ]
         ]
     },
@@ -3406,66 +3409,6 @@
         "bcm": true,
         "x": 3621.765625,
         "y": 275.75,
-        "wires": []
-    },
-    {
-        "id": "ce35f6506e293e48",
-        "type": "rpi-gpio out",
-        "z": "23caab7f537e37b0",
-        "name": "坐垫向后",
-        "pin": "24",
-        "set": true,
-        "level": "0",
-        "freq": "",
-        "out": "out",
-        "bcm": true,
-        "x": 3000,
-        "y": 560,
-        "wires": []
-    },
-    {
-        "id": "89c0600ea9495192",
-        "type": "rpi-gpio out",
-        "z": "23caab7f537e37b0",
-        "name": "坐垫向后",
-        "pin": "24",
-        "set": true,
-        "level": "0",
-        "freq": "",
-        "out": "out",
-        "bcm": true,
-        "x": 3514.765625,
-        "y": 614.75,
-        "wires": []
-    },
-    {
-        "id": "611357cc71e3a489",
-        "type": "rpi-gpio out",
-        "z": "23caab7f537e37b0",
-        "name": "坐垫向前",
-        "pin": "25",
-        "set": true,
-        "level": "0",
-        "freq": "",
-        "out": "out",
-        "bcm": true,
-        "x": 3020,
-        "y": 800,
-        "wires": []
-    },
-    {
-        "id": "ea11f72185f81955",
-        "type": "rpi-gpio out",
-        "z": "23caab7f537e37b0",
-        "name": "坐垫向前",
-        "pin": "25",
-        "set": true,
-        "level": "0",
-        "freq": "",
-        "out": "out",
-        "bcm": true,
-        "x": 3554.765625,
-        "y": 863.75,
         "wires": []
     },
     {
@@ -4017,136 +3960,6 @@
         ]
     },
     {
-        "id": "04de8949266ba1c0",
-        "type": "rpi-gpio out",
-        "z": "23caab7f537e37b0",
-        "name": "靠背向前",
-        "pin": "18",
-        "set": true,
-        "level": "0",
-        "freq": "",
-        "out": "out",
-        "bcm": true,
-        "x": 2600,
-        "y": 1380,
-        "wires": []
-    },
-    {
-        "id": "2d104068bc6740be",
-        "type": "change",
-        "z": "23caab7f537e37b0",
-        "name": "向下移动置0",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "0",
-                "tot": "str"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 2830,
-        "y": 1460,
-        "wires": [
-            [
-                "281f222c312604cc"
-            ]
-        ]
-    },
-    {
-        "id": "7576e601dd2d9b9f",
-        "type": "delay",
-        "z": "23caab7f537e37b0",
-        "name": "",
-        "pauseType": "delay",
-        "timeout": "2000",
-        "timeoutUnits": "milliseconds",
-        "rate": "1",
-        "nbRateUnits": "1",
-        "rateUnits": "second",
-        "randomFirst": "1",
-        "randomLast": "5",
-        "randomUnits": "seconds",
-        "drop": false,
-        "allowrate": false,
-        "outputs": 1,
-        "x": 2610,
-        "y": 1460,
-        "wires": [
-            [
-                "2d104068bc6740be"
-            ]
-        ]
-    },
-    {
-        "id": "281f222c312604cc",
-        "type": "function",
-        "z": "23caab7f537e37b0",
-        "name": "重置控制标识",
-        "func": " \nvar hunchControlTime = global.get(\"hunchControlTime\");\nglobal.set(\"hunchControlTime\", hunchControlTime+2000);\n \nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 3020,
-        "y": 1460,
-        "wires": [
-            [
-                "54843142a3a2a7ae"
-            ]
-        ]
-    },
-    {
-        "id": "54843142a3a2a7ae",
-        "type": "rpi-gpio out",
-        "z": "23caab7f537e37b0",
-        "name": "靠背向前",
-        "pin": "18",
-        "set": true,
-        "level": "0",
-        "freq": "",
-        "out": "out",
-        "bcm": true,
-        "x": 3220,
-        "y": 1460,
-        "wires": []
-    },
-    {
-        "id": "355bc6dbcd102b2f",
-        "type": "function",
-        "z": "23caab7f537e37b0",
-        "name": "气囊充气",
-        "func": "var delimiter = Buffer.from([0x05, 0x64, 0x00, 0x64, 0x64, 0x64, 0x00, 0x00, 0x00, 0x20]);\nmsg.payload = delimiter;\nconsole.info(msg.payload)\n\nglobal.set(\"controlingFlag\", 0);\nvar waistControlTime = global.get(\"waistControlTime\");\nglobal.set(\"waistControlTime\", waistControlTime + 2000);\nglobal.set(\"waistUpConditionCount\", 0);\n\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 2600,
-        "y": 1300,
-        "wires": [
-            [
-                "2e2456fd28a43fdb"
-            ]
-        ]
-    },
-    {
-        "id": "2e2456fd28a43fdb",
-        "type": "serial out",
-        "z": "23caab7f537e37b0",
-        "name": "",
-        "serial": "deba420c25236b68",
-        "x": 2850,
-        "y": 1300,
-        "wires": []
-    },
-    {
         "id": "0dfb92980e6df6e4",
         "type": "change",
         "z": "23caab7f537e37b0",
@@ -4203,7 +4016,7 @@
         "type": "function",
         "z": "23caab7f537e37b0",
         "name": "重置控制标识",
-        "func": "\nvar frontControlTime=global.get(\"frontControlTime\");\nglobal.set(\"frontControlTime\",frontControlTime+2000);\nconsole.info(\"起始调整frontControlTime: \" + frontControlTime + 2000)\nreturn msg;",
+        "func": "\nvar frontControlTime=global.get(\"frontControlTime\");\nglobal.set(\"frontControlTime\",2000);\nconsole.info(\"起始调整frontControlTime: \" + frontControlTime + 2000)\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -4250,32 +4063,11 @@
         "wires": []
     },
     {
-        "id": "2ac4654c32fa235b",
-        "type": "function",
-        "z": "23caab7f537e37b0",
-        "name": "function 3",
-        "func": "\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 2360,
-        "y": 1380,
-        "wires": [
-            [
-                "355bc6dbcd102b2f",
-                "04de8949266ba1c0",
-                "7576e601dd2d9b9f"
-            ]
-        ]
-    },
-    {
         "id": "6f2924dddd1fc24d",
         "type": "function",
         "z": "23caab7f537e37b0",
         "name": "靠背坐垫调整",
-        "func": " \nvar controlingFlag = global.get(\"controlingFlag\");\nconsole.info(\"controlingFlag: \" + controlingFlag);\nif (controlingFlag==0){\n    global.set(\"controlingFlag\", 1);\n    console.info(\"靠背坐垫开始调整\");\n    msg.payload=1;\n    return msg;\n}\n ",
+        "func": " \nvar controlingFlag = global.get(\"controlingFlag\");\n\nif (controlingFlag==0){\n    global.set(\"controlingFlag\", 1);\n    console.info(\"靠背坐垫开始调整\");\n    msg.payload=1;\n    return msg;\n}\n ",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -4295,7 +4087,7 @@
         "type": "function",
         "z": "23caab7f537e37b0",
         "name": "并发调整",
-        "func": "console.info(\"并发调整\");\nreturn msg;",
+        "func": "\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -4423,7 +4215,7 @@
         "type": "function",
         "z": "23caab7f537e37b0",
         "name": "重置控制标识",
-        "func": "\nvar hunchControlTime = global.get(\"hunchControlTime\");\nglobal.set(\"hunchControlTime\", hunchControlTime+2000);\nglobal.set(\"hunchUpConditionCount\",0);\nreturn msg;",
+        "func": "\nvar hunchControlTime = global.get(\"hunchControlTime\");\nglobal.set(\"hunchControlTime\", 1500);\nconsole.info(\"迎宾hunchControlTime:\"+hunchControlTime);\nglobal.set(\"hunchUpConditionCount\",0);\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -4520,7 +4312,7 @@
         "freq": "",
         "out": "out",
         "bcm": true,
-        "x": 2640,
+        "x": 2660,
         "y": 1780,
         "wires": []
     },
@@ -4593,28 +4385,11 @@
         "wires": []
     },
     {
-        "id": "882fbf69f72d956e",
-        "type": "function",
-        "z": "23caab7f537e37b0",
-        "name": "更改次序",
-        "func": "var frontControlTime = global.get(\"frontControlTime\");\nglobal.set(\"frontControlTime\", frontControlTime + 2000);\n\nglobal.set(\"controlNumber\",2);\nglobal.set(\"controlingFlag\",0);\nconsole.info(\"坐垫角度调整\");\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 3140,
-        "y": 1780,
-        "wires": [
-            []
-        ]
-    },
-    {
         "id": "4ce0aa02818ed88c",
         "type": "function",
         "z": "23caab7f537e37b0",
         "name": "气囊充气",
-        "func": "var delimiter = Buffer.from([0x05, 0x64, 0x00, 0x64, 0x64, 0x64, 0x00, 0x00, 0x00, 0x20]);\nmsg.payload = delimiter;\nconsole.info(msg.payload)\n\n\nvar waistControlTime = global.get(\"waistControlTime\");\nglobal.set(\"waistControlTime\", waistControlTime + 2000);\nglobal.set(\"waistUpConditionCount\", 0);\n\nreturn msg;",
+        "func": "\n\n\nvar waistControlTime = global.get(\"waistControlTime\");\nglobal.set(\"waistControlTime\",   2000);\nglobal.set(\"waistUpConditionCount\", 0);\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -4633,7 +4408,7 @@
         "type": "function",
         "z": "23caab7f537e37b0",
         "name": "允许读写标识",
-        "func": "global.set(\"readFlag\",0);\nreturn msg;",
+        "func": "global.set(\"readFlag\",1);\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -4738,8 +4513,8 @@
         "z": "23caab7f537e37b0",
         "name": "",
         "pauseType": "delay",
-        "timeout": "1",
-        "timeoutUnits": "seconds",
+        "timeout": "1500",
+        "timeoutUnits": "milliseconds",
         "rate": "1",
         "nbRateUnits": "1",
         "rateUnits": "second",
@@ -4749,7 +4524,7 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 3800,
+        "x": 3810,
         "y": 1600,
         "wires": [
             [
@@ -4778,7 +4553,7 @@
         "y": 1780,
         "wires": [
             [
-                "882fbf69f72d956e"
+                "3afc712d243c8a3c"
             ]
         ]
     },
@@ -4788,7 +4563,7 @@
         "z": "23caab7f537e37b0",
         "name": "",
         "kind": "fcnt",
-        "count": "5",
+        "count": "3",
         "initial": "1",
         "step": "1",
         "condition": "",
@@ -4917,7 +4692,7 @@
         "z": "23caab7f537e37b0",
         "name": "",
         "pauseType": "delay",
-        "timeout": "1500",
+        "timeout": "1000",
         "timeoutUnits": "milliseconds",
         "rate": "1",
         "nbRateUnits": "1",
@@ -5015,7 +4790,7 @@
         "z": "23caab7f537e37b0",
         "name": "",
         "pauseType": "delay",
-        "timeout": "1500",
+        "timeout": "1000",
         "timeoutUnits": "milliseconds",
         "rate": "1",
         "nbRateUnits": "1",
@@ -5096,7 +4871,7 @@
         "z": "23caab7f537e37b0",
         "name": "",
         "pauseType": "delay",
-        "timeout": "1500",
+        "timeout": "1000",
         "timeoutUnits": "milliseconds",
         "rate": "1",
         "nbRateUnits": "1",
@@ -5177,7 +4952,7 @@
         "z": "23caab7f537e37b0",
         "name": "",
         "pauseType": "delay",
-        "timeout": "1500",
+        "timeout": "1000",
         "timeoutUnits": "milliseconds",
         "rate": "1",
         "nbRateUnits": "1",
@@ -5258,7 +5033,7 @@
         "z": "23caab7f537e37b0",
         "name": "",
         "pauseType": "delay",
-        "timeout": "1500",
+        "timeout": "1000",
         "timeoutUnits": "milliseconds",
         "rate": "1",
         "nbRateUnits": "1",
@@ -5286,5 +5061,356 @@
         "x": 3970,
         "y": 2240,
         "wires": []
+    },
+    {
+        "id": "fc91c123f1ac8604",
+        "type": "rpi-gpio out",
+        "z": "23caab7f537e37b0",
+        "name": "座椅向下移动",
+        "pin": "26",
+        "set": true,
+        "level": "0",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 3000,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "9409fa8d4e120a80",
+        "type": "rpi-gpio out",
+        "z": "23caab7f537e37b0",
+        "name": "座椅向下移动",
+        "pin": "26",
+        "set": true,
+        "level": "0",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 3480,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "a8faa4f78bde53b9",
+        "type": "rpi-gpio out",
+        "z": "23caab7f537e37b0",
+        "name": "座椅前上移动",
+        "pin": "19",
+        "set": true,
+        "level": "0",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 3020,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "37bc2193c32dd852",
+        "type": "rpi-gpio out",
+        "z": "23caab7f537e37b0",
+        "name": "座椅前上移动",
+        "pin": "19",
+        "set": true,
+        "level": "0",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 3460,
+        "y": 860,
+        "wires": []
+    },
+    {
+        "id": "2725fd1821a3bb17",
+        "type": "loop",
+        "z": "23caab7f537e37b0",
+        "name": "",
+        "kind": "fcnt",
+        "count": "3",
+        "initial": "1",
+        "step": "1",
+        "condition": "",
+        "conditionType": "js",
+        "when": "before",
+        "enumeration": "enum",
+        "enumerationType": "msg",
+        "limit": "",
+        "loopPayload": "loop-index",
+        "finalPayload": "final-count",
+        "x": 3050,
+        "y": 720,
+        "wires": [
+            [],
+            [
+                "9668bdd8928f6acf"
+            ]
+        ]
+    },
+    {
+        "id": "9668bdd8928f6acf",
+        "type": "function",
+        "z": "23caab7f537e37b0",
+        "name": "坐垫气囊放气",
+        "func": "var delimiter = Buffer.from([0x07, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x15]);\nmsg.payload = delimiter;\nconsole.info(msg.payload)\nconsole.info(111)\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 3260,
+        "y": 700,
+        "wires": [
+            [
+                "81a4adc44dce14c3",
+                "61c54c8a9b6c801d"
+            ]
+        ]
+    },
+    {
+        "id": "81a4adc44dce14c3",
+        "type": "delay",
+        "z": "23caab7f537e37b0",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "1000",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 3470,
+        "y": 740,
+        "wires": [
+            [
+                "2725fd1821a3bb17"
+            ]
+        ]
+    },
+    {
+        "id": "61c54c8a9b6c801d",
+        "type": "serial out",
+        "z": "23caab7f537e37b0",
+        "name": "",
+        "serial": "deba420c25236b68",
+        "x": 3470,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "3afc712d243c8a3c",
+        "type": "loop",
+        "z": "23caab7f537e37b0",
+        "name": "",
+        "kind": "fcnt",
+        "count": "5",
+        "initial": "1",
+        "step": "1",
+        "condition": "",
+        "conditionType": "js",
+        "when": "before",
+        "enumeration": "enum",
+        "enumerationType": "msg",
+        "limit": "",
+        "loopPayload": "loop-index",
+        "finalPayload": "final-count",
+        "x": 3330,
+        "y": 1800,
+        "wires": [
+            [
+                "45b6743308bfb5ce"
+            ],
+            [
+                "8cc56334995d67d1"
+            ]
+        ]
+    },
+    {
+        "id": "8cc56334995d67d1",
+        "type": "function",
+        "z": "23caab7f537e37b0",
+        "name": "坐垫气囊充气",
+        "func": "var delimiter = Buffer.from([0x07, 0x64, 0x64, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x15]);\nmsg.payload = delimiter;\nconsole.info(msg.payload)\nconsole.info(111)\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 3540,
+        "y": 1780,
+        "wires": [
+            [
+                "a575682843d89d21",
+                "4fb2b276b825e2f2"
+            ]
+        ]
+    },
+    {
+        "id": "a575682843d89d21",
+        "type": "delay",
+        "z": "23caab7f537e37b0",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "1000",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 3750,
+        "y": 1820,
+        "wires": [
+            [
+                "3afc712d243c8a3c"
+            ]
+        ]
+    },
+    {
+        "id": "4fb2b276b825e2f2",
+        "type": "serial out",
+        "z": "23caab7f537e37b0",
+        "name": "",
+        "serial": "deba420c25236b68",
+        "x": 3750,
+        "y": 1760,
+        "wires": []
+    },
+    {
+        "id": "45b6743308bfb5ce",
+        "type": "function",
+        "z": "23caab7f537e37b0",
+        "name": "更改次序",
+        "func": "var frontControlTime = global.get(\"frontControlTime\");\nglobal.set(\"frontControlTime\", frontControlTime + 2000);\n\nglobal.set(\"controlNumber\",2);\nglobal.set(\"controlingFlag\",0);\nconsole.info(\"坐垫角度调整\");\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 3500,
+        "y": 1720,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f9fe261fbad238aa",
+        "type": "change",
+        "z": "23caab7f537e37b0",
+        "name": "向前移动置0",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "0",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2990,
+        "y": 500,
+        "wires": [
+            [
+                "bacc3d51419628a3"
+            ]
+        ]
+    },
+    {
+        "id": "3d9c038896ef3ac8",
+        "type": "delay",
+        "z": "23caab7f537e37b0",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "2000",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 2830,
+        "y": 500,
+        "wires": [
+            [
+                "f9fe261fbad238aa"
+            ]
+        ]
+    },
+    {
+        "id": "1f63df31dd36ca8e",
+        "type": "rpi-gpio out",
+        "z": "23caab7f537e37b0",
+        "name": "坐垫向后",
+        "pin": "24",
+        "set": true,
+        "level": "0",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 2840,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "bacc3d51419628a3",
+        "type": "rpi-gpio out",
+        "z": "23caab7f537e37b0",
+        "name": "坐垫向后",
+        "pin": "24",
+        "set": true,
+        "level": "0",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 3240,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "8389342d3ac68bc1",
+        "type": "change",
+        "z": "23caab7f537e37b0",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "1",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2650,
+        "y": 480,
+        "wires": [
+            [
+                "1f63df31dd36ca8e",
+                "3d9c038896ef3ac8"
+            ]
+        ]
     }
 ]
