@@ -1130,7 +1130,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1100,
+        "x": 1160,
         "y": 720,
         "wires": [
             [
@@ -1144,7 +1144,7 @@
         "z": "0c118dcb95acf0e0",
         "name": "",
         "serial": "deba420c25236b68",
-        "x": 1350,
+        "x": 1410,
         "y": 720,
         "wires": []
     },
@@ -1169,13 +1169,725 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 890,
+        "x": 950,
         "y": 720,
         "wires": [
             [
                 "e3551c7e5f4e8e15"
             ]
         ]
+    },
+    {
+        "id": "80a523ccb90fe104",
+        "type": "function",
+        "z": "0c118dcb95acf0e0",
+        "name": "坐垫气囊放气",
+        "func": "var delimiter = Buffer.from([0x07, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,0x15]);\nmsg.payload = delimiter;\nconsole.info(msg.payload)\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1720,
+        "y": 120,
+        "wires": [
+            [
+                "b9e2296578d5f3d8"
+            ]
+        ]
+    },
+    {
+        "id": "b9e2296578d5f3d8",
+        "type": "serial out",
+        "z": "0c118dcb95acf0e0",
+        "name": "",
+        "serial": "deba420c25236b68",
+        "x": 1950,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "8ec99578fcfc6e39",
+        "type": "inject",
+        "z": "0c118dcb95acf0e0",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1490,
+        "y": 120,
+        "wires": [
+            [
+                "80a523ccb90fe104"
+            ]
+        ]
+    },
+    {
+        "id": "a00e07cd36378cc8",
+        "type": "function",
+        "z": "0c118dcb95acf0e0",
+        "name": "气囊充气",
+        "func": "var delimiter = Buffer.from([0x05, 0x64, 0x64, 0x64, 0x64, 0x64, 0x00, 0x00, 0x00, 0x40]);\nmsg.payload = delimiter;\nconsole.info(msg.payload)\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1020,
+        "y": 860,
+        "wires": [
+            [
+                "9f6b8fafed3f55e5"
+            ]
+        ]
+    },
+    {
+        "id": "9f6b8fafed3f55e5",
+        "type": "serial out",
+        "z": "0c118dcb95acf0e0",
+        "name": "",
+        "serial": "deba420c25236b68",
+        "x": 1270,
+        "y": 860,
+        "wires": []
+    },
+    {
+        "id": "4485678a4f85ddc6",
+        "type": "inject",
+        "z": "0c118dcb95acf0e0",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 650,
+        "y": 860,
+        "wires": [
+            [
+                "a00e07cd36378cc8"
+            ]
+        ]
+    },
+    {
+        "id": "67a11eac533670aa",
+        "type": "function",
+        "z": "0c118dcb95acf0e0",
+        "name": "function 4",
+        "func": "global.set(\"bagCounts\",0);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 740,
+        "y": 800,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "42a241ef3ed50158",
+        "type": "inject",
+        "z": "0c118dcb95acf0e0",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 560,
+        "y": 800,
+        "wires": [
+            [
+                "67a11eac533670aa"
+            ]
+        ]
+    },
+    {
+        "id": "301cc8c7d875ba72",
+        "type": "loop",
+        "z": "0c118dcb95acf0e0",
+        "name": "",
+        "kind": "fcnt",
+        "count": "5",
+        "initial": "1",
+        "step": "1",
+        "condition": "",
+        "conditionType": "js",
+        "when": "before",
+        "enumeration": "enum",
+        "enumerationType": "msg",
+        "limit": "",
+        "loopPayload": "loop-index",
+        "finalPayload": "final-count",
+        "x": 1890,
+        "y": 880,
+        "wires": [
+            [],
+            [
+                "ece5ac3d58462de4"
+            ]
+        ]
+    },
+    {
+        "id": "ece5ac3d58462de4",
+        "type": "function",
+        "z": "0c118dcb95acf0e0",
+        "name": "气囊充气",
+        "func": "var delimiter = Buffer.from([0x05, 0x64, 0x64, 0x64, 0x64, 0x64, 0x00, 0x00, 0x00, 0x40]);\nmsg.payload = delimiter;\nconsole.info(msg.payload)\nconsole.info(111)\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2080,
+        "y": 860,
+        "wires": [
+            [
+                "b214acefbe82eafb",
+                "ad7436cc3b93678c"
+            ]
+        ]
+    },
+    {
+        "id": "b214acefbe82eafb",
+        "type": "delay",
+        "z": "0c118dcb95acf0e0",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "1500",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 2310,
+        "y": 900,
+        "wires": [
+            [
+                "301cc8c7d875ba72"
+            ]
+        ]
+    },
+    {
+        "id": "c8b0119e9718581b",
+        "type": "inject",
+        "z": "0c118dcb95acf0e0",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1630,
+        "y": 880,
+        "wires": [
+            [
+                "301cc8c7d875ba72"
+            ]
+        ]
+    },
+    {
+        "id": "ad7436cc3b93678c",
+        "type": "serial out",
+        "z": "0c118dcb95acf0e0",
+        "name": "",
+        "serial": "deba420c25236b68",
+        "x": 2310,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "cbe804f13af3ea25",
+        "type": "loop",
+        "z": "0c118dcb95acf0e0",
+        "name": "",
+        "kind": "fcnt",
+        "count": "5",
+        "initial": "1",
+        "step": "1",
+        "condition": "",
+        "conditionType": "js",
+        "when": "before",
+        "enumeration": "enum",
+        "enumerationType": "msg",
+        "limit": "",
+        "loopPayload": "loop-index",
+        "finalPayload": "final-count",
+        "x": 1930,
+        "y": 720,
+        "wires": [
+            [],
+            [
+                "3801cb38374da708"
+            ]
+        ]
+    },
+    {
+        "id": "3801cb38374da708",
+        "type": "function",
+        "z": "0c118dcb95acf0e0",
+        "name": "靠背气囊放气",
+        "func": "var delimiter = Buffer.from([0x05, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x20]);\nmsg.payload = delimiter;\nconsole.info(msg.payload)\nconsole.info(111)\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2140,
+        "y": 700,
+        "wires": [
+            [
+                "efda232c60174fb4",
+                "1cdab24f611ad4f7"
+            ]
+        ]
+    },
+    {
+        "id": "efda232c60174fb4",
+        "type": "delay",
+        "z": "0c118dcb95acf0e0",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "1500",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 2350,
+        "y": 740,
+        "wires": [
+            [
+                "cbe804f13af3ea25"
+            ]
+        ]
+    },
+    {
+        "id": "5512129aa950e0e6",
+        "type": "inject",
+        "z": "0c118dcb95acf0e0",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1670,
+        "y": 720,
+        "wires": [
+            [
+                "cbe804f13af3ea25"
+            ]
+        ]
+    },
+    {
+        "id": "1cdab24f611ad4f7",
+        "type": "serial out",
+        "z": "0c118dcb95acf0e0",
+        "name": "",
+        "serial": "deba420c25236b68",
+        "x": 2350,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "f399c9e98f566cb3",
+        "type": "loop",
+        "z": "0c118dcb95acf0e0",
+        "name": "",
+        "kind": "fcnt",
+        "count": "5",
+        "initial": "1",
+        "step": "1",
+        "condition": "",
+        "conditionType": "js",
+        "when": "before",
+        "enumeration": "enum",
+        "enumerationType": "msg",
+        "limit": "",
+        "loopPayload": "loop-index",
+        "finalPayload": "final-count",
+        "x": 1930,
+        "y": 600,
+        "wires": [
+            [],
+            [
+                "e8d9cb47c135f271"
+            ]
+        ]
+    },
+    {
+        "id": "e8d9cb47c135f271",
+        "type": "function",
+        "z": "0c118dcb95acf0e0",
+        "name": "靠背气囊充气",
+        "func": "var delimiter = Buffer.from([0x05, 0x64, 0x64, 0x64, 0x64, 0x64, 0x00, 0x00, 0x00, 0x40]);\nmsg.payload = delimiter;\nconsole.info(msg.payload)\nconsole.info(111)\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2140,
+        "y": 580,
+        "wires": [
+            [
+                "0cd1b1fcaa052150",
+                "11852c97c24b439d"
+            ]
+        ]
+    },
+    {
+        "id": "0cd1b1fcaa052150",
+        "type": "delay",
+        "z": "0c118dcb95acf0e0",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "1500",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 2350,
+        "y": 620,
+        "wires": [
+            [
+                "f399c9e98f566cb3"
+            ]
+        ]
+    },
+    {
+        "id": "f927b808fcf0522f",
+        "type": "inject",
+        "z": "0c118dcb95acf0e0",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1670,
+        "y": 600,
+        "wires": [
+            [
+                "f399c9e98f566cb3"
+            ]
+        ]
+    },
+    {
+        "id": "11852c97c24b439d",
+        "type": "serial out",
+        "z": "0c118dcb95acf0e0",
+        "name": "",
+        "serial": "deba420c25236b68",
+        "x": 2350,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "6dd8f0e5e00ae731",
+        "type": "loop",
+        "z": "0c118dcb95acf0e0",
+        "name": "",
+        "kind": "fcnt",
+        "count": "5",
+        "initial": "1",
+        "step": "1",
+        "condition": "",
+        "conditionType": "js",
+        "when": "before",
+        "enumeration": "enum",
+        "enumerationType": "msg",
+        "limit": "",
+        "loopPayload": "loop-index",
+        "finalPayload": "final-count",
+        "x": 1930,
+        "y": 460,
+        "wires": [
+            [],
+            [
+                "1e23a2d5c2ce7b97"
+            ]
+        ]
+    },
+    {
+        "id": "1e23a2d5c2ce7b97",
+        "type": "function",
+        "z": "0c118dcb95acf0e0",
+        "name": "坐垫气囊放气",
+        "func": "var delimiter = Buffer.from([0x07, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x15]);\nmsg.payload = delimiter;\nconsole.info(msg.payload)\nconsole.info(111)\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2140,
+        "y": 440,
+        "wires": [
+            [
+                "15069ca6454029a1",
+                "2565caccdab4f766"
+            ]
+        ]
+    },
+    {
+        "id": "15069ca6454029a1",
+        "type": "delay",
+        "z": "0c118dcb95acf0e0",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "1500",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 2350,
+        "y": 480,
+        "wires": [
+            [
+                "6dd8f0e5e00ae731"
+            ]
+        ]
+    },
+    {
+        "id": "6d0c4f3220261b33",
+        "type": "inject",
+        "z": "0c118dcb95acf0e0",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1670,
+        "y": 460,
+        "wires": [
+            [
+                "6dd8f0e5e00ae731"
+            ]
+        ]
+    },
+    {
+        "id": "2565caccdab4f766",
+        "type": "serial out",
+        "z": "0c118dcb95acf0e0",
+        "name": "",
+        "serial": "deba420c25236b68",
+        "x": 2350,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "ed05ebc2c64b0c39",
+        "type": "loop",
+        "z": "0c118dcb95acf0e0",
+        "name": "",
+        "kind": "fcnt",
+        "count": "5",
+        "initial": "1",
+        "step": "1",
+        "condition": "",
+        "conditionType": "js",
+        "when": "before",
+        "enumeration": "enum",
+        "enumerationType": "msg",
+        "limit": "",
+        "loopPayload": "loop-index",
+        "finalPayload": "final-count",
+        "x": 1930,
+        "y": 300,
+        "wires": [
+            [],
+            [
+                "f800cd5c6415afd5"
+            ]
+        ]
+    },
+    {
+        "id": "f800cd5c6415afd5",
+        "type": "function",
+        "z": "0c118dcb95acf0e0",
+        "name": "坐垫气囊充气",
+        "func": "var delimiter = Buffer.from([0x07, 0x64, 0x64, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x15]);\nmsg.payload = delimiter;\nconsole.info(msg.payload)\nconsole.info(111)\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2140,
+        "y": 280,
+        "wires": [
+            [
+                "e0d683d9f5aab7fa",
+                "5722ed02f3c00912"
+            ]
+        ]
+    },
+    {
+        "id": "e0d683d9f5aab7fa",
+        "type": "delay",
+        "z": "0c118dcb95acf0e0",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "1500",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 2350,
+        "y": 320,
+        "wires": [
+            [
+                "ed05ebc2c64b0c39"
+            ]
+        ]
+    },
+    {
+        "id": "0c241a2e462eda29",
+        "type": "inject",
+        "z": "0c118dcb95acf0e0",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1670,
+        "y": 300,
+        "wires": [
+            [
+                "ed05ebc2c64b0c39"
+            ]
+        ]
+    },
+    {
+        "id": "5722ed02f3c00912",
+        "type": "serial out",
+        "z": "0c118dcb95acf0e0",
+        "name": "",
+        "serial": "deba420c25236b68",
+        "x": 2350,
+        "y": 260,
+        "wires": []
     },
     {
         "id": "96bfd23f6af11a6e",
@@ -1711,7 +2423,7 @@
             [
                 "858618ba7d8aedd3",
                 "49eefdb6138996fe",
-                "9d73730c11f38559"
+                "72d86e8b390fc3a8"
             ]
         ]
     },
@@ -1732,7 +2444,7 @@
             [
                 "39a2727a83b5d2ac",
                 "cc8c795819132cd5",
-                "13c053d71f33ad67"
+                "7f54eb58c17689d1"
             ]
         ]
     },
@@ -1890,7 +2602,8 @@
         "wires": [
             [
                 "e5e786b3cf8b3efb",
-                "9d5a4cca8ef9dccd"
+                "9d5a4cca8ef9dccd",
+                "ad92cc83605e164f"
             ]
         ]
     },
@@ -1910,7 +2623,8 @@
         "wires": [
             [
                 "fedd5531eb422989",
-                "cfda399748851474"
+                "cfda399748851474",
+                "aa07e2ec10769956"
             ]
         ]
     },
@@ -2065,7 +2779,7 @@
         "z": "23caab7f537e37b0",
         "name": "",
         "pauseType": "delay",
-        "timeout": "2000",
+        "timeout": "3000",
         "timeoutUnits": "milliseconds",
         "rate": "1",
         "nbRateUnits": "1",
@@ -2151,7 +2865,7 @@
         "z": "23caab7f537e37b0",
         "name": "",
         "pauseType": "delay",
-        "timeout": "2000",
+        "timeout": "3000",
         "timeoutUnits": "milliseconds",
         "rate": "1",
         "nbRateUnits": "1",
@@ -2342,7 +3056,7 @@
         "y": 60,
         "wires": [
             [
-                "1235f0aa882f2909"
+                "0bcccd6d100510ed"
             ]
         ]
     },
@@ -2358,7 +3072,7 @@
         "finalize": "",
         "libs": [],
         "x": 2900,
-        "y": 280,
+        "y": 260,
         "wires": [
             [
                 "bf9ec3c0d1e77755",
@@ -2444,7 +3158,7 @@
         "allowrate": false,
         "outputs": 1,
         "x": 3090,
-        "y": 300,
+        "y": 280,
         "wires": [
             [
                 "fc6fb50dedc47a70"
@@ -2471,7 +3185,7 @@
         "to": "",
         "reg": false,
         "x": 3310,
-        "y": 300,
+        "y": 280,
         "wires": [
             [
                 "e4ca7a3db1ec5ab7"
@@ -2676,7 +3390,7 @@
         "out": "out",
         "bcm": true,
         "x": 3100,
-        "y": 220,
+        "y": 200,
         "wires": []
     },
     {
@@ -2691,7 +3405,7 @@
         "out": "out",
         "bcm": true,
         "x": 3621.765625,
-        "y": 295.75,
+        "y": 275.75,
         "wires": []
     },
     {
@@ -2810,93 +3524,6 @@
         "serial": "deba420c25236b68",
         "x": 3550,
         "y": 3320,
-        "wires": []
-    },
-    {
-        "id": "1235f0aa882f2909",
-        "type": "function",
-        "z": "23caab7f537e37b0",
-        "name": "气囊放气",
-        "func": "var delimiter = Buffer.from([0x05, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,0x20]);\nmsg.payload = delimiter;\nconsole.info(msg.payload)\nconsole.info(\"放气\");\n\nglobal.set(\"controlingFlag\", 0);\nvar waistControlTime = global.get(\"waistControlTime\");\nglobal.set(\"waistControlTime\", waistControlTime - 2000);\nglobal.set(\"waistUpConditionCount\", 0);\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 3040,
-        "y": 60,
-        "wires": [
-            [
-                "22a4ebccfc1c4a26"
-            ]
-        ]
-    },
-    {
-        "id": "22a4ebccfc1c4a26",
-        "type": "serial out",
-        "z": "23caab7f537e37b0",
-        "name": "",
-        "serial": "deba420c25236b68",
-        "x": 3290,
-        "y": 60,
-        "wires": []
-    },
-    {
-        "id": "9d73730c11f38559",
-        "type": "function",
-        "z": "23caab7f537e37b0",
-        "name": "气囊充气",
-        "func": "var delimiter = Buffer.from([0x05, 0x64, 0x00, 0x64, 0x64, 0x64, 0x00, 0x00, 0x00, 0x20]);\nmsg.payload = delimiter;\nconsole.info(msg.payload)\n\nglobal.set(\"controlingFlag\", 0);\nvar waistControlTime = global.get(\"waistControlTime\");\nglobal.set(\"waistControlTime\", waistControlTime + 2000);\nglobal.set(\"waistUpConditionCount\", 0);\n\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 3500,
-        "y": 2020,
-        "wires": [
-            [
-                "1c06cab6054fd202"
-            ]
-        ]
-    },
-    {
-        "id": "1c06cab6054fd202",
-        "type": "serial out",
-        "z": "23caab7f537e37b0",
-        "name": "",
-        "serial": "deba420c25236b68",
-        "x": 3750,
-        "y": 2020,
-        "wires": []
-    },
-    {
-        "id": "13c053d71f33ad67",
-        "type": "function",
-        "z": "23caab7f537e37b0",
-        "name": "气囊放气",
-        "func": "var delimiter = Buffer.from([0x05, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,0x20]);\nmsg.payload = delimiter;\nconsole.info(msg.payload)\nconsole.info(\"放气\");\n\nglobal.set(\"controlingFlag\", 0);\nvar waistControlTime = global.get(\"waistControlTime\");\nglobal.set(\"waistControlTime\", waistControlTime - 2000);\nglobal.set(\"waistUpConditionCount\", 0);\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 3520,
-        "y": 2260,
-        "wires": [
-            [
-                "50ac318bb66e4997"
-            ]
-        ]
-    },
-    {
-        "id": "50ac318bb66e4997",
-        "type": "serial out",
-        "z": "23caab7f537e37b0",
-        "name": "",
-        "serial": "deba420c25236b68",
-        "x": 3770,
-        "y": 2260,
         "wires": []
     },
     {
@@ -3997,36 +4624,8 @@
         "y": 1980,
         "wires": [
             [
-                "2290e06033e62f45",
-                "fd4303a6897ac0b8"
+                "fa5e7a4f53e4d1ab"
             ]
-        ]
-    },
-    {
-        "id": "2290e06033e62f45",
-        "type": "serial out",
-        "z": "23caab7f537e37b0",
-        "name": "",
-        "serial": "deba420c25236b68",
-        "x": 2910,
-        "y": 1980,
-        "wires": []
-    },
-    {
-        "id": "28ac5f337d0b366f",
-        "type": "function",
-        "z": "23caab7f537e37b0",
-        "name": "更改次序",
-        "func": "global.set(\"controlNumber\",3);\nglobal.set(\"controlingFlag\",0);\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 3040,
-        "y": 1920,
-        "wires": [
-            []
         ]
     },
     {
@@ -4034,7 +4633,7 @@
         "type": "function",
         "z": "23caab7f537e37b0",
         "name": "允许读写标识",
-        "func": "global.set(\"readFlag\",1);\nreturn msg;",
+        "func": "global.set(\"readFlag\",0);\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -4184,13 +4783,59 @@
         ]
     },
     {
-        "id": "fd4303a6897ac0b8",
+        "id": "0bcccd6d100510ed",
+        "type": "loop",
+        "z": "23caab7f537e37b0",
+        "name": "",
+        "kind": "fcnt",
+        "count": "5",
+        "initial": "1",
+        "step": "1",
+        "condition": "",
+        "conditionType": "js",
+        "when": "before",
+        "enumeration": "enum",
+        "enumerationType": "msg",
+        "limit": "",
+        "loopPayload": "loop-index",
+        "finalPayload": "final-count",
+        "x": 3030,
+        "y": 60,
+        "wires": [
+            [],
+            [
+                "1e64ea523faf5db6"
+            ]
+        ]
+    },
+    {
+        "id": "1e64ea523faf5db6",
+        "type": "function",
+        "z": "23caab7f537e37b0",
+        "name": "靠背气囊放气",
+        "func": "var delimiter = Buffer.from([0x05, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x20]);\nmsg.payload = delimiter;\nconsole.info(msg.payload)\nconsole.info(111)\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 3240,
+        "y": 40,
+        "wires": [
+            [
+                "17f6db41c15ccb15",
+                "f3adba7f0c703be7"
+            ]
+        ]
+    },
+    {
+        "id": "17f6db41c15ccb15",
         "type": "delay",
         "z": "23caab7f537e37b0",
         "name": "",
         "pauseType": "delay",
-        "timeout": "1",
-        "timeoutUnits": "seconds",
+        "timeout": "1500",
+        "timeoutUnits": "milliseconds",
         "rate": "1",
         "nbRateUnits": "1",
         "rateUnits": "second",
@@ -4200,12 +4845,446 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 2840,
-        "y": 1920,
+        "x": 3450,
+        "y": 80,
         "wires": [
             [
-                "28ac5f337d0b366f"
+                "0bcccd6d100510ed"
             ]
         ]
+    },
+    {
+        "id": "f3adba7f0c703be7",
+        "type": "serial out",
+        "z": "23caab7f537e37b0",
+        "name": "",
+        "serial": "deba420c25236b68",
+        "x": 3450,
+        "y": 20,
+        "wires": []
+    },
+    {
+        "id": "fa5e7a4f53e4d1ab",
+        "type": "loop",
+        "z": "23caab7f537e37b0",
+        "name": "",
+        "kind": "fcnt",
+        "count": "3",
+        "initial": "1",
+        "step": "1",
+        "condition": "",
+        "conditionType": "js",
+        "when": "before",
+        "enumeration": "enum",
+        "enumerationType": "msg",
+        "limit": "",
+        "loopPayload": "loop-index",
+        "finalPayload": "final-count",
+        "x": 2870,
+        "y": 1980,
+        "wires": [
+            [
+                "a07d1d2c7808e8e2"
+            ],
+            [
+                "790dbe7916733588"
+            ]
+        ]
+    },
+    {
+        "id": "790dbe7916733588",
+        "type": "function",
+        "z": "23caab7f537e37b0",
+        "name": "靠背气囊充气",
+        "func": "var delimiter = Buffer.from([0x05, 0x64, 0x64, 0x64, 0x64, 0x64, 0x00, 0x00, 0x00, 0x40]);\nmsg.payload = delimiter;\nconsole.info(msg.payload)\nconsole.info(111)\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 3100,
+        "y": 1960,
+        "wires": [
+            [
+                "ab62d5ea532e55a4",
+                "2d5c8a6bdc8ac14b"
+            ]
+        ]
+    },
+    {
+        "id": "ab62d5ea532e55a4",
+        "type": "delay",
+        "z": "23caab7f537e37b0",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "1500",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 3290,
+        "y": 2000,
+        "wires": [
+            [
+                "fa5e7a4f53e4d1ab"
+            ]
+        ]
+    },
+    {
+        "id": "2d5c8a6bdc8ac14b",
+        "type": "serial out",
+        "z": "23caab7f537e37b0",
+        "name": "",
+        "serial": "deba420c25236b68",
+        "x": 3290,
+        "y": 1920,
+        "wires": []
+    },
+    {
+        "id": "a07d1d2c7808e8e2",
+        "type": "function",
+        "z": "23caab7f537e37b0",
+        "name": "更改次序",
+        "func": "global.set(\"controlNumber\",3);\nglobal.set(\"controlingFlag\",0);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2980,
+        "y": 1920,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ad92cc83605e164f",
+        "type": "loop",
+        "z": "23caab7f537e37b0",
+        "name": "",
+        "kind": "fcnt",
+        "count": "3",
+        "initial": "1",
+        "step": "1",
+        "condition": "",
+        "conditionType": "js",
+        "when": "before",
+        "enumeration": "enum",
+        "enumerationType": "msg",
+        "limit": "",
+        "loopPayload": "loop-index",
+        "finalPayload": "final-count",
+        "x": 3630,
+        "y": 2540,
+        "wires": [
+            [],
+            [
+                "a926af1bd1a8d979"
+            ]
+        ]
+    },
+    {
+        "id": "a926af1bd1a8d979",
+        "type": "function",
+        "z": "23caab7f537e37b0",
+        "name": "坐垫气囊充气",
+        "func": "var delimiter = Buffer.from([0x07, 0x64, 0x64, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x15]);\nmsg.payload = delimiter;\nconsole.info(msg.payload)\nconsole.info(111)\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 3840,
+        "y": 2520,
+        "wires": [
+            [
+                "e5233485ba5230af",
+                "1fc074a45995accd"
+            ]
+        ]
+    },
+    {
+        "id": "e5233485ba5230af",
+        "type": "delay",
+        "z": "23caab7f537e37b0",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "1500",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 4050,
+        "y": 2560,
+        "wires": [
+            [
+                "ad92cc83605e164f"
+            ]
+        ]
+    },
+    {
+        "id": "1fc074a45995accd",
+        "type": "serial out",
+        "z": "23caab7f537e37b0",
+        "name": "",
+        "serial": "deba420c25236b68",
+        "x": 4050,
+        "y": 2500,
+        "wires": []
+    },
+    {
+        "id": "aa07e2ec10769956",
+        "type": "loop",
+        "z": "23caab7f537e37b0",
+        "name": "",
+        "kind": "fcnt",
+        "count": "5",
+        "initial": "1",
+        "step": "1",
+        "condition": "",
+        "conditionType": "js",
+        "when": "before",
+        "enumeration": "enum",
+        "enumerationType": "msg",
+        "limit": "",
+        "loopPayload": "loop-index",
+        "finalPayload": "final-count",
+        "x": 3630,
+        "y": 2760,
+        "wires": [
+            [],
+            [
+                "80486e9daa88fc55"
+            ]
+        ]
+    },
+    {
+        "id": "80486e9daa88fc55",
+        "type": "function",
+        "z": "23caab7f537e37b0",
+        "name": "坐垫气囊放气",
+        "func": "var delimiter = Buffer.from([0x07, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x15]);\nmsg.payload = delimiter;\nconsole.info(msg.payload)\nconsole.info(111)\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 3840,
+        "y": 2740,
+        "wires": [
+            [
+                "25e6507bea8f6a4c",
+                "415cbea78183fc3f"
+            ]
+        ]
+    },
+    {
+        "id": "25e6507bea8f6a4c",
+        "type": "delay",
+        "z": "23caab7f537e37b0",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "1500",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 4050,
+        "y": 2780,
+        "wires": [
+            [
+                "aa07e2ec10769956"
+            ]
+        ]
+    },
+    {
+        "id": "415cbea78183fc3f",
+        "type": "serial out",
+        "z": "23caab7f537e37b0",
+        "name": "",
+        "serial": "deba420c25236b68",
+        "x": 4050,
+        "y": 2720,
+        "wires": []
+    },
+    {
+        "id": "72d86e8b390fc3a8",
+        "type": "loop",
+        "z": "23caab7f537e37b0",
+        "name": "",
+        "kind": "fcnt",
+        "count": "2",
+        "initial": "1",
+        "step": "1",
+        "condition": "",
+        "conditionType": "js",
+        "when": "before",
+        "enumeration": "enum",
+        "enumerationType": "msg",
+        "limit": "",
+        "loopPayload": "loop-index",
+        "finalPayload": "final-count",
+        "x": 3590,
+        "y": 2040,
+        "wires": [
+            [],
+            [
+                "81f1fbc6f552bef5"
+            ]
+        ]
+    },
+    {
+        "id": "81f1fbc6f552bef5",
+        "type": "function",
+        "z": "23caab7f537e37b0",
+        "name": "靠背气囊充气",
+        "func": "var delimiter = Buffer.from([0x05, 0x64, 0x64, 0x64, 0x64, 0x64, 0x00, 0x00, 0x00, 0x40]);\nmsg.payload = delimiter;\nconsole.info(msg.payload)\nconsole.info(111)\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 3800,
+        "y": 2020,
+        "wires": [
+            [
+                "ae3a72bd493f1885",
+                "574f16645d59900f"
+            ]
+        ]
+    },
+    {
+        "id": "ae3a72bd493f1885",
+        "type": "delay",
+        "z": "23caab7f537e37b0",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "1500",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 4010,
+        "y": 2060,
+        "wires": [
+            [
+                "72d86e8b390fc3a8"
+            ]
+        ]
+    },
+    {
+        "id": "574f16645d59900f",
+        "type": "serial out",
+        "z": "23caab7f537e37b0",
+        "name": "",
+        "serial": "deba420c25236b68",
+        "x": 4010,
+        "y": 2000,
+        "wires": []
+    },
+    {
+        "id": "7f54eb58c17689d1",
+        "type": "loop",
+        "z": "23caab7f537e37b0",
+        "name": "",
+        "kind": "fcnt",
+        "count": "2",
+        "initial": "1",
+        "step": "1",
+        "condition": "",
+        "conditionType": "js",
+        "when": "before",
+        "enumeration": "enum",
+        "enumerationType": "msg",
+        "limit": "",
+        "loopPayload": "loop-index",
+        "finalPayload": "final-count",
+        "x": 3550,
+        "y": 2280,
+        "wires": [
+            [],
+            [
+                "85a2f49ee9202f63"
+            ]
+        ]
+    },
+    {
+        "id": "85a2f49ee9202f63",
+        "type": "function",
+        "z": "23caab7f537e37b0",
+        "name": "靠背气囊放气",
+        "func": "var delimiter = Buffer.from([0x05, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x20]);\nmsg.payload = delimiter;\nconsole.info(msg.payload)\nconsole.info(111)\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 3760,
+        "y": 2260,
+        "wires": [
+            [
+                "63b2a5663aad1e73",
+                "59d3a92063dd70c0"
+            ]
+        ]
+    },
+    {
+        "id": "63b2a5663aad1e73",
+        "type": "delay",
+        "z": "23caab7f537e37b0",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "1500",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 3970,
+        "y": 2300,
+        "wires": [
+            [
+                "7f54eb58c17689d1"
+            ]
+        ]
+    },
+    {
+        "id": "59d3a92063dd70c0",
+        "type": "serial out",
+        "z": "23caab7f537e37b0",
+        "name": "",
+        "serial": "deba420c25236b68",
+        "x": 3970,
+        "y": 2240,
+        "wires": []
     }
 ]
