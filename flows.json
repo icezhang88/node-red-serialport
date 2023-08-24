@@ -2186,8 +2186,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 2050,
-        "y": 320,
+        "x": 1830,
+        "y": 240,
         "wires": [
             [
                 "75823bbbffb694c2"
@@ -2224,7 +2224,7 @@
         "type": "function",
         "z": "23caab7f537e37b0",
         "name": "BackActionTrigger",
-        "func": "// console.info(\"在座次数\" + msg.payload);\n// 复位标识为0  可进入复位  \nglobal.set(\"resetCompleteFlag\", 0);\n\nvar ndata =global.get(\"backMatrixData\");\n \n \nvar num1 = 0, num2 = 0, num3 = 0;\nvar numHead=0,numBody=0,numFoot=0;\n \nfor (var i = 0; i < 10; i++) {\n    ndata[i * 10 + 0] = ndata[i * 10 + 1];\n    ndata[i * 10 + 9] = ndata[i * 10 + 8];\n}\nfor (var i = 0; i < 29; i++) {\n    num1 += ndata[i];\n}\nfor (var i = 29; i < 69; i++) {\n    num2 += ndata[i];\n}\nfor (var i = 69; i < 99; i++) {\n    num3 += ndata[i];\n}\n\n\n\nfor (var i = 49; i < 99; i++) {\n    numFoot+=ndata[i];\n}\n//靠背上部求和平均\nnum1 = num1 / 30;\n//靠背中部求和平均\nnum2 = num2 / 40;\n//靠背下部求和平均\nnum3 = (num3-40) / 30;\nvar sumBack = num1 + num2 + num3;\nvar waist = num1 / sumBack;\n//var hunch = (num2+ num3) / sumBack;\n//var hunch=numFoot/num1;\nvar back=num3/num2;\n\nvar hunch=numFoot/num1;\n\nconst backMatrixSum=ndata.reduce((accumulater,currentValue)=>{\n    return accumulater+currentValue;\n},0);\n\nconsole.info(\n    \"backsum: \" + backMatrixSum.toFixed(2)+\n \"  sumBack:\" + sumBack.toFixed(2) \n+ \" waist: \" + waist.toFixed(2) + \n\" hunch: \" + hunch.toFixed(2)\n\n);\n\n\nmsg.waist = waist.toFixed(2)  ;\nmsg.hunch = Math.floor(hunch);\n\n\nreturn msg;",
+        "func": "// console.info(\"在座次数\" + msg.payload);\n// 复位标识为0  可进入复位  \nglobal.set(\"resetCompleteFlag\", 0);\n\nvar ndata =global.get(\"backMatrixData\");\n \n \nvar num1 = 0, num2 = 0, num3 = 0;\nvar numHead=0,numBody=0,numFoot=0;\nvar oneLine=0,twoLine=0,threeLine=0,fourLine=0,fiveLine=0;\nfor(var i=0;i<20;i++){\n    oneLine+=ndata[i];\n}\nfor (var i = 20; i < 40; i++) {\n    twoLine += ndata[i];\n} \nfor (var i = 40; i < 60; i++) {\n    threeLine += ndata[i];\n}\n for (var i = 60; i < 80; i++) {\n    fourLine += ndata[i];\n}\n for (var i = 80; i < 100; i++) {\n    fiveLine += ndata[i];\n}\nconsole.info(\n    \"oneLine:\" + Math.floor(oneLine)+\n    \"twoLine :\" + Math.floor(twoLine)+\n    \"threeLine :\" + Math.floor(threeLine)+\n    \"fourLine :\" + Math.floor(fourLine)+\n        \"fiveLine :\" + Math.floor(fiveLine)\n)\n \nfor (var i = 0; i < 10; i++) {\n    ndata[i * 10 + 0] = ndata[i * 10 + 1];\n    ndata[i * 10 + 9] = ndata[i * 10 + 8];\n}\nfor (var i = 0; i < 29; i++) {\n    num1 += ndata[i];\n}\nfor (var i = 29; i < 69; i++) {\n    num2 += ndata[i];\n}\nfor (var i = 69; i < 99; i++) {\n    num3 += ndata[i];\n}\n\n\n\nfor (var i = 49; i < 99; i++) {\n    numFoot+=ndata[i];\n}\n//靠背上部求和平均\nnum1 = num1 / 30;\n//靠背中部求和平均\nnum2 = num2 / 40;\n//靠背下部求和平均\nnum3 = (num3-40) / 30;\nvar sumBack = num1 + num2 + num3;\nvar waist = num1 / sumBack;\n//var hunch = (num2+ num3) / sumBack;\n//var hunch=numFoot/num1;\nvar back=num3/num2;\n\nvar hunch = (oneLine + twoLine) / (oneLine + twoLine+fiveLine);\n\nconst backMatrixSum=ndata.reduce((accumulater,currentValue)=>{\n    return accumulater+currentValue;\n},0);\n\nconsole.info(\n    \"backsum: \" + backMatrixSum.toFixed(2)+\n \"  sumBack:\" + sumBack.toFixed(2) \n+ \" waist: \" + waist.toFixed(2) + \n\" hunch: \" + hunch.toFixed(2)\n\n);\n\n\nmsg.waist = waist.toFixed(2)  ;\nmsg.hunch = hunch.toFixed(2);\n\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -2248,15 +2248,15 @@
         "rules": [
             {
                 "t": "gte",
-                "v": "70",
+                "v": "50",
                 "vt": "str"
             }
         ],
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 2210,
-        "y": 320,
+        "x": 2070,
+        "y": 240,
         "wires": [
             [
                 "e8b517a694a27acf"
@@ -2274,14 +2274,12 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 2400,
-        "y": 320,
+        "x": 2300,
+        "y": 240,
         "wires": [
             [
-                "f43741ac300f6cf1",
-                "98118aeba92e4aa7",
-                "0e0a22f283d375d8",
-                "8389342d3ac68bc1"
+                "8389342d3ac68bc1",
+                "f43741ac300f6cf1"
             ]
         ]
     },
@@ -2290,7 +2288,7 @@
         "type": "function",
         "z": "23caab7f537e37b0",
         "name": "SitActionTrigger",
-        "func": "// 复位标识为0  可进入复位  \nglobal.set(\"resetCompleteFlag\", 0);\nconst ndata1 = global.get(\"sitMatrixData\");\n\n// console.info(ndata1);\n\n\nconst sitMatrixDataSum = ndata1.reduce((accumulator, currentValue) => {\n    return accumulator + currentValue;\n}, 0);\n// console.info(\"sitSum: \" + sitMatrixDataSum);\n\n\n// (accumulator, currentValue) => {\n//     return accumulator + currentValue;\n// }, 0\n\n \n\nvar num11 = 0, num21 = 0, num31 = 0, num41 = 0, num51 = 0, num61 = 0;\n\nfor (var i = 0; i < 3; i++) {\n    for (var j = 0; j < 5; j++) {\n        num11 += ndata1[10 * i + j];\n    }\n}\n\nfor (var i = 0; i < 3; i++) {\n    for (var j = 5; j < 10; j++) {\n        num21 += ndata1[10 * i + j];\n    }\n}\n\nfor (var i = 3; i < 7; i++) {\n    for (var j = 0; j < 5; j++) {\n        num31 += ndata1[10 * i + j];\n    }\n}\n\nfor (var i = 3; i < 7; i++) {\n    for (var j = 5; j < 10; j++) {\n        num41 += ndata1[10 * i + j];\n    }\n}\n\nfor (var i = 7; i < 10; i++) {\n    for (var j = 0; j < 5; j++) {\n        num51 += ndata1[10 * i + j];\n    }\n}\nfor (var i = 7; i < 10; i++) {\n    for (var j = 5; j < 10; j++) {\n        num61 += ndata1[10 * i + j];\n    }\n}\nnum11 = num11 / 15;\nnum21 = num21 / 15;\nnum31 = num31 / 20;\nnum41 = num41 / 20;\nnum51 = num51 / 15;\nnum61 = num61 / 15;\nvar sumSit = num11 + num21 + num31 + num41 + num51 + num61;\nvar frontleg = (num11 + num21) / sumSit;\nvar backleg = 1 - frontleg;\nvar front = (num11 + num21 + num31 + num41) / sumSit;\n//前腿支撑\nfrontleg = (num11 + num21) / sumSit;\n//前腿支撑\nbackleg = 1 - frontleg;\n//靠前\nfront = (num11 + num21 + num31 + num41) / sumSit;\n\n\n// console.info(\"sum: \" + sitMatrixDataSum );\n// console.info(\n     \n//     \"frontLeg: \"+frontleg.toFixed(2)+\n//     \" backLeg: \" + backleg.toFixed(2)+\n//     \" front: \" + front.toFixed(2) \n// )\nmsg.frontleg=frontleg;\nmsg.backleg=1-frontleg;\nmsg.front=front;\n\nmsg.payload = 1;\n\nreturn msg;",
+        "func": "// 复位标识为0  可进入复位  \nglobal.set(\"resetCompleteFlag\", 0);\nconst ndata1 = global.get(\"sitMatrixData\");\n\n// console.info(ndata1);\n\n\nconst sitMatrixDataSum = ndata1.reduce((accumulator, currentValue) => {\n    return accumulator + currentValue;\n}, 0);\n// console.info(\"sitSum: \" + sitMatrixDataSum);\n\n\n// (accumulator, currentValue) => {\n//     return accumulator + currentValue;\n// }, 0\n\n \n\nvar num11 = 0, num21 = 0, num31 = 0, num41 = 0, num51 = 0, num61 = 0;\n\nfor (var i = 0; i < 3; i++) {\n    for (var j = 0; j < 5; j++) {\n        num11 += ndata1[10 * i + j];\n    }\n}\n\nfor (var i = 0; i < 3; i++) {\n    for (var j = 5; j < 10; j++) {\n        num21 += ndata1[10 * i + j];\n    }\n}\n\nfor (var i = 3; i < 7; i++) {\n    for (var j = 0; j < 5; j++) {\n        num31 += ndata1[10 * i + j];\n    }\n}\n\nfor (var i = 3; i < 7; i++) {\n    for (var j = 5; j < 10; j++) {\n        num41 += ndata1[10 * i + j];\n    }\n}\n\nfor (var i = 7; i < 10; i++) {\n    for (var j = 0; j < 5; j++) {\n        num51 += ndata1[10 * i + j];\n    }\n}\nfor (var i = 7; i < 10; i++) {\n    for (var j = 5; j < 10; j++) {\n        num61 += ndata1[10 * i + j];\n    }\n}\nnum11 = num11 / 15;\nnum21 = num21 / 15;\nnum31 = num31 / 20;\nnum41 = num41 / 20;\nnum51 = num51 / 15;\nnum61 = num61 / 15;\nvar sumSit = num11 + num21 + num31 + num41 + num51 + num61;\nvar frontleg = (num11 + num21) / sumSit;\nvar backleg = 1 - frontleg;\nvar front = (num11 + num21 + num31 + num41) / sumSit;\n//前腿支撑\nfrontleg = (num11 + num21) / sumSit;\n//前腿支撑\nbackleg = 1 - frontleg;\n//靠前\nfront = (num11 + num21 + num31 + num41) / sumSit;\n\n\n// console.info(\"sum: \" + sitMatrixDataSum );\nconsole.info(\n     \n    \"frontLeg: \"+frontleg.toFixed(2)+\n    \" backLeg: \" + backleg.toFixed(2)+\n    \" front: \" + front.toFixed(2) \n)\nmsg.frontleg=frontleg;\nmsg.backleg=1-frontleg;\nmsg.front=front;\n\nmsg.payload = 1;\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -2347,12 +2345,12 @@
         "rules": [
             {
                 "t": "gt",
-                "v": "400",
+                "v": "0.75",
                 "vt": "str"
             },
             {
                 "t": "lt",
-                "v": "160",
+                "v": "0.25",
                 "vt": "str"
             }
         ],
@@ -2363,10 +2361,10 @@
         "y": 2240,
         "wires": [
             [
-                "20b1a596648ac30c"
+                "042ccadb945582fc"
             ],
             [
-                "042ccadb945582fc"
+                "20b1a596648ac30c"
             ]
         ]
     },
@@ -2413,14 +2411,14 @@
         "type": "function",
         "z": "23caab7f537e37b0",
         "name": "条件窗口",
-        "func": "\nglobal.set(\"hunchDownConditionCount\", 0);\n\nvar hunchUpConditionCount = global.get(\"hunchUpConditionCount\");\nhunchUpConditionCount++;\nglobal.set(\"hunchUpConditionCount\", hunchUpConditionCount);\n\nvar hunchControlTime = global.get(\"hunchControlTime\");\n\nconsole.info(\"hunchControlTime:\"+hunchControlTime);\nconsole.info(\"hunchUpConditionCount: \" + hunchUpConditionCount)\n//向前移动的范围不超过6s\n//条件窗口为30帧连续判断\nif(hunchControlTime<4000){\n//条件窗口为30帧连续判断\n    if (hunchUpConditionCount > 30) {\n        msg.payload = 1;\n        global.set(\"hunchUpConditionCount\", 0);\n\n        var controlingFlag = global.get(\"controlingFlag\");\n        if (controlingFlag == 0) {\n            global.set(\"controlingFlag\", 1);\n            return msg;\n        }\n    }\n\n}\n\n \n\n ",
+        "func": "\nglobal.set(\"hunchDownConditionCount\", 0);\n\nvar hunchUpConditionCount = global.get(\"hunchUpConditionCount\");\nhunchUpConditionCount++;\nglobal.set(\"hunchUpConditionCount\", hunchUpConditionCount);\n\nvar hunchControlTime = global.get(\"hunchControlTime\");\n\nconsole.info(\"hunchControlTime:\"+hunchControlTime);\nconsole.info(\"hunchUpConditionCount: \" + hunchUpConditionCount)\n//向前移动的范围不超过6s\n//条件窗口为30帧连续判断\n//if(hunchControlTime<6000){\n//条件窗口为30帧连续判断\n    if (hunchUpConditionCount > 30) {\n        msg.payload = 1;\n        global.set(\"hunchUpConditionCount\", 0);\n\n        var controlingFlag = global.get(\"controlingFlag\");\n        if (controlingFlag == 0) {\n            global.set(\"controlingFlag\", 1);\n            return msg;\n        }\n    }\n\n//}\n\n \n\n ",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 3300,
-        "y": 2080,
+        "x": 3260,
+        "y": 2120,
         "wires": [
             [
                 "858618ba7d8aedd3",
@@ -2434,14 +2432,14 @@
         "type": "function",
         "z": "23caab7f537e37b0",
         "name": "条件窗口",
-        "func": "\nglobal.set(\"hunchUpConditionCount\", 0);\n\nvar hunchDownConditionCount = global.get(\"hunchDownConditionCount\");\nhunchDownConditionCount++;\nglobal.set(\"hunchDownConditionCount\", hunchDownConditionCount);\n\nvar hunchControlTime = global.get(\"hunchControlTime\");\n\nconsole.info(\"hunchControlTime: \"  +hunchControlTime);\nconsole.info(\"hunchDownConditionCount: \" + hunchDownConditionCount)\n//移动的范围不超过6s\n//条件窗口为30帧连续判断\nconsole.info();\nif (hunchControlTime >- 4000) {\n    //条件窗口为30帧连续判断\n    if (hunchDownConditionCount > 30) {\n        msg.payload = 1;\n        global.set(\"hunchDownConditionCount\", 0);\n\n        var controlingFlag = global.get(\"controlingFlag\");\n        if (controlingFlag == 0) {\n            global.set(\"controlingFlag\", 1);\n            return msg;\n        }\n    }\n\n}\n\n \n\n\n ",
+        "func": "\nglobal.set(\"hunchUpConditionCount\", 0);\n\nvar hunchDownConditionCount = global.get(\"hunchDownConditionCount\");\nhunchDownConditionCount++;\nglobal.set(\"hunchDownConditionCount\", hunchDownConditionCount);\n\nvar hunchControlTime = global.get(\"hunchControlTime\");\n\nconsole.info(\"hunchControlTime: \"  +hunchControlTime);\nconsole.info(\"hunchDownConditionCount: \" + hunchDownConditionCount)\n//移动的范围不超过6s\n//条件窗口为30帧连续判断\nconsole.info();\n//if (hunchControlTime >- 6000) {\n    //条件窗口为30帧连续判断\n    if (hunchDownConditionCount > 30) {\n        msg.payload = 1;\n        global.set(\"hunchDownConditionCount\", 0);\n\n        var controlingFlag = global.get(\"controlingFlag\");\n        if (controlingFlag == 0) {\n            global.set(\"controlingFlag\", 1);\n            return msg;\n        }\n    }\n\n//}\n\n \n\n\n ",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 3300,
-        "y": 2380,
+        "x": 3260,
+        "y": 2320,
         "wires": [
             [
                 "39a2727a83b5d2ac",
@@ -2471,12 +2469,12 @@
         "rules": [
             {
                 "t": "gt",
-                "v": "0.65",
+                "v": "0.62",
                 "vt": "str"
             },
             {
                 "t": "lt",
-                "v": "0.47",
+                "v": "0.52",
                 "vt": "str"
             }
         ],
@@ -2593,7 +2591,7 @@
         "type": "function",
         "z": "23caab7f537e37b0",
         "name": "条件窗口",
-        "func": "\nglobal.set(\"frontDownConditionCount\", 0);\n\nvar frontUpConditionCount= global.get(\"frontUpConditionCount\");\nfrontUpConditionCount++;\nglobal.set(\"frontUpConditionCount\", frontUpConditionCount);\n \nvar frontControlTime=global.get(\"frontControlTime\");\nconsole.info(\"frontControlTime: \" + global.get(\"frontControlTime\"));\n\n//向前移动的范围不超过6s\n//条件窗口为30帧连续判断\nconsole.info(\"frontControlTime: \" + frontControlTime);\nif (frontControlTime<4000){\n    console.info(\"frontControlTime: \" + frontControlTime);\n    if (frontUpConditionCount > 30) {\n        msg.payload = 1;\n        global.set(\"frontUpConditionCount\", 0);\n\n        var controlingFlag = global.get(\"controlingFlag\");\n        if (controlingFlag == 0) {\n            global.set(\"controlingFlag\", 1);\n            return msg;\n        }\n\n    }\n}\n\n \n\n\n \n\n ",
+        "func": "\nglobal.set(\"frontDownConditionCount\", 0);\n\nvar frontUpConditionCount= global.get(\"frontUpConditionCount\");\nfrontUpConditionCount++;\nglobal.set(\"frontUpConditionCount\", frontUpConditionCount);\n \nvar frontControlTime=global.get(\"frontControlTime\");\nconsole.info(\"frontControlTime: \" + global.get(\"frontControlTime\"));\n\n//向前移动的范围不超过6s\n//条件窗口为30帧连续判断\nconsole.info(\"frontControlTime: \" + frontControlTime);\nif (frontControlTime<6000){\n    console.info(\"frontControlTime: \" + frontControlTime);\n    if (frontUpConditionCount > 30) {\n        msg.payload = 1;\n        global.set(\"frontUpConditionCount\", 0);\n\n        var controlingFlag = global.get(\"controlingFlag\");\n        if (controlingFlag == 0) {\n            global.set(\"controlingFlag\", 1);\n            return msg;\n        }\n\n    }\n}\n\n \n\n\n \n\n ",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -2604,8 +2602,8 @@
         "wires": [
             [
                 "e5e786b3cf8b3efb",
-                "9d5a4cca8ef9dccd",
-                "ad92cc83605e164f"
+                "ad92cc83605e164f",
+                "072e9a6de6d366ec"
             ]
         ]
     },
@@ -2614,7 +2612,7 @@
         "type": "function",
         "z": "23caab7f537e37b0",
         "name": "条件窗口",
-        "func": "\nglobal.set(\"frontUpConditionCount\", 0);\n\nvar frontDownConditionCount = global.get(\"frontDownConditionCount\");\nfrontDownConditionCount++;\nglobal.set(\"frontDownConditionCount\", frontDownConditionCount);\n\n\nvar frontControlTime=global.get(\"frontControlTime\");\n\n//向后移动的范围不超过6s\n//条件窗口为30帧连续判断\nconsole.info(\"frontControlTime: \" + frontControlTime);\nif(frontControlTime>-4000){\n    //条件窗口为30帧连续判断\n    if (frontDownConditionCount > 30) {\n        msg.payload = 1;\n        global.set(\"frontDownConditionCount\", 0);\n\n\n        var controlingFlag = global.get(\"controlingFlag\");\n        if (controlingFlag == 0) {\n            global.set(\"controlingFlag\", 1);\n            return msg;\n        }\n\n    }\n\n}   \n\n \n\n \n ",
+        "func": "\nglobal.set(\"frontUpConditionCount\", 0);\n\nvar frontDownConditionCount = global.get(\"frontDownConditionCount\");\nfrontDownConditionCount++;\nglobal.set(\"frontDownConditionCount\", frontDownConditionCount);\n\n\nvar frontControlTime=global.get(\"frontControlTime\");\n\n//向后移动的范围不超过6s\n//条件窗口为30帧连续判断\nconsole.info(\"frontControlTime: \" + frontControlTime);\nif(frontControlTime>-6000){\n    //条件窗口为30帧连续判断\n    if (frontDownConditionCount > 30) {\n        msg.payload = 1;\n        global.set(\"frontDownConditionCount\", 0);\n\n\n        var controlingFlag = global.get(\"controlingFlag\");\n        if (controlingFlag == 0) {\n            global.set(\"controlingFlag\", 1);\n            return msg;\n        }\n\n    }\n\n}   \n\n \n\n \n ",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -2625,8 +2623,8 @@
         "wires": [
             [
                 "fedd5531eb422989",
-                "cfda399748851474",
-                "aa07e2ec10769956"
+                "aa07e2ec10769956",
+                "a346dfe4d445e05e"
             ]
         ]
     },
@@ -2700,7 +2698,7 @@
         "y": 2600,
         "wires": [
             [
-                "3b837eb249de7da7"
+                "8159adf1fe0be847"
             ]
         ]
     },
@@ -2719,7 +2717,7 @@
         "y": 2820,
         "wires": [
             [
-                "7547a378edacfbf8"
+                "cac94a7895dc497f"
             ]
         ]
     },
@@ -2781,7 +2779,7 @@
         "z": "23caab7f537e37b0",
         "name": "",
         "pauseType": "delay",
-        "timeout": "3000",
+        "timeout": "2000",
         "timeoutUnits": "milliseconds",
         "rate": "1",
         "nbRateUnits": "1",
@@ -2811,7 +2809,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 3920,
+        "x": 3900,
         "y": 2180,
         "wires": [
             [
@@ -2968,8 +2966,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 2650,
-        "y": 80,
+        "x": 2510,
+        "y": 500,
         "wires": [
             [
                 "debe5af3bc8c240e"
@@ -2981,7 +2979,7 @@
         "id": "98118aeba92e4aa7",
         "type": "switch",
         "z": "23caab7f537e37b0",
-        "name": "switch_hunch",
+        "name": "switch_hunch(靠背归位)",
         "property": "hunchControlTime",
         "propertyType": "msg",
         "rules": [
@@ -2999,8 +2997,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 2720,
-        "y": 320,
+        "x": 3230,
+        "y": 260,
         "wires": [
             [
                 "3b2a65f0b8abc030"
@@ -3032,8 +3030,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 2630,
-        "y": 720,
+        "x": 4070,
+        "y": 300,
         "wires": [
             [
                 "305aa8af9241a37f"
@@ -3054,8 +3052,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 2820,
-        "y": 60,
+        "x": 2700,
+        "y": 500,
         "wires": [
             [
                 "0bcccd6d100510ed"
@@ -3073,8 +3071,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 2900,
-        "y": 260,
+        "x": 3380,
+        "y": 200,
         "wires": [
             [
                 "bf9ec3c0d1e77755",
@@ -3093,8 +3091,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 2900,
-        "y": 360,
+        "x": 3380,
+        "y": 300,
         "wires": [
             [
                 "a565fc9bc858c29f",
@@ -3113,8 +3111,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 2820,
-        "y": 620,
+        "x": 4260,
+        "y": 200,
         "wires": [
             [
                 "60a3cb13fca43cb8",
@@ -3134,8 +3132,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 2820,
-        "y": 800,
+        "x": 4260,
+        "y": 380,
         "wires": [
             [
                 "4edaadb95fd7fe78",
@@ -3160,8 +3158,8 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 3090,
-        "y": 280,
+        "x": 3570,
+        "y": 220,
         "wires": [
             [
                 "fc6fb50dedc47a70"
@@ -3187,11 +3185,12 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 3310,
-        "y": 280,
+        "x": 3790,
+        "y": 220,
         "wires": [
             [
-                "e4ca7a3db1ec5ab7"
+                "e4ca7a3db1ec5ab7",
+                "0e0a22f283d375d8"
             ]
         ]
     },
@@ -3212,8 +3211,8 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 3090,
-        "y": 440,
+        "x": 3570,
+        "y": 380,
         "wires": [
             [
                 "f389994c6d54ef3e"
@@ -3239,11 +3238,12 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 3310,
-        "y": 440,
+        "x": 3790,
+        "y": 380,
         "wires": [
             [
-                "02078b70d2c822eb"
+                "02078b70d2c822eb",
+                "0e0a22f283d375d8"
             ]
         ]
     },
@@ -3264,8 +3264,8 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 2990,
-        "y": 620,
+        "x": 4430,
+        "y": 200,
         "wires": [
             [
                 "1c3b03e332c55812"
@@ -3291,8 +3291,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 3210,
-        "y": 620,
+        "x": 4650,
+        "y": 200,
         "wires": [
             [
                 "9409fa8d4e120a80"
@@ -3316,8 +3316,8 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 3010,
-        "y": 860,
+        "x": 4450,
+        "y": 440,
         "wires": [
             [
                 "d81e1e33b5f3d2a3"
@@ -3343,8 +3343,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 3230,
-        "y": 860,
+        "x": 4670,
+        "y": 440,
         "wires": [
             [
                 "37bc2193c32dd852"
@@ -3362,8 +3362,8 @@
         "freq": "",
         "out": "out",
         "bcm": true,
-        "x": 3100,
-        "y": 360,
+        "x": 3580,
+        "y": 300,
         "wires": []
     },
     {
@@ -3377,8 +3377,8 @@
         "freq": "",
         "out": "out",
         "bcm": true,
-        "x": 3620,
-        "y": 440,
+        "x": 4020,
+        "y": 380,
         "wires": []
     },
     {
@@ -3392,8 +3392,8 @@
         "freq": "",
         "out": "out",
         "bcm": true,
-        "x": 3100,
-        "y": 200,
+        "x": 3580,
+        "y": 140,
         "wires": []
     },
     {
@@ -3407,8 +3407,8 @@
         "freq": "",
         "out": "out",
         "bcm": true,
-        "x": 3621.765625,
-        "y": 275.75,
+        "x": 4020,
+        "y": 220,
         "wires": []
     },
     {
@@ -4448,66 +4448,6 @@
         ]
     },
     {
-        "id": "9d5a4cca8ef9dccd",
-        "type": "rpi-gpio out",
-        "z": "23caab7f537e37b0",
-        "name": "座椅前上移动",
-        "pin": "19",
-        "set": true,
-        "level": "0",
-        "freq": "",
-        "out": "out",
-        "bcm": true,
-        "x": 3420,
-        "y": 2500,
-        "wires": []
-    },
-    {
-        "id": "3b837eb249de7da7",
-        "type": "rpi-gpio out",
-        "z": "23caab7f537e37b0",
-        "name": "座椅前上移动",
-        "pin": "19",
-        "set": true,
-        "level": "0",
-        "freq": "",
-        "out": "out",
-        "bcm": true,
-        "x": 4080,
-        "y": 2600,
-        "wires": []
-    },
-    {
-        "id": "cfda399748851474",
-        "type": "rpi-gpio out",
-        "z": "23caab7f537e37b0",
-        "name": "座椅向下移动",
-        "pin": "26",
-        "set": true,
-        "level": "0",
-        "freq": "",
-        "out": "out",
-        "bcm": true,
-        "x": 3480,
-        "y": 2700,
-        "wires": []
-    },
-    {
-        "id": "7547a378edacfbf8",
-        "type": "rpi-gpio out",
-        "z": "23caab7f537e37b0",
-        "name": "座椅向下移动",
-        "pin": "26",
-        "set": true,
-        "level": "0",
-        "freq": "",
-        "out": "out",
-        "bcm": true,
-        "x": 4080,
-        "y": 2820,
-        "wires": []
-    },
-    {
         "id": "cdd90321234ee2cc",
         "type": "delay",
         "z": "23caab7f537e37b0",
@@ -4574,8 +4514,8 @@
         "limit": "",
         "loopPayload": "loop-index",
         "finalPayload": "final-count",
-        "x": 3030,
-        "y": 60,
+        "x": 2910,
+        "y": 500,
         "wires": [
             [],
             [
@@ -4594,8 +4534,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 3240,
-        "y": 40,
+        "x": 3100,
+        "y": 480,
         "wires": [
             [
                 "17f6db41c15ccb15",
@@ -4620,8 +4560,8 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 3450,
-        "y": 80,
+        "x": 3310,
+        "y": 520,
         "wires": [
             [
                 "0bcccd6d100510ed"
@@ -4634,8 +4574,8 @@
         "z": "23caab7f537e37b0",
         "name": "",
         "serial": "deba420c25236b68",
-        "x": 3450,
-        "y": 20,
+        "x": 3310,
+        "y": 460,
         "wires": []
     },
     {
@@ -4644,7 +4584,7 @@
         "z": "23caab7f537e37b0",
         "name": "",
         "kind": "fcnt",
-        "count": "3",
+        "count": "5",
         "initial": "1",
         "step": "1",
         "condition": "",
@@ -4671,7 +4611,7 @@
         "type": "function",
         "z": "23caab7f537e37b0",
         "name": "靠背气囊充气",
-        "func": "var delimiter = Buffer.from([0x05, 0x64, 0x64, 0x64, 0x64, 0x64, 0x00, 0x00, 0x00, 0x40]);\nmsg.payload = delimiter;\nconsole.info(msg.payload)\nconsole.info(111)\nreturn msg;",
+        "func": "var delimiter = Buffer.from([0x05, 0x64, 0x00, 0x64, 0x64, 0x64, 0x00, 0x00, 0x00, 0x30]);\nmsg.payload = delimiter;\nconsole.info(msg.payload)\nconsole.info(111)\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -4768,8 +4708,8 @@
         "id": "a926af1bd1a8d979",
         "type": "function",
         "z": "23caab7f537e37b0",
-        "name": "坐垫气囊充气",
-        "func": "var delimiter = Buffer.from([0x07, 0x64, 0x64, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x15]);\nmsg.payload = delimiter;\nconsole.info(msg.payload)\nconsole.info(111)\nreturn msg;",
+        "name": "坐垫气囊放气",
+        "func": "var delimiter = Buffer.from([0x07, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x15]);\nmsg.payload = delimiter;\nconsole.info(msg.payload)\nconsole.info(111)\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -4849,8 +4789,8 @@
         "id": "80486e9daa88fc55",
         "type": "function",
         "z": "23caab7f537e37b0",
-        "name": "坐垫气囊放气",
-        "func": "var delimiter = Buffer.from([0x07, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x15]);\nmsg.payload = delimiter;\nconsole.info(msg.payload)\nconsole.info(111)\nreturn msg;",
+        "name": "坐垫气囊充气",
+        "func": "var delimiter = Buffer.from([0x07, 0x64, 0x64, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x15]);\nmsg.payload = delimiter;\nconsole.info(msg.payload)\nconsole.info(111)\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -4931,7 +4871,7 @@
         "type": "function",
         "z": "23caab7f537e37b0",
         "name": "靠背气囊充气",
-        "func": "var delimiter = Buffer.from([0x05, 0x64, 0x64, 0x64, 0x64, 0x64, 0x00, 0x00, 0x00, 0x40]);\nmsg.payload = delimiter;\nconsole.info(msg.payload)\nconsole.info(111)\nreturn msg;",
+        "func": "var delimiter = Buffer.from([0x05, 0x64, 0x00, 0x64, 0x64, 0x64, 0x00, 0x00, 0x00, 0x30]);\nmsg.payload = delimiter;\nconsole.info(msg.payload)\nconsole.info(111)\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -5073,8 +5013,8 @@
         "freq": "",
         "out": "out",
         "bcm": true,
-        "x": 3000,
-        "y": 560,
+        "x": 4440,
+        "y": 140,
         "wires": []
     },
     {
@@ -5088,8 +5028,8 @@
         "freq": "",
         "out": "out",
         "bcm": true,
-        "x": 3480,
-        "y": 620,
+        "x": 4920,
+        "y": 200,
         "wires": []
     },
     {
@@ -5103,8 +5043,8 @@
         "freq": "",
         "out": "out",
         "bcm": true,
-        "x": 3020,
-        "y": 800,
+        "x": 4460,
+        "y": 380,
         "wires": []
     },
     {
@@ -5118,8 +5058,8 @@
         "freq": "",
         "out": "out",
         "bcm": true,
-        "x": 3460,
-        "y": 860,
+        "x": 4900,
+        "y": 440,
         "wires": []
     },
     {
@@ -5139,8 +5079,8 @@
         "limit": "",
         "loopPayload": "loop-index",
         "finalPayload": "final-count",
-        "x": 3050,
-        "y": 720,
+        "x": 4490,
+        "y": 300,
         "wires": [
             [],
             [
@@ -5159,8 +5099,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 3260,
-        "y": 700,
+        "x": 4700,
+        "y": 280,
         "wires": [
             [
                 "81a4adc44dce14c3",
@@ -5185,8 +5125,8 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 3470,
-        "y": 740,
+        "x": 4910,
+        "y": 320,
         "wires": [
             [
                 "2725fd1821a3bb17"
@@ -5199,8 +5139,8 @@
         "z": "23caab7f537e37b0",
         "name": "",
         "serial": "deba420c25236b68",
-        "x": 3470,
-        "y": 680,
+        "x": 4910,
+        "y": 260,
         "wires": []
     },
     {
@@ -5291,7 +5231,7 @@
         "type": "function",
         "z": "23caab7f537e37b0",
         "name": "更改次序",
-        "func": "var frontControlTime = global.get(\"frontControlTime\");\nglobal.set(\"frontControlTime\", frontControlTime + 2000);\n\nglobal.set(\"controlNumber\",2);\nglobal.set(\"controlingFlag\",0);\nconsole.info(\"坐垫角度调整\");\nreturn msg;",
+        "func": "var frontControlTime = global.get(\"frontControlTime\");\nglobal.set(\"frontControlTime\",   2000);\n\nglobal.set(\"controlNumber\",2);\nglobal.set(\"controlingFlag\",0);\nconsole.info(\"坐垫角度调整\");\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -5322,11 +5262,12 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 2990,
-        "y": 500,
+        "x": 3030,
+        "y": 140,
         "wires": [
             [
-                "bacc3d51419628a3"
+                "bacc3d51419628a3",
+                "98118aeba92e4aa7"
             ]
         ]
     },
@@ -5347,8 +5288,8 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 2830,
-        "y": 500,
+        "x": 2870,
+        "y": 140,
         "wires": [
             [
                 "f9fe261fbad238aa"
@@ -5366,8 +5307,8 @@
         "freq": "",
         "out": "out",
         "bcm": true,
-        "x": 2840,
-        "y": 440,
+        "x": 2860,
+        "y": 80,
         "wires": []
     },
     {
@@ -5381,15 +5322,15 @@
         "freq": "",
         "out": "out",
         "bcm": true,
-        "x": 3240,
-        "y": 500,
+        "x": 3200,
+        "y": 120,
         "wires": []
     },
     {
         "id": "8389342d3ac68bc1",
         "type": "change",
         "z": "23caab7f537e37b0",
-        "name": "",
+        "name": "坐垫归位",
         "rules": [
             {
                 "t": "set",
@@ -5404,13 +5345,107 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 2650,
-        "y": 480,
+        "x": 2660,
+        "y": 120,
         "wires": [
             [
                 "1f63df31dd36ca8e",
                 "3d9c038896ef3ac8"
             ]
+        ]
+    },
+    {
+        "id": "a346dfe4d445e05e",
+        "type": "rpi-gpio out",
+        "z": "23caab7f537e37b0",
+        "name": "座椅前上移动",
+        "pin": "19",
+        "set": true,
+        "level": "0",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 3480,
+        "y": 2700,
+        "wires": []
+    },
+    {
+        "id": "cac94a7895dc497f",
+        "type": "rpi-gpio out",
+        "z": "23caab7f537e37b0",
+        "name": "座椅前上移动",
+        "pin": "19",
+        "set": true,
+        "level": "0",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 4120,
+        "y": 2820,
+        "wires": []
+    },
+    {
+        "id": "072e9a6de6d366ec",
+        "type": "rpi-gpio out",
+        "z": "23caab7f537e37b0",
+        "name": "座椅向下移动",
+        "pin": "26",
+        "set": true,
+        "level": "0",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 3480,
+        "y": 2500,
+        "wires": []
+    },
+    {
+        "id": "8159adf1fe0be847",
+        "type": "rpi-gpio out",
+        "z": "23caab7f537e37b0",
+        "name": "座椅向下移动",
+        "pin": "26",
+        "set": true,
+        "level": "0",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 4125,
+        "y": 2603.75,
+        "wires": []
+    },
+    {
+        "id": "18e2e6339aaa8bf4",
+        "type": "function",
+        "z": "23caab7f537e37b0",
+        "name": "坐垫气囊放气",
+        "func": "var delimiter = Buffer.from([0x07, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x15]);\nmsg.payload = delimiter;\nconsole.info(msg.payload)\nconsole.info(111)\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 4300,
+        "y": 2500,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "338ab4309676e909",
+        "type": "function",
+        "z": "23caab7f537e37b0",
+        "name": "坐垫气囊充气",
+        "func": "var delimiter = Buffer.from([0x07, 0x64, 0x64, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x15]);\nmsg.payload = delimiter;\nconsole.info(msg.payload)\nconsole.info(111)\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 4300,
+        "y": 2720,
+        "wires": [
+            []
         ]
     }
 ]
