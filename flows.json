@@ -5066,7 +5066,7 @@
         "z": "219e636deaee25b2",
         "g": "43fae32e434e7918",
         "name": "允许读写标识",
-        "func": "global.set(\"readFlag\",1);\nreturn msg;",
+        "func": "global.set(\"readFlag\",0);\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
