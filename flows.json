@@ -3145,7 +3145,7 @@
         "z": "219e636deaee25b2",
         "g": "43fae32e434e7918",
         "name": "在离坐判断",
-        "func": "// 汽车座椅的使用逻辑\nif (msg.payload.sitData!=null){\n    global.set(\"sitMatrixData\", msg.payload.sitData);\n   \n   \n}\nif (msg.payload.backData != null) {\n    global.set(\"backMatrixData\", msg.payload.backData);\n}\n\n\nconst sitMatrixSum = global.get(\"sitMatrixData\").reduce((accumulator, currentValue) => {\n    return accumulator + currentValue;\n}, 0);\n \nmsg.sitMatrixSum = sitMatrixSum;\n\n\n \nreturn msg;",
+        "func": "// 汽车座椅的使用逻辑\nif (msg.payload.sitData!=null){\n    global.set(\"sitMatrixData\", msg.payload.sitData);\n   \n   \n}\nif (msg.payload.backData != null) {\n    global.set(\"backMatrixData\", msg.payload.backData);\n}\n\n\nconst sitMatrixSum = global.get(\"sitMatrixData\").reduce((accumulator, currentValue) => {\n    return accumulator + currentValue;\n}, 0);\n \nmsg.sitMatrixSum = sitMatrixSum;\n\nglobal.set(\"weight\", sitMatrixSum);\n \nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -3165,7 +3165,7 @@
         "z": "219e636deaee25b2",
         "g": "43fae32e434e7918",
         "name": "realTimeMatrix",
-        "func": "\n\nglobal.set(\"controlingFlag\",0);\n//初始化复位标识\nglobal.set(\"resetCompleteFlag\",1);\n\n//设置全局变量 保存坐垫及靠背的实时矩阵数据\nvar sitMatrixData=new Array();\nvar backMatrixData=new Array();\nglobal.set(\"sitMatrixData\", sitMatrixData);\nglobal.set(\"backMatrixData\", backMatrixData);\n//在离坐判断全局变量\nglobal.set(\"onSeatCount\",0);\nglobal.set(\"notSeatCount\",0);\n\n//座椅 坐垫 上下调节条件frontControlTime\nglobal.set(\"frontControlTime\",0);\nglobal.set(\"frontUpConditionCount\",0);\nglobal.set(\"frontDownConditionCount\", 0);\n\n//座椅 靠背 靠背调节条件\n\nglobal.set(\"personType\",0);\n\nglobal.set(\"hunchControlTime\",0);\nglobal.set(\"hunchUpConditionCount\",0);\nglobal.set(\"hunchDownConditionCount\",0);\n\nglobal.set(\"ceyiConditionCount\", 0);\nglobal.set(\"ceyiFlag\", 0);\n \n\n\nglobal.set(\"hunchBagUpConditionCount\", 0);\nglobal.set(\"hunchBagDownConditionCount\", 0);\n\n\n//座椅 靠背调节条件\nglobal.set(\"waistControlTime\",0);\nglobal.set(\"waistUpConditionCount\",0);\nglobal.set(\"waistDownConditionCount\",0);\n\nreturn msg;",
+        "func": "\n\nglobal.set(\"controlingFlag\",0);\n//初始化复位标识\nglobal.set(\"resetCompleteFlag\",1);\n\n//设置全局变量 保存坐垫及靠背的实时矩阵数据\nvar sitMatrixData=new Array();\nvar backMatrixData=new Array();\nglobal.set(\"sitMatrixData\", sitMatrixData);\nglobal.set(\"backMatrixData\", backMatrixData);\n//在离坐判断全局变量\nglobal.set(\"onSeatCount\",0);\nglobal.set(\"notSeatCount\",0);\n\n//座椅 坐垫 上下调节条件frontControlTime\nglobal.set(\"frontControlTime\",0);\nglobal.set(\"frontUpConditionCount\",0);\nglobal.set(\"frontDownConditionCount\", 0);\n\n//座椅 靠背 靠背调节条件\n\nglobal.set(\"personType\",0);\n\nglobal.set(\"hunchControlTime\",0);\nglobal.set(\"hunchUpConditionCount\",0);\nglobal.set(\"hunchDownConditionCount\",0);\n\nglobal.set(\"ceyiConditionCount\", 0);\nglobal.set(\"ceyiFlag\", 0);\n \n\n\nglobal.set(\"hunchBagUpConditionCount\", 0);\nglobal.set(\"hunchBagDownConditionCount\", 0);\n\n\n//座椅 靠背调节条件\nglobal.set(\"waistControlTime\",0);\nglobal.set(\"waistUpConditionCount\",0);\nglobal.set(\"waistDownConditionCount\",0);\n\n\n//保存传感器压力和 为体重测量标准\nglobal.set(\"weight\",0);\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -3357,18 +3357,19 @@
         "type": "function",
         "z": "219e636deaee25b2",
         "name": "SitActionTrigger",
-        "func": "// 复位标识为0  可进入复位  \nglobal.set(\"resetCompleteFlag\", 0);\nconst ndata1 = global.get(\"sitMatrixData\");\n\n// console.info(ndata1);\n\n\nconst sitMatrixDataSum = ndata1.reduce((accumulator, currentValue) => {\n    return accumulator + currentValue;\n}, 0);\n// console.info(\"sitSum: \" + sitMatrixDataSum);\n\n\n// (accumulator, currentValue) => {\n//     return accumulator + currentValue;\n// }, 0\n\n \n\nvar num11 = 0, num21 = 0, num31 = 0, num41 = 0, num51 = 0, num61 = 0;\n\nvar num1=0,num2=0;\nfor(var i=0;i<20;i++){\n    num1+=ndata1[i];\n}\n\nfor (var i = 60; i < 100; i++) {\n    num2 += ndata1[i];\n}\n\nvar front=num1*2/num2;\n\n\n// console.info(\"sum: \" + sitMatrixDataSum );\nconsole.info(\n     \n  \n    \" front: \" + front.toFixed(2) \n)\n\nmsg.front=front;\n\n \n\nreturn msg;",
+        "func": "// 复位标识为0  可进入复位  \nglobal.set(\"resetCompleteFlag\", 0);\nconst ndata1 = global.get(\"sitMatrixData\");\n\nconst weight=global.get(\"weight\");\n\n\n\nconst sitMatrixDataSum = ndata1.reduce((accumulator, currentValue) => {\n    return accumulator + currentValue;\n}, 0);\n// console.info(\"sitSum: \" + sitMatrixDataSum);\n\n\n// (accumulator, currentValue) => {\n//     return accumulator + currentValue;\n// }, 0\n\n \n\nvar num11 = 0, num21 = 0, num31 = 0, num41 = 0, num51 = 0, num61 = 0;\n\nvar num1=0,num2=0;\nfor(var i=0;i<20;i++){\n    num1+=ndata1[i];\n}\n\nfor (var i = 60; i < 100; i++) {\n    num2 += ndata1[i];\n}\n\nvar front=num1*2/num2;\n\n\n// console.info(\"sum: \" + sitMatrixDataSum );\nconsole.info(\n     \n  \n    \" front: \" + front.toFixed(2) \n)\n\nmsg.front=front;\n\nmsg.weight = weight;\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 3140,
-        "y": 2540,
+        "x": 2700,
+        "y": 2520,
         "wires": [
             [
-                "76d56d555a4f4508",
-                "19c15118609407e5"
+                "19c15118609407e5",
+                "485ade4de37fc4bb",
+                "161fe2d1ad76cae7"
             ]
         ]
     },
@@ -3501,7 +3502,7 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 3380,
+        "x": 3340,
         "y": 2520,
         "wires": [
             [
@@ -5008,8 +5009,8 @@
         "name": "",
         "server": "525b28950b5c660b",
         "client": "",
-        "x": 3350,
-        "y": 2700,
+        "x": 2790,
+        "y": 2780,
         "wires": []
     },
     {
@@ -5398,23 +5399,23 @@
         "name": "",
         "server": "525b28950b5c660b",
         "client": "",
-        "x": 3470,
-        "y": 2420,
+        "x": 3030,
+        "y": 2300,
         "wires": []
     },
     {
         "id": "19c15118609407e5",
         "type": "function",
         "z": "219e636deaee25b2",
-        "name": "function 12",
+        "name": "腿托上传",
         "func": "\nmsg.payload = \"2 \" + msg.front.toFixed(2);\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 3310,
-        "y": 2420,
+        "x": 2860,
+        "y": 2300,
         "wires": [
             [
                 "95ea192dcab4e69c"
@@ -7482,6 +7483,145 @@
         "wires": [
             [
                 "6b311d94c8667f39"
+            ]
+        ]
+    },
+    {
+        "id": "485ade4de37fc4bb",
+        "type": "switch",
+        "z": "219e636deaee25b2",
+        "name": "体重判断",
+        "property": "weight",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "gt",
+                "v": "6000",
+                "vt": "str"
+            },
+            {
+                "t": "btwn",
+                "v": "6000",
+                "vt": "num",
+                "v2": "4000",
+                "v2t": "num"
+            },
+            {
+                "t": "lt",
+                "v": "4000",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 3,
+        "x": 3020,
+        "y": 2520,
+        "wires": [
+            [
+                "fa8182ce4b407dad"
+            ],
+            [
+                "76d56d555a4f4508"
+            ],
+            [
+                "e3600d06459ce6e5"
+            ]
+        ]
+    },
+    {
+        "id": "fa8182ce4b407dad",
+        "type": "switch",
+        "z": "219e636deaee25b2",
+        "name": "坐垫阈值调整",
+        "property": "front",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "gt",
+                "v": "0.60",
+                "vt": "str"
+            },
+            {
+                "t": "lt",
+                "v": "0.45",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 3340,
+        "y": 2460,
+        "wires": [
+            [
+                "15727151fb964d27"
+            ],
+            [
+                "9febe3f2634ffc6f"
+            ]
+        ]
+    },
+    {
+        "id": "e3600d06459ce6e5",
+        "type": "switch",
+        "z": "219e636deaee25b2",
+        "name": "坐垫阈值调整",
+        "property": "front",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "gt",
+                "v": "0.60",
+                "vt": "str"
+            },
+            {
+                "t": "lt",
+                "v": "0.45",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 3340,
+        "y": 2600,
+        "wires": [
+            [
+                "15727151fb964d27"
+            ],
+            [
+                "9febe3f2634ffc6f"
+            ]
+        ]
+    },
+    {
+        "id": "60f8f039d87a794f",
+        "type": "websocket out",
+        "z": "219e636deaee25b2",
+        "name": "",
+        "server": "525b28950b5c660b",
+        "client": "",
+        "x": 3030,
+        "y": 2660,
+        "wires": []
+    },
+    {
+        "id": "161fe2d1ad76cae7",
+        "type": "function",
+        "z": "219e636deaee25b2",
+        "name": "体重指数上传",
+        "func": "\nmsg.payload = \"4 \" + msg.weight.toFixed(2);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2860,
+        "y": 2660,
+        "wires": [
+            [
+                "60f8f039d87a794f"
             ]
         ]
     }
