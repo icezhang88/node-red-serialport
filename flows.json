@@ -3311,7 +3311,7 @@
         "type": "function",
         "z": "219e636deaee25b2",
         "name": "BackActionTrigger",
-        "func": "// console.info(\"在座次数\" + msg.payload);\n// 复位标识为0  可进入复位  \nglobal.set(\"resetCompleteFlag\", 0);\n\nvar ndata =global.get(\"backMatrixData\");\n \n \nvar num1 = 0, num2 = 0, num3 = 0;\nvar numHead=0,numBody=0,numFoot=0;\nvar oneLine=0\nvar twoLine=0,threeLine=0,fourLine=0,fiveLine=0;\nvar sixLine=0,servenLine=0,eightLine=0,nineLine=0,tenLine=0;\n\nvar topSum=0,bottomSum=0;\n\n\nfor(var i=0;i<10;i++){\n    oneLine+=ndata[i];\n}\nfor (var i = 10; i < 20; i++) {\n    twoLine += ndata[i];\n}\nfor (var i = 20; i < 30; i++) {\n    threeLine += ndata[i];\n}\nfor (var i = 30; i < 40; i++) {\n    fourLine += ndata[i];\n}\nfor (var i = 40; i < 50; i++) {\n    fiveLine += ndata[i];\n}\nfor (var i = 50; i < 60; i++) {\n    sixLine += ndata[i];\n}\nfor (var i = 60; i < 70; i++) {\n    servenLine += ndata[i];\n}\nfor (var i = 70; i < 80; i++) {\n    eightLine += ndata[i];\n}\nfor (var i = 80; i < 90; i++) {\n    nineLine += ndata[i];\n}\nfor (var i = 90; i < 100; i++) {\n    tenLine += ndata[i];\n}\n\n\n\nfor(var i=0;i<50;i++){\n    topSum+=ndata[i];\n}\nfor(var i=50;i<100;i++){\n    bottomSum+=ndata[i];\n}\n\n\n\n \nfor (var i = 0; i < 10; i++) {\n    ndata[i * 10 + 0] = ndata[i * 10 + 1];\n    ndata[i * 10 + 9] = ndata[i * 10 + 8];\n}\nfor (var i = 0; i < 29; i++) {\n    num1 += ndata[i];\n}\nfor (var i = 29; i < 69; i++) {\n    num2 += ndata[i];\n}\nfor (var i = 69; i < 99; i++) {\n    num3 += ndata[i];\n}\n\n\n\nfor (var i = 49; i < 99; i++) {\n    numFoot+=ndata[i];\n}\n//靠背上部求和平均\nnum1 = num1 / 30;\n//靠背中部求和平均\nnum2 = num2 / 40;\n//靠背下部求和平均\nnum3 = (num3-40) / 30;\nvar sumBack = num1 + num2 + num3;\nvar waist = num1 / sumBack;\n//var hunch = (num2+ num3) / sumBack;\n//var hunch=numFoot/num1;\nvar back=num3/num2;\n\n//var hunch = (oneLine + twoLine) / (oneLine + twoLine+fiveLine);\nvar hunch=(topSum/bottomSum);\n\nconst backMatrixSum=ndata.reduce((accumulater,currentValue)=>{\n    return accumulater+currentValue;\n},0);\n\n// console.info(\n\n// \" hunch: \" + hunch.toFixed(2)\n\n// );\n\n\nmsg.waist = waist.toFixed(2)  ;\nmsg.hunch = hunch.toFixed(2);\n/////////////////////////////////\n//侧翼测试\n/////////////////////////////////\n\nconst oneDimArray = ndata;\n\n// 定义行数和列数\nconst rows = 10;\nconst cols = 10;\n\n// 初始化一个二维数组\nconst twoDimArray = [];\n\n// 使用嵌套循环将一维数组转换为二维数组\nfor (let i = 0; i < rows; i++) {\n    const row = [];\n    for (let j = 0; j < cols; j++) {\n        // 从一维数组中取出元素并添加到二维数组中\n        row.push(oneDimArray[i * cols + j]);\n    }\n    twoDimArray.push(row);\n}\n\n\nvar leftSum = 0, rightSum = 0;\nfor (var i = 3; i < 7; i++) {\n    for (var j = 0; j < 5; j++) {\n        leftSum += twoDimArray[i][j]\n\n        rightSum += twoDimArray[i][j + 5];\n\n    }\n}\n\n\n \nvar sum = leftSum + rightSum;\n\nvar leftRate = leftSum / sum;\nvar rightRate = rightSum / sum\n\nconsole.info(\"leftRate: \"+leftRate)\nconsole.info(\"rightRate: \"+rightRate)\n\nmsg.payload.leftRate = leftRate;\nmsg.payload.rightRate = rightRate;\n\nmsg.ceyi = leftRate - rightRate;\nreturn msg;",
+        "func": "// console.info(\"在座次数\" + msg.payload);\n// 复位标识为0  可进入复位  \nglobal.set(\"resetCompleteFlag\", 0);\n\nvar ndata =global.get(\"backMatrixData\");\n \n \nvar num1 = 0, num2 = 0, num3 = 0;\nvar numHead=0,numBody=0,numFoot=0;\nvar oneLine=0\nvar twoLine=0,threeLine=0,fourLine=0,fiveLine=0;\nvar sixLine=0,servenLine=0,eightLine=0,nineLine=0,tenLine=0;\n\nvar topSum=0,bottomSum=0;\n\n\nfor(var i=0;i<10;i++){\n    oneLine+=ndata[i];\n}\nfor (var i = 10; i < 20; i++) {\n    twoLine += ndata[i];\n}\nfor (var i = 20; i < 30; i++) {\n    threeLine += ndata[i];\n}\nfor (var i = 30; i < 40; i++) {\n    fourLine += ndata[i];\n}\nfor (var i = 40; i < 50; i++) {\n    fiveLine += ndata[i];\n}\nfor (var i = 50; i < 60; i++) {\n    sixLine += ndata[i];\n}\nfor (var i = 60; i < 70; i++) {\n    servenLine += ndata[i];\n}\nfor (var i = 70; i < 80; i++) {\n    eightLine += ndata[i];\n}\nfor (var i = 80; i < 90; i++) {\n    nineLine += ndata[i];\n}\nfor (var i = 90; i < 100; i++) {\n    tenLine += ndata[i];\n}\n\n\n\nfor(var i=0;i<50;i++){\n    topSum+=ndata[i];\n}\nfor(var i=50;i<100;i++){\n    bottomSum+=ndata[i];\n}\n\n\n\n \nfor (var i = 0; i < 10; i++) {\n    ndata[i * 10 + 0] = ndata[i * 10 + 1];\n    ndata[i * 10 + 9] = ndata[i * 10 + 8];\n}\nfor (var i = 0; i < 29; i++) {\n    num1 += ndata[i];\n}\nfor (var i = 29; i < 69; i++) {\n    num2 += ndata[i];\n}\nfor (var i = 69; i < 99; i++) {\n    num3 += ndata[i];\n}\n\n\n\nfor (var i = 49; i < 99; i++) {\n    numFoot+=ndata[i];\n}\n//靠背上部求和平均\nnum1 = num1 / 30;\n//靠背中部求和平均\nnum2 = num2 / 40;\n//靠背下部求和平均\nnum3 = (num3-40) / 30;\nvar sumBack = num1 + num2 + num3;\nvar waist = num1 / sumBack;\n//var hunch = (num2+ num3) / sumBack;\n//var hunch=numFoot/num1;\nvar back=num3/num2;\n\n//var hunch = (oneLine + twoLine) / (oneLine + twoLine+fiveLine);\nvar hunch=(topSum/bottomSum);\n\nconst backMatrixSum=ndata.reduce((accumulater,currentValue)=>{\n    return accumulater+currentValue;\n},0);\n\n// console.info(\n\n// \" hunch: \" + hunch.toFixed(2)\n\n// );\n\n\nmsg.waist = waist.toFixed(2)  ;\nmsg.hunch = hunch.toFixed(2);\n/////////////////////////////////\n//侧翼测试\n/////////////////////////////////\n\nconst oneDimArray = ndata;\n\n// 定义行数和列数\nconst rows = 10;\nconst cols = 10;\n\n// 初始化一个二维数组\nconst twoDimArray = [];\n\n// 使用嵌套循环将一维数组转换为二维数组\nfor (let i = 0; i < rows; i++) {\n    const row = [];\n    for (let j = 0; j < cols; j++) {\n        // 从一维数组中取出元素并添加到二维数组中\n        row.push(oneDimArray[i * cols + j]);\n    }\n    twoDimArray.push(row);\n}\n\n\nvar leftSum = 0, rightSum = 0;\nfor (var i = 0; i < 6; i++) {\n    for (var j = 0; j < 5; j++) {\n        leftSum += twoDimArray[i][j]\n\n        rightSum += twoDimArray[i][j + 5];\n\n    }\n}\n\n\n \nvar sum = leftSum + rightSum;\n\nvar leftRate = leftSum / sum;\nvar rightRate = rightSum / sum\n\nconsole.info(\"leftRate: \"+leftRate)\nconsole.info(\"rightRate: \"+rightRate)\n\nmsg.payload.leftRate = leftRate;\nmsg.payload.rightRate = rightRate;\n\nmsg.ceyi = leftRate - rightRate;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -3489,7 +3489,7 @@
         "rules": [
             {
                 "t": "gt",
-                "v": "0.62",
+                "v": "0.60",
                 "vt": "str"
             },
             {
@@ -6096,7 +6096,8 @@
         "y": 1340,
         "wires": [
             [
-                "8c4ac90ce1a54be8"
+                "8c4ac90ce1a54be8",
+                "0dd06626c5b22342"
             ]
         ]
     },
@@ -6110,19 +6111,19 @@
         "rules": [
             {
                 "t": "gt",
-                "v": "0.15",
+                "v": "0.12",
                 "vt": "num"
             },
             {
                 "t": "btwn",
-                "v": "0.15",
+                "v": "0.12",
                 "vt": "num",
-                "v2": "0.03",
+                "v2": "0.05",
                 "v2t": "num"
             },
             {
                 "t": "lt",
-                "v": "0.03",
+                "v": "0.05",
                 "vt": "num"
             }
         ],
@@ -6911,8 +6912,8 @@
         "freq": "",
         "out": "out",
         "bcm": true,
-        "x": 4800,
-        "y": 140,
+        "x": 4780,
+        "y": 120,
         "wires": []
     },
     {
@@ -7451,6 +7452,36 @@
         "wires": [
             [
                 "32f0e5654b3e9830"
+            ]
+        ]
+    },
+    {
+        "id": "6b311d94c8667f39",
+        "type": "websocket out",
+        "z": "219e636deaee25b2",
+        "name": "",
+        "server": "525b28950b5c660b",
+        "client": "",
+        "x": 3390,
+        "y": 1280,
+        "wires": []
+    },
+    {
+        "id": "0dd06626c5b22342",
+        "type": "function",
+        "z": "219e636deaee25b2",
+        "name": "function 17",
+        "func": "\nmsg.payload = \"3 \" + msg.ceyi.toFixed(2);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 3250,
+        "y": 1260,
+        "wires": [
+            [
+                "6b311d94c8667f39"
             ]
         ]
     }
